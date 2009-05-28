@@ -8,7 +8,7 @@ public class ArtRopaVO extends ArticuloVO {
 	public ArtRopaVO(){
 		
 	}
-	public ArtRopaVO(int ref, String desc, String linea, double pL, double pO, 
+	public ArtRopaVO(long ref, String desc, String linea, double pL, double pO, 
 			 String color, String sec, int stock, String talle, String origen) { 			 
 
 		super(ref, desc, linea, pL, pO, color, sec, stock);

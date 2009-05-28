@@ -34,7 +34,7 @@ public class Articulo implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	private int referencia;
+	private long referencia;
 	private String linea;
 	private String descripcion;
 	private double precioLista;
@@ -43,7 +43,7 @@ public class Articulo implements Serializable{
 	private String seccion;
 	private int stock;
 	  
-	public Articulo(int ref, String desc, String linea, double pL, double pO, String color, String sec, int stock) {
+	public Articulo(long ref, String desc, String linea, double pL, double pO, String color, String sec, int stock) {
 		this.referencia = ref;
 		this.descripcion = desc;
 		this.precioLista = pL;
@@ -58,11 +58,11 @@ public class Articulo implements Serializable{
 	}
 	
 	@Id
-	public int getReferencia() {
+	public long getReferencia() {
 		return referencia;
 	}
 
-	public void setReferencia(int referencia) {
+	public void setReferencia(long referencia) {
 		this.referencia = referencia;
 	}
 

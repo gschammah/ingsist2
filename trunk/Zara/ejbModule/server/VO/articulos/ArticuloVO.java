@@ -6,7 +6,7 @@ public class ArticuloVO implements Serializable {
 		
 	private static final long serialVersionUID = 1L;
 	
-	private int referencia;
+	private long referencia;
 	private String linea;
 	private String descripcion;
 	private double precioLista;
@@ -15,7 +15,7 @@ public class ArticuloVO implements Serializable {
 	private String seccion;
 	private int stock;
 	
-	public ArticuloVO(int referencia, String linea, String descripcion, double precioLista, double precioOferta, String color, String seccion, int stock) {
+	public ArticuloVO(long referencia, String linea, String descripcion, double precioLista, double precioOferta, String color, String seccion, int stock) {
 		this.referencia = referencia;
 		this.linea = linea;
 		this.descripcion = descripcion;
@@ -29,11 +29,11 @@ public class ArticuloVO implements Serializable {
 	public ArticuloVO() {
 	}
 
-	public int getReferencia() {
+	public long getReferencia() {
 		return referencia;
 	}
 
-	public void setReferencia(int referencia) {
+	public void setReferencia(long referencia) {
 		this.referencia = referencia;
 	}
 

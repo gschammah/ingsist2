@@ -5,7 +5,7 @@ import javax.ejb.Remote;
 import server.VO.articulos.ArticuloVO;
 
 @Remote
-public interface AdministradorArticulos {
+public interface AdministradorArticulos{
 
 	public void test(ArticuloVO art);
 

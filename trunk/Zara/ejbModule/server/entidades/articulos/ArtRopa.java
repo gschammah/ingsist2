@@ -6,6 +6,7 @@ import javax.persistence.Transient;
 
 import server.VO.articulos.ArtHogarVO;
 import server.VO.articulos.ArtRopaVO;
+import server.VO.articulos.ArticuloVO;
 
 @Entity
 @DiscriminatorValue("ROPA")
@@ -59,7 +60,8 @@ public class ArtRopa extends Articulo {
 		return vo;
 	}
 
-	public void setVO(ArtRopaVO vo){
+	public void setVO(ArticuloVO artVO){
+		ArtRopaVO vo = (ArtRopaVO)artVO;
 		this.setColor(vo.getColor());
 		this.setDescripcion(vo.getDescripcion());
 		this.setLinea(vo.getLinea());

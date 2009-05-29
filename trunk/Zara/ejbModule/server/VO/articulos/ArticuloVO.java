@@ -2,6 +2,9 @@ package server.VO.articulos;
 
 import java.io.Serializable;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+
+
 public class ArticuloVO implements Serializable {
 		
 	private static final long serialVersionUID = 1L;

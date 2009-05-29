@@ -5,7 +5,9 @@ import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import server.VO.OfAD.OfADVO;
 import server.VO.articulos.ArticuloVO;
+import server.entidades.OfAD.OfAD;
 import server.entidades.articulos.*;
 
 
@@ -19,10 +21,10 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 	@PersistenceContext
 	private EntityManager em;		
 	
-	public void test(ArticuloVO art) {
-		Articulo arti = new Articulo();
-		arti.setVO(art);
-		em.persist(arti);		
+	public void test(OfADVO ofadVO) {
+		OfAD ofad = new OfAD();
+		ofad.setVO(ofadVO);
+		em.persist(ofad);		
 	}
 
 }	

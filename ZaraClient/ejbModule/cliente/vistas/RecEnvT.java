@@ -30,8 +30,6 @@ public class RecEnvT extends javax.swing.JFrame {
         jTable2 = new javax.swing.JTable();
         btn_generar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
         
         setTitle("Recepciín de Envíos a Tienda");
         
@@ -96,31 +94,31 @@ public class RecEnvT extends javax.swing.JFrame {
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Artículo", "Descripción", "Cant. Pendiente", "Stock Actual"
+                "Artículo", "Descripción", "Cant. Recivida", "Cant. Pendiente", "Stock Actual"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -141,6 +139,10 @@ public class RecEnvT extends javax.swing.JFrame {
         jTable2.getColumnModel().getColumn(3).setMinWidth(100);
         jTable2.getColumnModel().getColumn(3).setPreferredWidth(100);
         jTable2.getColumnModel().getColumn(3).setMaxWidth(100);
+        jTable2.getColumnModel().getColumn(4).setMinWidth(100);
+        jTable2.getColumnModel().getColumn(4).setPreferredWidth(100);
+        jTable2.getColumnModel().getColumn(4).setMaxWidth(100);
+
 
         btn_generar.setText("Salir");
         btn_generar.addActionListener(new java.awt.event.ActionListener() {
@@ -151,10 +153,6 @@ public class RecEnvT extends javax.swing.JFrame {
 
         jButton2.setText("Registrar EnvT");
 
-        jLabel5.setText("User Currently Logged:");
-
-        jTextField2.setEditable(false);
-        jTextField2.setText("XXXXXXX-XX (Nombre, Apellido)");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -184,9 +182,7 @@ public class RecEnvT extends javax.swing.JFrame {
                         .addComponent(jLabel4))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 204, Short.MAX_VALUE)
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -216,8 +212,7 @@ public class RecEnvT extends javax.swing.JFrame {
                         .addComponent(btn_generar)
                         .addComponent(jButton2))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel5)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        ))
                 .addContainerGap())
         );
 
@@ -239,13 +234,11 @@ public class RecEnvT extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 
 }

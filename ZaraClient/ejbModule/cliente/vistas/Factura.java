@@ -87,6 +87,20 @@ public class Factura extends javax.swing.JFrame {
         });
         jTable1.setEditingColumn(1);
         jScrollPane1.setViewportView(jTable1);
+        
+        jTable1.getColumnModel().getColumn(0).setMinWidth(100);
+        jTable1.getColumnModel().getColumn(0).setPreferredWidth(100);
+        jTable1.getColumnModel().getColumn(0).setMaxWidth(100);
+        jTable1.getColumnModel().getColumn(1).setMinWidth(70);
+        jTable1.getColumnModel().getColumn(1).setPreferredWidth(70);
+        jTable1.getColumnModel().getColumn(1).setMaxWidth(70);
+        jTable1.getColumnModel().getColumn(3).setMinWidth(70);
+        jTable1.getColumnModel().getColumn(3).setPreferredWidth(70);
+        jTable1.getColumnModel().getColumn(3).setMaxWidth(70);
+        jTable1.getColumnModel().getColumn(4).setMinWidth(70);
+        jTable1.getColumnModel().getColumn(4).setPreferredWidth(70);
+        jTable1.getColumnModel().getColumn(4).setMaxWidth(70);
+
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

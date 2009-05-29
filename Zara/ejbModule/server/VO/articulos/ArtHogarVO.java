@@ -1,5 +1,7 @@
 package server.VO.articulos;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+
 public class ArtHogarVO extends ArticuloVO {
 	
 	private String nombre;
@@ -55,6 +57,20 @@ public class ArtHogarVO extends ArticuloVO {
 		this.categoria = categoria;
 	}
 	
-	
+	public void setVO(ArticuloVO artVO) {
+		ArtHogarVO vo = (ArtHogarVO)artVO;
+		this.setColor(vo.getColor());
+		this.setDescripcion(vo.getDescripcion());
+		this.setLinea(vo.getLinea());	
+		this.setPrecioLista(vo.getPrecioLista());
+		this.setPrecioOferta(vo.getPrecioOferta());
+		this.setReferencia(vo.getReferencia());
+		this.setSeccion(vo.getSeccion());
+		this.setStock(vo.getStock());
+		this.setCategoria(vo.getCategoria());
+		this.setComposicion(vo.getComposicion());
+		this.setMedidas(vo.getMedidas());
+		this.setNombre(vo.getNombre());
+	}
 	
 }

@@ -2,16 +2,24 @@ package server.entidades.OfAD;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
 import server.VO.OfAD.ItemOfADVO;
 import server.VO.OfAD.OfADVO;
+import server.VO.articulos.ArtHogarVO;
+import server.VO.articulos.ArtRopaVO;
+import server.VO.articulos.ArticuloVO;
+import server.entidades.articulos.ArtHogar;
+import server.entidades.articulos.ArtRopa;
 import server.entidades.articulos.Articulo;
 
 @Entity
@@ -29,7 +37,7 @@ public class ItemOfAD implements Serializable{
 		
 	}	
 	
-	@OneToOne
+	@OneToOne(cascade=(CascadeType.ALL))
 	public Articulo getArticulo() {
 		return articulo;
 	}
@@ -54,8 +62,7 @@ public class ItemOfAD implements Serializable{
 		this.precioOferta = precioOferta;
 	}
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@Id	
 	public int getId() {
 		return id;
 	}
@@ -78,15 +85,23 @@ public class ItemOfAD implements Serializable{
     public ItemOfADVO getVO(){
             ItemOfADVO vo = new ItemOfADVO();
             vo.setId(this.getId());
-            vo.setArticulo(this.getArticulo());
+            vo.setArticulo(this.getArticulo().getVO());
             vo.setPrecioLista(this.getPrecioLista());
             vo.setPrecioOferta(this.getPrecioOferta());            
             return vo;
     }
 	
-	public void setVO(ItemOfADVO vo){
-		this.id = vo.getId();
-		this.articulo = vo.getArticulo();
+	public void setVO(ItemOfADVO vo){		
+		
+		if (vo.getArticulo() instanceof ArtHogarVO) {
+			this.articulo = new ArtHogar();			
+		}
+		else if (vo.getArticulo() instanceof ArtRopaVO) {
+			this.articulo = new ArtRopa();			
+		} 
+		
+		this.id = vo.getId();		
+		this.articulo.setVO(vo.getArticulo());		
 		this.precioLista = vo.getPrecioLista();
 		this.precioOferta = vo.getPrecioOferta();
 	}

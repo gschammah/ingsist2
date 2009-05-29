@@ -2,6 +2,7 @@ package server.entidades.OfAD;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
@@ -88,8 +89,8 @@ public class OfAD implements Serializable{
 
 	public void setVO(OfADVO vo){
             this.id = vo.getId();
-            this.fecha = vo.getFecha();
-            this.articulos = this.voToOfad(vo.getArticulos());
+            this.fecha = vo.getFecha();            
+            this.articulos = this.voToOfad(vo.getArticulos());            
     }
 
 	

@@ -124,25 +124,10 @@ public class Articulo implements Serializable{
 	 
 	@Transient
 	public ArticuloVO getVO(){
-		ArticuloVO vo = new ArticuloVO( referencia,
-										linea,
-										descripcion,
-										precioLista,
-										precioOferta,
-										color,
-										seccion,
-										stock );
-		return vo;
+		return null;
 	}
 
-	public void setVO(ArticuloVO vo){
-		this.setColor(vo.getColor());
-		this.setDescripcion(vo.getDescripcion());
-		this.setLinea(vo.getLinea());
-		this.setPrecioLista(vo.getPrecioLista());
-		this.setPrecioOferta(vo.getPrecioOferta());
-		this.setReferencia(vo.getReferencia());
-		this.setSeccion(vo.getSeccion());		
+	public void setVO(ArticuloVO vo){			
 	}
 
 }

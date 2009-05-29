@@ -5,15 +5,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
-public class OfADVO{
-		
+public class OfADVO implements Serializable {
+					
 	private static final long serialVersionUID = 1L;
+	
 	private String id;
 	private Date fecha;
 	private Collection<ItemOfADVO> articulos = new ArrayList<ItemOfADVO>();
@@ -44,6 +39,10 @@ public class OfADVO{
 
 	public void setArticulos(Collection<ItemOfADVO> articulos) {
 		this.articulos = articulos;
+	}
+	
+	public void addItem(ItemOfADVO articulo){
+		articulos.add(articulo);
 	}
 	
 }

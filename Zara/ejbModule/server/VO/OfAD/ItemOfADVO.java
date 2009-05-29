@@ -9,15 +9,16 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import server.VO.articulos.ArticuloVO;
 import server.entidades.articulos.Articulo;
 
 
-public class ItemOfADVO{
+public class ItemOfADVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
 	private int id;
-	private Articulo articulo;
+	private ArticuloVO articulo;
 	private double precioLista;
 	private double precioOferta;
 	private OfADVO ofad;
@@ -26,11 +27,11 @@ public class ItemOfADVO{
 		
 	}	
 		
-	public Articulo getArticulo() {
+	public ArticuloVO getArticulo() {
 		return articulo;
 	}
 	
-	public void setArticulo(Articulo articulo) {
+	public void setArticulo(ArticuloVO articulo) {
 		this.articulo = articulo;
 	}
 	

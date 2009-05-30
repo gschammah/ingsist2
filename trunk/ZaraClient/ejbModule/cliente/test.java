@@ -6,6 +6,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import cliente.XML.ParseXML;
+import server.VO.OfAD.ItemOfADVO;
 import server.VO.OfAD.OfADVO;
 import server.beans.articulos.AdministradorArticulos;
 
@@ -30,8 +31,22 @@ public class test {
 		try {
 			initialContext = new InitialContext(contextProperties);
 			admArt = (AdministradorArticulos) initialContext.lookup(naming);
-			OfADVO ofadVO = ParseXML.parseOfAD("/UADE/workspace/ZaraClient/ejbModule/cliente/XML/OFAD.xml");
-			admArt.test(ofadVO);
+			OfADVO ofadVO = ParseXML.parseOfAD("/UADE/workspace/ZaraClient/ejbModule/cliente/XML/xmls/OFAD.xml");
+			ofadVO = admArt.nuevoOfad(ofadVO);
+						
+			for (ItemOfADVO item: ofadVO.getArticulos()) {
+				System.out.println(item.getArticulo().getDescripcion() + ": " + item.getArticulo().isNuevo());
+			}
+			
+			try {
+				System.out.print(admArt.checkExistingOfad("a7127b3974a9cfc095f5bb795b76568").toString());
+			}
+			catch (NullPointerException e)
+			{
+				System.out.println("no existe");
+			}
+			
+			
 
 		} catch (NamingException e) {
 			e.printStackTrace();

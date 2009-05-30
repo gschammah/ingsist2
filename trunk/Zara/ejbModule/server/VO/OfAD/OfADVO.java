@@ -9,22 +9,15 @@ public class OfADVO implements Serializable {
 					
 	private static final long serialVersionUID = 1L;
 	
-	private String id;
+	private int id;
+	private String xmlHash;
 	private Date fecha;
 	private Collection<ItemOfADVO> articulos = new ArrayList<ItemOfADVO>();
 
 	public OfADVO(){
 		
-	}	
+	}		
 	
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
 	public Date getFecha() {
 		return fecha;
 	}
@@ -43,6 +36,26 @@ public class OfADVO implements Serializable {
 	
 	public void addItem(ItemOfADVO articulo){
 		articulos.add(articulo);
+	}
+
+
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+	public String getXmlHash() {
+		return xmlHash;
+	}
+
+
+	public void setXmlHash(String xmlHash) {
+		this.xmlHash = xmlHash;
 	}
 	
 }

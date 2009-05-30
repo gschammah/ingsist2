@@ -2,13 +2,14 @@ package server.entidades.OfAD;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
@@ -21,7 +22,8 @@ import server.VO.OfAD.OfADVO;
 public class OfAD implements Serializable{
 		
 	private static final long serialVersionUID = 1L;
-	private String id;
+	private int id;
+	private String xmlHash;
 	private Date fecha;
 	private Collection<ItemOfAD> articulos = new ArrayList<ItemOfAD>();
 
@@ -30,13 +32,26 @@ public class OfAD implements Serializable{
 	}	
 	
 	@Id
-	public String getId() {
+	@GeneratedValue(strategy=GenerationType.TABLE)
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+
+	public void setId(int id) {
 		this.id = id;
 	}
+
+
+	public String getXmlHash() {
+		return xmlHash;
+	}
+
+
+	public void setXmlHash(String xmlHash) {
+		this.xmlHash = xmlHash;
+	}
+
 
 	public Date getFecha() {
 		return fecha;
@@ -47,9 +62,9 @@ public class OfAD implements Serializable{
 	}
 	
 	@OneToMany(mappedBy="ofad", fetch=FetchType.EAGER, cascade=(CascadeType.ALL))
-	public Collection<ItemOfAD> getArticulos() {
+	public Collection<ItemOfAD> getArticulos() {		
 		return articulos;
-	}
+	}	
 
 	public void setArticulos(Collection<ItemOfAD> articulos) {
 		this.articulos = articulos;
@@ -59,6 +74,7 @@ public class OfAD implements Serializable{
     public OfADVO getVO(){
             OfADVO vo = new OfADVO();
             vo.setId(this.getId());
+            vo.setXmlHash(this.getXmlHash());
             vo.setArticulos(this.ofadToVO());
             vo.setFecha(fecha);
             return vo;
@@ -81,6 +97,7 @@ public class OfAD implements Serializable{
     	for (ItemOfADVO itemOfADVo : vo) {
     		ItemOfAD item = new ItemOfAD();
     		item.setVO(itemOfADVo);
+    		item.setOfad(this);
 			result.add(item);
 		}
     	
@@ -88,6 +105,7 @@ public class OfAD implements Serializable{
 	}
 
 	public void setVO(OfADVO vo){
+            this.xmlHash = vo.getXmlHash();
             this.id = vo.getId();
             this.fecha = vo.getFecha();            
             this.articulos = this.voToOfad(vo.getArticulos());            

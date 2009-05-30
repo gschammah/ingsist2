@@ -1,9 +1,9 @@
 package server.VO.articulos;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-
 public class ArtRopaVO extends ArticuloVO {
-
+	 
+	private static final long serialVersionUID = 1L;
+	
 	private String talle;
 	private String origen;
 

@@ -4,20 +4,16 @@ import java.io.Serializable;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
 import server.VO.OfAD.ItemOfADVO;
-import server.VO.OfAD.OfADVO;
 import server.VO.articulos.ArtHogarVO;
 import server.VO.articulos.ArtRopaVO;
-import server.VO.articulos.ArticuloVO;
 import server.entidades.articulos.ArtHogar;
 import server.entidades.articulos.ArtRopa;
 import server.entidades.articulos.Articulo;
@@ -33,10 +29,10 @@ public class ItemOfAD implements Serializable{
 	private double precioOferta;
 	private OfAD ofad;
 	
-	public ItemOfAD(){
+	public ItemOfAD() {
 		
-	}	
-	
+	}
+		
 	@OneToOne(cascade=(CascadeType.ALL))
 	public Articulo getArticulo() {
 		return articulo;
@@ -62,7 +58,8 @@ public class ItemOfAD implements Serializable{
 		this.precioOferta = precioOferta;
 	}
 	
-	@Id	
+	@Id
+	@GeneratedValue(strategy=GenerationType.TABLE)
 	public int getId() {
 		return id;
 	}
@@ -71,8 +68,7 @@ public class ItemOfAD implements Serializable{
 		this.id = id;
 	}
 
-	
-	@ManyToOne
+	@ManyToOne	
 	public OfAD getOfad() {
 		return ofad;
 	}
@@ -101,7 +97,7 @@ public class ItemOfAD implements Serializable{
 		} 
 		
 		this.id = vo.getId();		
-		this.articulo.setVO(vo.getArticulo());		
+		this.articulo.setVO(vo.getArticulo());
 		this.precioLista = vo.getPrecioLista();
 		this.precioOferta = vo.getPrecioOferta();
 	}

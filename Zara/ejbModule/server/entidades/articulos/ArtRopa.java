@@ -47,28 +47,23 @@ public class ArtRopa extends Articulo {
 	
 	@Transient
 	public ArtRopaVO getVO(){
-		ArtRopaVO vo = new ArtRopaVO( this.getReferencia(),
-										this.getLinea(),
-										this.getDescripcion(),
-										this.getPrecioLista(),
-										this.getPrecioOferta(),
-										this.getColor(),
-										this.getSeccion(),
-										this.getStock(),
-										this.getTalle(),
-										this.getOrigen());
-		return vo;
+		ArtRopaVO vo = new ArtRopaVO();
+		vo.setColor(this.getColor());
+		vo.setDescripcion(this.getDescripcion());
+		vo.setLinea(this.getLinea());
+		vo.setNuevo(this.isNuevo());		
+		vo.setPrecioLista(this.getPrecioLista());
+		vo.setPrecioOferta(this.getPrecioOferta());
+		vo.setReferencia(this.getReferencia());
+		vo.setSeccion(this.getSeccion());
+		vo.setStock(this.getStock());
+		vo.setOrigen(this.getOrigen());
+		vo.setTalle(this.getTalle());
+		return vo;		
 	}
 
-	public void setVO(ArticuloVO artVO){
-		ArtRopaVO vo = (ArtRopaVO)artVO;
-		this.setColor(vo.getColor());
-		this.setDescripcion(vo.getDescripcion());
-		this.setLinea(vo.getLinea());
-		this.setPrecioLista(vo.getPrecioLista());
-		this.setPrecioOferta(vo.getPrecioOferta());
-		this.setReferencia(vo.getReferencia());
-		this.setSeccion(vo.getSeccion());
+	public void setVO(ArtRopaVO vo){
+		super.setVO(vo);		
 		this.setTalle(vo.getTalle());
 		this.setOrigen(vo.getOrigen());		
 	}

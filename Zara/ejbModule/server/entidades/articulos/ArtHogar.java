@@ -63,30 +63,25 @@ public class ArtHogar extends Articulo {
 	
 	@Transient
 	public ArtHogarVO getVO(){
-		ArtHogarVO vo = new ArtHogarVO( this.getReferencia(),
-										this.getLinea(),
-										this.getDescripcion(),
-										this.getPrecioLista(),
-										this.getPrecioOferta(),
-										this.getColor(),
-										this.getSeccion(),
-										this.getStock(),
-										this.getNombre(),
-										this.getComposicion(),
-										this.getMedidas(),
-										this.getCategoria());
-		return vo;
+		ArtHogarVO vo = new ArtHogarVO();
+		vo.setColor(this.getColor());
+		vo.setDescripcion(this.getDescripcion());
+		vo.setLinea(this.getLinea());
+		vo.setNuevo(this.isNuevo());		
+		vo.setPrecioLista(this.getPrecioLista());
+		vo.setPrecioOferta(this.getPrecioOferta());
+		vo.setReferencia(this.getReferencia());
+		vo.setSeccion(this.getSeccion());
+		vo.setStock(this.getStock());
+		vo.setCategoria(this.getCategoria());
+		vo.setComposicion(this.getComposicion());
+		vo.setMedidas(this.getMedidas());
+		vo.setNombre(this.getNombre());		
+		return vo;		
 	}
 
-	public void setVO(ArticuloVO artVO){
-		ArtHogarVO vo = (ArtHogarVO)artVO;
-		this.setColor(vo.getColor());
-		this.setDescripcion(vo.getDescripcion());
-		this.setLinea(vo.getLinea());
-		this.setPrecioLista(vo.getPrecioLista());
-		this.setPrecioOferta(vo.getPrecioOferta());
-		this.setReferencia(vo.getReferencia());
-		this.setSeccion(vo.getSeccion());
+	public void setVO(ArtHogarVO vo){
+		super.setVO(vo);		
 		this.setNombre(vo.getNombre());
 		this.setComposicion(vo.getComposicion());
 		this.setMedidas(vo.getMedidas());

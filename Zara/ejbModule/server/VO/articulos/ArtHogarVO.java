@@ -56,21 +56,5 @@ public class ArtHogarVO extends ArticuloVO {
 	public void setCategoria(String categoria) {
 		this.categoria = categoria;
 	}
-	
-	public void setVO(ArticuloVO artVO) {
-		ArtHogarVO vo = (ArtHogarVO)artVO;
-		this.setColor(vo.getColor());
-		this.setDescripcion(vo.getDescripcion());
-		this.setLinea(vo.getLinea());	
-		this.setPrecioLista(vo.getPrecioLista());
-		this.setPrecioOferta(vo.getPrecioOferta());
-		this.setReferencia(vo.getReferencia());
-		this.setSeccion(vo.getSeccion());
-		this.setStock(vo.getStock());
-		this.setCategoria(vo.getCategoria());
-		this.setComposicion(vo.getComposicion());
-		this.setMedidas(vo.getMedidas());
-		this.setNombre(vo.getNombre());
-	}
-	
+		
 }

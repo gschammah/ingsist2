@@ -17,6 +17,7 @@ public class ArticuloVO implements Serializable {
 	private String color;
 	private String seccion;
 	private int stock;
+	private boolean nuevo = false;
 	
 	public ArticuloVO(long referencia, String linea, String descripcion, double precioLista, double precioOferta, String color, String seccion, int stock) {
 		this.referencia = referencia;
@@ -94,6 +95,14 @@ public class ArticuloVO implements Serializable {
 
 	public void setStock(int stock) {
 		this.stock = stock;
+	}
+
+	public boolean isNuevo() {
+		return nuevo;
+	}
+
+	public void setNuevo(boolean nuevo) {
+		this.nuevo = nuevo;
 	}
  			
 }

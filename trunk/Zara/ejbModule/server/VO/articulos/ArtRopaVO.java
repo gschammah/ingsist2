@@ -35,19 +35,6 @@ public class ArtRopaVO extends ArticuloVO {
 	public void setOrigen(String origen) {
 		this.origen = origen;
 	}
-
-	public void setVO(ArticuloVO artVO) {
-		ArtRopaVO vo = (ArtRopaVO)artVO;
-		this.setColor(vo.getColor());
-		this.setDescripcion(vo.getDescripcion());
-		this.setLinea(vo.getLinea());
-		this.setOrigen(vo.getOrigen());
-		this.setPrecioLista(vo.getPrecioLista());
-		this.setPrecioOferta(vo.getPrecioOferta());
-		this.setReferencia(vo.getReferencia());
-		this.setSeccion(vo.getSeccion());
-		this.setStock(vo.getStock());
-		this.setTalle(vo.getTalle());
-	}
+	
 
 }

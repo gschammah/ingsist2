@@ -42,7 +42,9 @@ public class Articulo implements Serializable{
 	private String color;
 	private String seccion;
 	private int stock;
-	  
+	private boolean nuevo = false;
+	  	
+
 	public Articulo(long ref, String desc, String linea, double pL, double pO, String color, String sec, int stock) {
 		this.referencia = ref;
 		this.descripcion = desc;
@@ -121,13 +123,41 @@ public class Articulo implements Serializable{
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
-	 
+	
+		 
 	@Transient
 	public ArticuloVO getVO(){
-		return null;
+		ArticuloVO vo = new ArticuloVO();
+		vo.setColor(this.getColor());
+		vo.setDescripcion(this.getDescripcion());
+		vo.setLinea(this.getLinea());
+		vo.setNuevo(this.isNuevo());		
+		vo.setPrecioLista(this.getPrecioLista());
+		vo.setPrecioOferta(this.getPrecioOferta());
+		vo.setReferencia(this.getReferencia());
+		vo.setSeccion(this.getSeccion());
+		vo.setStock(this.getStock());
+		return vo;
 	}
 
-	public void setVO(ArticuloVO vo){			
+	public void setVO(ArticuloVO vo){
+		this.setColor(vo.getColor());
+		this.setDescripcion(vo.getDescripcion());
+		this.setLinea(vo.getLinea());
+		this.setPrecioLista(vo.getPrecioLista());
+		this.setPrecioOferta(vo.getPrecioOferta());
+		this.setReferencia(vo.getReferencia());
+		this.setSeccion(vo.getSeccion());
+		this.setNuevo(vo.isNuevo());
+	}
+
+	@Transient
+	public boolean isNuevo() {
+		return nuevo;
+	}
+
+	public void setNuevo(boolean nuevo) {
+		this.nuevo = nuevo;
 	}
 
 }

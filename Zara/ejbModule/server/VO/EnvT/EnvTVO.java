@@ -46,4 +46,7 @@ public class EnvTVO implements Serializable {
 		this.articulos = articulos;
 	}
 	
+	public void addItem(ItemEnvTVO item){
+		this.articulos.add(item);
+	}
 }

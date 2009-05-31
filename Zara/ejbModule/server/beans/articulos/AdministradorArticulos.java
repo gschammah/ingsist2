@@ -15,6 +15,6 @@ public interface AdministradorArticulos {
 	
 	public Date checkExistingOfad(String hash);
 	
-	public Articulo buscarArticulo(Articulo art);
+	public Articulo buscarArticulo(long ref);
 
 }

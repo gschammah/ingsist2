@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import server.VO.articulos.ArticuloVO;
 import server.entidades.articulos.Articulo;
 
 
@@ -16,7 +17,7 @@ public class ItemEnvTVO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private int id;
-	private Articulo articulo;
+	private ArticuloVO articulo;
 	private int cantidad;
 	private EnvTVO envt;
 	
@@ -28,11 +29,11 @@ public class ItemEnvTVO implements Serializable{
 		this.id = id;
 	}
 	
-	public Articulo getArticulo() {
+	public ArticuloVO getArticulo() {
 		return articulo;
 	}
 
-	public void setArticulo(Articulo articulo) {
+	public void setArticulo(ArticuloVO articulo) {
 		this.articulo = articulo;
 	}
 	

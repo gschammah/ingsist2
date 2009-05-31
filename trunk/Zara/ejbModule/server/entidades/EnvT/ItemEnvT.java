@@ -41,7 +41,7 @@ public class ItemEnvT implements Serializable{
 		this.id = id;
 	}
 	
-	@Transient
+	@OneToOne
 	public Articulo getArticulo() {
 		return articulo;
 	}
@@ -72,14 +72,15 @@ public class ItemEnvT implements Serializable{
             ItemEnvTVO vo = new ItemEnvTVO();
             vo.setId(this.getId());
             vo.setCantidad(this.getCantidad());
-            vo.setArticulo(this.articulo);
+            vo.setArticulo(this.articulo.getVO());
             return vo;
     }
 	
 	public void setVO(ItemEnvTVO vo){						
 		this.id = vo.getId();		
 		this.cantidad = vo.getCantidad();
-		this.articulo = vo.getArticulo();
+		this.articulo = new Articulo();
+		this.articulo.setReferencia(vo.getArticulo().getReferencia());
 	}
 	
 }

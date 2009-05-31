@@ -27,7 +27,8 @@ import server.entidades.articulos.*;
 public class AdministradorArticulosBean implements AdministradorArticulos {
 	
 	@PersistenceContext
-	private EntityManager em;		
+	private EntityManager em;
+		
 	
 	public OfADVO nuevoOfad(OfADVO ofadVO) {
 		OfAD ofad = new OfAD();
@@ -37,7 +38,7 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 		
 		for (ItemOfAD itemOfAD : items) {
 			//me fijo si existe
-			Articulo art = buscarArticulo(itemOfAD.getArticulo());
+			Articulo art = buscarArticulo(itemOfAD.getArticulo().getReferencia());
 			//si existe actualizo los precios 
 			if (art != null)
 			{
@@ -72,8 +73,8 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 		}										
 	}
 	
-	public Articulo buscarArticulo(Articulo art){		
-		Articulo result = em.find(Articulo.class, art.getReferencia());
+	public Articulo buscarArticulo(long ref){		
+		Articulo result = em.find(Articulo.class, ref);
 		return result;
 	}
 

@@ -1,11 +1,15 @@
 
-package cliente.vistas;
+package cliente.vistas.gui;
+
+import cliente.vistas.VistaListadoPALC;
 
 public class ListadoPALC extends javax.swing.JFrame {
-
-    /** Creates new form ListadoPALC */
-    public ListadoPALC() {
+    private VistaListadoPALC vistaPadre;
+    
+	/** Creates new form ListadoPALC */
+    public ListadoPALC(VistaListadoPALC vista) {
         initComponents();
+        vistaPadre = vista;
     }
 
     /** This method is called from within the constructor to

@@ -1,13 +1,17 @@
 
-package cliente.vistas;
+package cliente.vistas.gui;
 
 import java.awt.event.ActionEvent;
 
-public class PALC extends javax.swing.JFrame {
+import cliente.vistas.VistaPALC;
 
-    /** Creates new form PALC */
-    public PALC() {
+public class PALC extends javax.swing.JFrame {
+    private VistaPALC vistaPadre;
+    
+	/** Creates new form PALC */
+    public PALC(VistaPALC vista) {
         initComponents();
+        vistaPadre = vista;
     }
 
     /** This method is called from within the constructor to
@@ -51,8 +55,7 @@ public class PALC extends javax.swing.JFrame {
             }
 
             private void btnGenerarActionPerformed(ActionEvent evt) {
-                ListadoPALC vista_listado = new ListadoPALC();     
-                vista_listado.setVisible(true);
+                
             }
         });
 

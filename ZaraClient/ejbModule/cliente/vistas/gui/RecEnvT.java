@@ -1,11 +1,15 @@
 
-package cliente.vistas;
+package cliente.vistas.gui;
+
+import cliente.vistas.VistaRecEnvT;
 
 public class RecEnvT extends javax.swing.JFrame {
-
-    /** Creates new form RecEnvT */
-    public RecEnvT() {
+    private VistaRecEnvT vistaPadre;
+    
+	/** Creates new form RecEnvT */
+    public RecEnvT(VistaRecEnvT vista) {
         initComponents();
+        vistaPadre = vista;
     }
 
     /** This method is called from within the constructor to

@@ -11,6 +11,8 @@ import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 
+import server.VO.EnvT.EnvTVO;
+import server.VO.EnvT.ItemEnvTVO;
 import server.VO.OfAD.ItemOfADVO;
 import server.VO.OfAD.OfADVO;
 import server.VO.articulos.ArtHogarVO;
@@ -94,4 +96,50 @@ public class ParseXML {
 		return ofadVO;
 
 	}
+	
+	
+	public static EnvTVO parseEnvT(String file) {
+
+		SAXBuilder builder = new SAXBuilder();
+		Document doc = null;
+		
+		MD5 md5 = new MD5(file);
+								
+		try {			
+			doc = builder.build(new FileInputStream(file));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (JDOMException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		Element root = doc.getRootElement();
+		List articulos = root.getChild("itemsenvt").getChildren();
+		EnvTVO envt = new EnvTVO();
+		envt.setFecha(Calendar.getInstance().getTime());				
+		//envt.setXmlHash(md5.obtenerMD5Hash());		
+				
+				
+		for (Object articulo : articulos) {
+
+			Element art = ((Element) articulo);
+
+			ItemEnvTVO itemEnvT = new ItemEnvTVO();							
+			ArticuloVO artVO = new ArticuloVO();
+			
+			artVO.setReferencia(Long.parseLong(art.getChildText("referencia")));
+			
+			itemEnvT.setCantidad(Integer.parseInt(art.getChildText("cantidadenviada")));			
+			itemEnvT.setArticulo(artVO);
+			
+			envt.addItem(itemEnvT);
+
+		}
+
+		return envt;
+
+	}
+	
+	
 }

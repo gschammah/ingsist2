@@ -4,21 +4,25 @@
  * Created on 6 de abril de 2009, 00:44
  */
 
-package cliente.vistas;
+package cliente.vistas.gui;
+
+import cliente.vistas.VistaFactura;
+import cliente.vistas.VistaMainMenu;
 
 /**
  *
  * @author  chama
  */
 public class Factura extends javax.swing.JFrame {
-
+	private VistaFactura vistaPadre = null;
     /**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	/** Creates new form VentaArticulos */
-    public Factura() {
+    public Factura(VistaFactura vista) {
         initComponents();
+        vistaPadre = vista;
     }
 
     /** This method is called from within the constructor to

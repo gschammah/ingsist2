@@ -1,11 +1,15 @@
 
-package cliente.vistas;
+package cliente.vistas.gui;
+
+import cliente.vistas.VistaOfAD;
 
 public class OfAD extends javax.swing.JFrame {
-
-    /** Creates new form test */
-    public OfAD() {
+    private VistaOfAD vistaPadre;
+    
+	/** Creates new form test */
+    public OfAD(VistaOfAD vista) {
         initComponents();
+        vistaPadre = vista;
     }
 
     /** This method is called from within the constructor to

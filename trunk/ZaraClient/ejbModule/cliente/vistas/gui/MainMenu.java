@@ -4,17 +4,25 @@
  * Created on 5 de abril de 2009, 23:59
  */
 
-package cliente.vistas;
+package cliente.vistas.gui;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import cliente.controladores.ZaraMainController;
+import cliente.vistas.VistaMainMenu;
 
 /**
  *
  * @author  chama
  */
 public class MainMenu extends javax.swing.JFrame {
+	private VistaMainMenu vistaPadre = null;
 
     /** Creates new form MainMenu */
-    public MainMenu() {
+    public MainMenu(VistaMainMenu vista) {
         initComponents();
+        vistaPadre = vista;
     }
 
     /** This method is called from within the constructor to
@@ -42,34 +50,41 @@ public class MainMenu extends javax.swing.JFrame {
 
         btn_Venta.setText(" Venta de artículos");
         btn_Venta.setName("btn_Venta");
-        btn_Venta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btn_Venta.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 btn_VentaActionPerformed(evt);
             }
         });
 
         btn_ofad.setText("Recibir \"oferta de artículos disponibles\" (OfAD)");
-        btn_ofad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btn_ofad.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 btn_ofadActionPerformed(evt);
             }
         });
 
         btn_palc.setText("Generar \"Pedido de artículos a La Coruña\" (PALC)");
-        btn_palc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btn_palc.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 btn_palcActionPerformed(evt);
             }
         });
 
         btn_envt.setText("Recibir \"Envío a tienda\" (EnvT)");
-        btn_envt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btn_envt.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 btn_envtActionPerformed(evt);
             }
         });
-
+        
         btn_salir.setText("Salir");
+        btn_salir.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                btn_salirActionPerformed(evt);
+            }
+			
+        });
+
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -108,28 +123,27 @@ public class MainMenu extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
-private void btn_ofadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ofadActionPerformed
-    OfAD vista_ofad = new OfAD();
-    vista_ofad.setVisible(true);
-}//GEN-LAST:event_btn_ofadActionPerformed
+private void btn_ofadActionPerformed(java.awt.event.ActionEvent evt) {
+    ((ZaraMainController)vistaPadre.getControlador()).mostrarOfAD();
+}
 
-private void btn_VentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_VentaActionPerformed
-    VentaArticulos vista_venta = new VentaArticulos();
-    vista_venta.setVisible(true);
-}//GEN-LAST:event_btn_VentaActionPerformed
+private void btn_VentaActionPerformed(java.awt.event.ActionEvent evt) {
+	((ZaraMainController)vistaPadre.getControlador()).mostrarVentas();
+}
 
-private void btn_palcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_palcActionPerformed
-    PALC vista_palc = new PALC();
-    vista_palc.setVisible(true);
-}//GEN-LAST:event_btn_palcActionPerformed
+private void btn_palcActionPerformed(java.awt.event.ActionEvent evt) {
+	((ZaraMainController)vistaPadre.getControlador()).mostrarPALC();
+}
 
-private void btn_envtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_envtActionPerformed
-    RecEnvT vista_envt = new RecEnvT();
-    vista_envt.setVisible(true);
-}//GEN-LAST:event_btn_envtActionPerformed
+private void btn_envtActionPerformed(java.awt.event.ActionEvent evt) {
+	((ZaraMainController)vistaPadre.getControlador()).mostrarEnvT();
+}
 
+private void btn_salirActionPerformed(ActionEvent evt) {
+	((ZaraMainController)vistaPadre.getControlador()).salirSistema();	
+}
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Venta;

@@ -4,19 +4,23 @@
  * Created on 6 de abril de 2009, 00:44
  */
 
-package cliente.vistas;
+package cliente.vistas.gui;
 
 import java.awt.Color;
+
+import cliente.vistas.VistaVentaArticulos;
 
 /**
  *
  * @author  chama
  */
 public class VentaArticulos extends javax.swing.JFrame {
-
-    /** Creates new form VentaArticulos */
-    public VentaArticulos() {
+    private VistaVentaArticulos vistaPadre;
+    
+	/** Creates new form VentaArticulos */
+    public VentaArticulos(VistaVentaArticulos vista) {
         initComponents();
+        vistaPadre = vista;
     }
 
     /** This method is called from within the constructor to
@@ -257,8 +261,7 @@ public class VentaArticulos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-    Factura vista_factura = new Factura();
-    vista_factura.setVisible(true);
+    
 }//GEN-LAST:event_jButton2ActionPerformed
 
    

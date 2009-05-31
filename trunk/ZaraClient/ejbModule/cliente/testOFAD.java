@@ -10,17 +10,17 @@ import server.VO.OfAD.ItemOfADVO;
 import server.VO.OfAD.OfADVO;
 import server.beans.articulos.AdministradorArticulos;
 
-public class test {
+public class testOFAD {
 
 	private Hashtable<String, String> contextProperties;
 	private InitialContext initialContext;
 
 	public static void main(String[] args) {
 
-		new test();
+		new testOFAD();
 	}
 
-	public test() {
+	public testOFAD() {
 
 		AdministradorArticulos admArt;
 		contextProperties = new Hashtable<String, String>();

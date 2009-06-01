@@ -43,8 +43,9 @@ public class Articulo implements Serializable{
 	private String seccion;
 	private int stock;
 	private boolean nuevo = false;
+	private int puntoReposicion;
 	  	
-
+	
 	public Articulo(long ref, String desc, String linea, double pL, double pO, String color, String sec, int stock) {
 		this.referencia = ref;
 		this.descripcion = desc;
@@ -124,6 +125,15 @@ public class Articulo implements Serializable{
 		this.stock = stock;
 	}
 	
+	public int getPuntoReposicion() {
+		return puntoReposicion;
+	}
+
+	public void setPuntoReposicion(int puntoReposicion) {
+		this.puntoReposicion = puntoReposicion;
+	}
+
+	
 		 
 	@Transient
 	public ArticuloVO getVO(){
@@ -137,6 +147,7 @@ public class Articulo implements Serializable{
 		vo.setReferencia(this.getReferencia());
 		vo.setSeccion(this.getSeccion());
 		vo.setStock(this.getStock());
+		vo.setPuntoReposicion(this.getPuntoReposicion());
 		return vo;
 	}
 
@@ -149,6 +160,7 @@ public class Articulo implements Serializable{
 		this.setReferencia(vo.getReferencia());
 		this.setSeccion(vo.getSeccion());
 		this.setNuevo(vo.isNuevo());
+		this.setPuntoReposicion(vo.getPuntoReposicion());
 	}
 
 	@Transient

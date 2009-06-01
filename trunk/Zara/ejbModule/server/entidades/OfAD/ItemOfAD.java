@@ -88,7 +88,7 @@ public class ItemOfAD implements Serializable{
     }
 	
 	public void setVO(ItemOfADVO vo){		
-		
+	
 		if (vo.getArticulo() instanceof ArtHogarVO) {
 			this.articulo = new ArtHogar();			
 		}
@@ -98,6 +98,7 @@ public class ItemOfAD implements Serializable{
 		
 		this.id = vo.getId();		
 		this.articulo.setVO(vo.getArticulo());
+		
 		this.precioLista = vo.getPrecioLista();
 		this.precioOferta = vo.getPrecioOferta();
 	}

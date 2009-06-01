@@ -18,6 +18,7 @@ public class ArticuloVO implements Serializable {
 	private String seccion;
 	private int stock;
 	private boolean nuevo = false;
+	private int puntoReposicion;
 	
 	public ArticuloVO(long referencia, String linea, String descripcion, double precioLista, double precioOferta, String color, String seccion, int stock) {
 		this.referencia = referencia;
@@ -103,6 +104,14 @@ public class ArticuloVO implements Serializable {
 
 	public void setNuevo(boolean nuevo) {
 		this.nuevo = nuevo;
+	}
+
+	public int getPuntoReposicion() {
+		return puntoReposicion;
+	}
+
+	public void setPuntoReposicion(int puntoReposicion) {
+		this.puntoReposicion = puntoReposicion;
 	}
  			
 }

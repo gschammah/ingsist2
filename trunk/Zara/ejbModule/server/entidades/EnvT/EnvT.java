@@ -27,6 +27,7 @@ public class EnvT implements Serializable {
 	private int id;
 	private Date fecha;
 	private Collection<ItemEnvT> articulos = new ArrayList<ItemEnvT>();
+	//TODO hash
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.TABLE)

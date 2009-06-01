@@ -12,6 +12,9 @@ public class VistaRecEnvT extends Vista {
 	public VistaRecEnvT(ZaraModel modelo){
 		super(modelo);
 		vistaGrafica = new RecEnvT(this);
+		
+		this.centrarVista(vistaGrafica);
+		
 		vistaGrafica.pack();
 		vistaGrafica.setVisible(true);
 	}

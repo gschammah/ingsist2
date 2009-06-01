@@ -1,5 +1,10 @@
 package cliente.controladores;
 
+
+import java.util.Date;
+
+import server.VO.OfAD.OfADVO;
+import cliente.XML.ParseXML;
 import cliente.modelo.ZaraModel;
 import cliente.vistas.VistaOfAD;
 import cliente.vistas.VistaPALC;
@@ -16,7 +21,8 @@ public class ZaraMainController extends Controlador{
 	}
 	
 	public void mostrarOfAD(){
-		new VistaOfAD((ZaraModel) this.getModelo());
+		VistaOfAD vista = new VistaOfAD((ZaraModel) this.getModelo());
+		OfADController ofad = new OfADController((ZaraModel) this.getModelo(), vista);		
 	}
 
 	public void mostrarVentas() {

@@ -1,22 +1,87 @@
 package cliente.vistas;
 
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.Date;
+
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import server.VO.OfAD.ItemOfADVO;
+import server.VO.OfAD.OfADVO;
+import server.VO.articulos.ArticuloVO;
+
+import cliente.controladores.OfADController;
 import cliente.modelo.ZaraModel;
 import cliente.vistas.gui.MainMenu;
 import cliente.vistas.gui.OfAD;
+import framework.controlador.Controlador;
 import framework.vista.Vista;
 
-public class VistaOfAD extends Vista {	
+public class VistaOfAD extends Vista {
 	private OfAD vistaGrafica;
 
-	public VistaOfAD(ZaraModel modelo){
+	public VistaOfAD(ZaraModel modelo) {
 		super(modelo);
 		vistaGrafica = new OfAD(this);
+		this.centrarVista(vistaGrafica);
+	}
+
+	public void addControlador(Controlador cp) {
+		super.addControlador(cp);
+		((OfADController) this.getControlador()).cargarOfAD();
+	}
+
+	public void showOfAD() {		
 		vistaGrafica.pack();
 		vistaGrafica.setVisible(true);
 	}
-	
-	public void actualizar() {
-		// TODO Auto-generated method stub		
+
+	public void cargarDatos(OfADVO ofad) {
+		Collection<ItemOfADVO> items = ofad.getArticulos();
+		JTable artDisponibles = vistaGrafica.getTablaArtDisponibles();
+		JTable artNuevos = vistaGrafica.getTablaArtNuevos();
+
+		for (ItemOfADVO item : items) {
+
+			ArticuloVO art = item.getArticulo();
+
+			if (art.isNuevo()) {
+				((DefaultTableModel) artNuevos.getModel())
+				.addRow(new Object[] { art.getReferencia(),
+						art.getDescripcion(), art.getPrecioLista(),
+						art.getPrecioOferta() });
+
+			} else {
+				((DefaultTableModel) artDisponibles.getModel())
+						.addRow(new Object[] { art.getReferencia(),
+								art.getDescripcion(), art.getPrecioLista(),
+								art.getPrecioOferta() });
+			}
+		}
+		vistaGrafica.setVisible(true);
 	}
+
+	public int showPopup(Date fecha) {
+		return JOptionPane.showConfirmDialog(vistaGrafica,
+				"Es posible que se haya cargado un OfAD el día "
+						+ DateFormat.getDateInstance().format(fecha)
+						+ " a las "
+						+ DateFormat.getTimeInstance().format(fecha)
+						+ ". Desea cargarlo de todos modos?", "Confirmación",
+				JOptionPane.YES_NO_OPTION);
+	}
+
+	public void actualizar() {
+		// TODO Auto-generated method stub
+	}
+
+	public OfAD getVistaGrafica() {
+		return vistaGrafica;
+	}
+	
+	
 
 }

@@ -12,6 +12,9 @@ public class VistaVentaArticulos extends Vista {
 	public VistaVentaArticulos(ZaraModel modelo){
 		super(modelo);
 		vistaGrafica = new VentaArticulos(this);
+		
+		this.centrarVista(vistaGrafica);
+		
 		vistaGrafica.pack();
 		vistaGrafica.setVisible(true);
 	}

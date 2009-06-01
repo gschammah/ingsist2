@@ -12,6 +12,9 @@ public class VistaListadoPALC extends Vista {
 	public VistaListadoPALC(ZaraModel modelo){
 		super(modelo);
 		vistaGrafica = new ListadoPALC(this);
+		
+		this.centrarVista(vistaGrafica);
+		
 		vistaGrafica.pack();
 		vistaGrafica.setVisible(true);
 	}

@@ -12,6 +12,9 @@ public class VistaFactura extends Vista {
 	public VistaFactura(ZaraModel modelo){
 		super(modelo);
 		vistaGrafica = new Factura(this);
+		
+		this.centrarVista(vistaGrafica);
+		
 		vistaGrafica.pack();
 		vistaGrafica.setVisible(true);
 	}

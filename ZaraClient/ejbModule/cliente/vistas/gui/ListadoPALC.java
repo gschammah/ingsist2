@@ -1,6 +1,8 @@
 
 package cliente.vistas.gui;
 
+import javax.swing.WindowConstants;
+
 import cliente.vistas.VistaListadoPALC;
 
 public class ListadoPALC extends javax.swing.JFrame {
@@ -29,6 +31,8 @@ public class ListadoPALC extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         
         setTitle("Listado de Pedidos a La Coruña");
+        
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         	
         jLabel1.setText("Listado Completo de Artículos a Pedir");
 

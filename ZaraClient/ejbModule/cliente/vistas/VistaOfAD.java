@@ -1,5 +1,7 @@
 package cliente.vistas;
 
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.text.DateFormat;
 import java.util.Collection;
 import java.util.Date;
@@ -25,13 +27,24 @@ public class VistaOfAD extends Vista {
 	public VistaOfAD(ZaraModel modelo) {
 		super(modelo);
 		vistaGrafica = new OfAD(this);
+		
+		vistaGrafica.addWindowListener(new WindowListener(){						
+			public void windowClosed(WindowEvent e) { instance = null;}			
+			public void windowActivated(WindowEvent e) {}
+			public void windowClosing(WindowEvent e) {}
+			public void windowDeactivated(WindowEvent e) {}
+			public void windowDeiconified(WindowEvent e) {}
+			public void windowIconified(WindowEvent e) {}
+			public void windowOpened(WindowEvent e) {}										
+		});
+		
 		this.centrarVista(vistaGrafica);
 	}
 
 	@Override
 	public void addControlador(Controlador cp) {
 		super.addControlador(cp);
-		((OfADController) this.getControlador()).cargarOfAD();
+		((OfADController) this.getControlador()).cargarOfAD(false);
 	}
 	
 	public void borrarTabla(JTable tabla){
@@ -70,6 +83,12 @@ public class VistaOfAD extends Vista {
 						art.getPrecioLista(), art.getPrecioOferta() });
 			}
 		}
+		
+		Date fecha = ofad.getFecha();
+		
+		vistaGrafica.getTxtActualizacion().setText(
+				DateFormat.getDateInstance().format(fecha) + " " + DateFormat.getTimeInstance().format(fecha) 
+		);
 		vistaGrafica.setVisible(true);
 	}
 
@@ -93,9 +112,10 @@ public class VistaOfAD extends Vista {
 		
 		return instance;
 	}
-	
-	public OfAD getVistaGrafica() {
-		return vistaGrafica;
+
+
+	public void cerrar() {
+		vistaGrafica.dispose();
 	}
 
 }

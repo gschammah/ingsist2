@@ -1,5 +1,7 @@
 package cliente.vistas;
 
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.text.DateFormat;
 import java.util.Collection;
 import java.util.Date;
@@ -30,6 +32,16 @@ public class VistaRecEnvT extends Vista {
 		
 		this.centrarVista(vistaGrafica);
 		
+		vistaGrafica.addWindowListener(new WindowListener(){						
+			public void windowClosed(WindowEvent e) { instance = null;}			
+			public void windowActivated(WindowEvent e) {}
+			public void windowClosing(WindowEvent e) {}
+			public void windowDeactivated(WindowEvent e) {}
+			public void windowDeiconified(WindowEvent e) {}
+			public void windowIconified(WindowEvent e) {}
+			public void windowOpened(WindowEvent e) {}										
+		});
+		
 		vistaGrafica.pack();
 		vistaGrafica.setVisible(true);
 	}
@@ -54,7 +66,13 @@ public class VistaRecEnvT extends Vista {
 		JTable artPendientes = vistaGrafica.getTablaArtPendientes();
 		
 		borrarTabla(artRecibidos);
-		borrarTabla(artPendientes);		 				
+		borrarTabla(artPendientes);
+		
+		Date fecha = envt.getFecha();
+		
+		vistaGrafica.getTxt_hora().setText(
+				DateFormat.getDateInstance().format(fecha) + " " + DateFormat.getTimeInstance().format(fecha) 
+		);
 
 		for (ItemEnvTVO item : items) {
 
@@ -72,14 +90,6 @@ public class VistaRecEnvT extends Vista {
 			}
 		}		
 	
-	}
-
-	public RecEnvT getVistaGrafica() {
-		return vistaGrafica;
-	}
-
-	public void setVistaGrafica(RecEnvT vistaGrafica) {
-		this.vistaGrafica = vistaGrafica;
 	}
 	
 	public int showPopup(Date fecha) {
@@ -100,6 +110,10 @@ public class VistaRecEnvT extends Vista {
 		}
 		
 		return instance;
+	}
+
+	public void cerrar() {
+		vistaGrafica.dispose();
 	}
 
 

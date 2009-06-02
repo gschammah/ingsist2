@@ -50,7 +50,7 @@ public class EnvTController extends Controlador {
 	}
 	
 	public void cerrar(){
-		((VistaRecEnvT)this.getVista()).getVistaGrafica().dispose();
+		((VistaRecEnvT)this.getVista()).cerrar();
 	}
 
 }

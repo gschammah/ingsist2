@@ -11,6 +11,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
+import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
 import cliente.controladores.EnvTController;
@@ -40,7 +41,7 @@ public class RecEnvT extends javax.swing.JFrame {
     
         jLabel1 = new JLabel();
         jLabel2 = new JLabel();
-        jTextField1 = new JTextField();
+        txt_hora = new JTextField();
         jLabel3 = new JLabel();
         jScrollPane1 = new JScrollPane();
         tablaArtRecibidos = new JTable();
@@ -50,14 +51,16 @@ public class RecEnvT extends javax.swing.JFrame {
         btn_salir = new JButton();
         btn_registrarEnvT = new JButton();
         
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        
         setTitle("Recepción de Envíos a Tienda");
         
         jLabel1.setText("Recepción de Envios a Tienda (EnvT)");
 
         jLabel2.setText("Hora de Arribo:");
 
-        jTextField1.setEditable(false);
-        jTextField1.setText("HH:MM:SS - DD/MM/AAAA");
+        txt_hora.setEditable(false);
+        txt_hora.setText("HH:MM:SS - DD/MM/AAAA");
 
         jLabel3.setText("Artículos Recibidos");
 
@@ -170,7 +173,7 @@ public class RecEnvT extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel2)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txt_hora, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel3))
@@ -194,7 +197,7 @@ public class RecEnvT extends javax.swing.JFrame {
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_hora, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
@@ -231,7 +234,7 @@ public class RecEnvT extends javax.swing.JFrame {
     private JScrollPane jScrollPane2;
     private JTable tablaArtRecibidos;
     private JTable tablaArtPendientes;
-    private JTextField jTextField1;
+    private JTextField txt_hora;
     // End of variables declaration//GEN-END:variables
 
 	public JTable getTablaArtRecibidos() {
@@ -240,6 +243,10 @@ public class RecEnvT extends javax.swing.JFrame {
 
 	public JTable getTablaArtPendientes() {
 		return this.tablaArtPendientes;
+	}
+
+	public JTextField getTxt_hora() {
+		return txt_hora;
 	}
 
 }

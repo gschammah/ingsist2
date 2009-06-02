@@ -1,5 +1,8 @@
 package cliente.vistas;
 
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+
 import cliente.modelo.ZaraModel;
 import cliente.vistas.gui.Factura;
 import framework.vista.Vista;
@@ -12,6 +15,16 @@ public class VistaFactura extends Vista {
 	public VistaFactura(ZaraModel modelo){
 		super(modelo);
 		vistaGrafica = new Factura(this);
+		
+		vistaGrafica.addWindowListener(new WindowListener(){						
+			public void windowClosed(WindowEvent e) { instance = null;}			
+			public void windowActivated(WindowEvent e) {}
+			public void windowClosing(WindowEvent e) {}
+			public void windowDeactivated(WindowEvent e) {}
+			public void windowDeiconified(WindowEvent e) {}
+			public void windowIconified(WindowEvent e) {}
+			public void windowOpened(WindowEvent e) {}										
+		});
 		
 		this.centrarVista(vistaGrafica);
 		

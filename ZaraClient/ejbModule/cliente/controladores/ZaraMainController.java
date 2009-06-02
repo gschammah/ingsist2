@@ -23,6 +23,7 @@ public class ZaraMainController extends Controlador{
 
 	public void mostrarVentas() {
 		VistaVentaArticulos vista = VistaVentaArticulos.getInstance((ZaraModel) this.getModelo());
+		new VentaArticulosController(this.getModelo(), vista);
 	}
 
 	public void mostrarPALC() {

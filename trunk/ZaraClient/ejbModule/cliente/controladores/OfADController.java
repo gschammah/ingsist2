@@ -18,14 +18,14 @@ public class OfADController extends Controlador {
 	}
 	
 	public Date checkOfAD(String hash){		
-		return ((ZaraModel)this.getModelo()).getAdmArt().checkExistingOfad(hash);			
+		return ((ZaraModel)this.getModelo()).getFachada().checkExistingOfad(hash);			
 	}
 	
 	public void cargarOfAD(){
-		Date fechaOfad = checkOfAD("d1b4d1179b233256d37e420d255278");
-		if (fechaOfad == null || (fechaOfad != null && ((VistaOfAD)this.getVista()).showPopup(fechaOfad) == 0)) {
-			OfADVO ofadVO = ParseXML.parseOfAD("/UADE/workspace/ZaraClient/ejbModule/cliente/XML/xmls/OFAD.xml");
-			((VistaOfAD)this.getVista()).cargarDatos(((ZaraModel)this.getModelo()).getAdmArt().nuevoOfad(ofadVO));			
+		OfADVO ofadVO = ParseXML.parseOfAD("/UADE/workspace/ZaraClient/ejbModule/cliente/XML/xmls/OFAD.xml");
+		Date fechaOfad = checkOfAD(ofadVO.getXmlHash());
+		if (fechaOfad == null || (fechaOfad != null && ((VistaOfAD)this.getVista()).showPopup(fechaOfad) == 0)) {			
+			((VistaOfAD)this.getVista()).cargarDatos(((ZaraModel)this.getModelo()).getFachada().nuevoOfad(ofadVO));			
 		}
 		else if (fechaOfad != null){			
 			System.err.println("Carga OfAD cancelada");

@@ -2,7 +2,6 @@ package cliente.vistas;
 
 import cliente.modelo.ZaraModel;
 import cliente.vistas.gui.ListadoPALC;
-import cliente.vistas.gui.OfAD;
 import framework.vista.Vista;
 
 public class VistaListadoPALC extends Vista {
@@ -18,9 +17,5 @@ public class VistaListadoPALC extends Vista {
 		vistaGrafica.pack();
 		vistaGrafica.setVisible(true);
 	}
-	
-	public void actualizar() {
-		// TODO Auto-generated method stub		
-	}
-
+		
 }

@@ -5,10 +5,11 @@
       <Referencia>7377674</Referencia>
       <seccion>Mujer</seccion>
       <descripcion>Vestido Corto C/Atado</descripcion>
-      <precioLista>123</precioLista>
+      <precioLista>119.0</precioLista>
       <precioOferta>12.0</precioOferta>
       <color>Negro</color>
-      <linea>Basic</linea>      
+      <linea>Basic</linea>
+      <stockReposicion>5</stockReposicion>
       <talle>L</talle>
       <origen>Asia</origen>
     </xml.ArtRopaVO>
@@ -16,10 +17,11 @@
       <Referencia>7168501</Referencia>
       <seccion>Mujer</seccion>
       <descripcion>Camisa C/Alto Lazo</descripcion>
-      <precioLista>999</precioLista>
+      <precioLista>119.0</precioLista>
       <precioOferta>14.0</precioOferta>
       <color>Azul</color>
-      <linea>Basic</linea>      
+      <linea>Basic</linea>
+      <stockReposicion>5</stockReposicion>
       <talle>L</talle>
       <origen>Asia</origen>
     </xml.ArtRopaVO>
@@ -30,7 +32,8 @@
       <precioLista>139.0</precioLista>
       <precioOferta>49.0</precioOferta>
       <color>Marron</color>
-      <linea>Basic</linea>      
+      <linea>Basic</linea>
+      <stockReposicion>5</stockReposicion>
       <talle>M</talle>
       <origen>Turquia</origen>
     </xml.ArtRopaVO>
@@ -41,7 +44,8 @@
       <precioLista>399.0</precioLista>
       <precioOferta>112.0</precioOferta>
       <color>Unico</color>
-      <linea>Unica</linea>      
+      <linea>Unica</linea>
+      <stockReposicion>5</stockReposicion>
       <nombre>Alfombra</nombre>
       <composicion>100% Piel Bovina</composicion>
       <medidas>150x200cm.</medidas>
@@ -54,7 +58,8 @@
       <precioLista>349.0</precioLista>
       <precioOferta>115.0</precioOferta>
       <color>Unico</color>
-      <linea>Unica</linea>      
+      <linea>Unica</linea>
+      <stockReposicion>5</stockReposicion>
       <nombre>Alfombra</nombre>
       <composicion>100% Piel Bovina</composicion>
       <medidas>150x200cm.</medidas>
@@ -67,7 +72,8 @@
       <precioLista>79.0</precioLista>
       <precioOferta>49.0</precioOferta>
       <color>Unico</color>
-      <linea>Unica</linea>      
+      <linea>Unica</linea>
+      <stockReposicion>5</stockReposicion>
       <nombre>Manta Harnet</nombre>
       <composicion>70% Mohar 30% Lana</composicion>
       <medidas>130x170cm.</medidas>

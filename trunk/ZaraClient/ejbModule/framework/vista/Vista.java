@@ -13,7 +13,6 @@ import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 
-import cliente.vistas.gui.MainMenu;
 import framework.controlador.*;
 import framework.modeloCliente.*;
 
@@ -50,7 +49,5 @@ public abstract class Vista {
 	public Controlador getControlador() {
 		return controlador;
 	}
-
-	public abstract void actualizar(); 
 	
 }

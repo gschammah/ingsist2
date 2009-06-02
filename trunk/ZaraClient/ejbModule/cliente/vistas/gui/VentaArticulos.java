@@ -39,7 +39,7 @@ public class VentaArticulos extends javax.swing.JFrame {
 
         jTextArea3 = new javax.swing.JTextArea();
         jTextArea3.setEditable(false);
-        jTextArea3.setBorder(javax.swing.BorderFactory.createLineBorder(Color.GRAY, 5));
+        jTextArea3.setBorder(javax.swing.BorderFactory.createLineBorder(Color.GRAY, 1));
         
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -88,11 +88,13 @@ public class VentaArticulos extends javax.swing.JFrame {
                 false, false, false, false, true, true
             };
 
-            public Class getColumnClass(int columnIndex) {
+            @Override
+			public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
+            @Override
+			public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });

@@ -1,7 +1,6 @@
 package cliente.vistas;
 
 import java.text.DateFormat;
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
@@ -15,7 +14,6 @@ import server.VO.articulos.ArticuloVO;
 
 import cliente.controladores.OfADController;
 import cliente.modelo.ZaraModel;
-import cliente.vistas.gui.MainMenu;
 import cliente.vistas.gui.OfAD;
 import framework.controlador.Controlador;
 import framework.vista.Vista;
@@ -29,36 +27,46 @@ public class VistaOfAD extends Vista {
 		this.centrarVista(vistaGrafica);
 	}
 
+	@Override
 	public void addControlador(Controlador cp) {
 		super.addControlador(cp);
 		((OfADController) this.getControlador()).cargarOfAD();
 	}
+	
+	public void borrarTabla(JTable tabla){
+		while (((DefaultTableModel) tabla.getModel()).getRowCount() > 0) {
+			((DefaultTableModel) tabla.getModel()).removeRow(0);
+		}
+	}
 
-	public void showOfAD() {		
+	public void showOfAD() {
 		vistaGrafica.pack();
 		vistaGrafica.setVisible(true);
 	}
 
 	public void cargarDatos(OfADVO ofad) {
+		
 		Collection<ItemOfADVO> items = ofad.getArticulos();
+		
 		JTable artDisponibles = vistaGrafica.getTablaArtDisponibles();
 		JTable artNuevos = vistaGrafica.getTablaArtNuevos();
+		
+		borrarTabla(artDisponibles);
+		borrarTabla(artNuevos);
 
 		for (ItemOfADVO item : items) {
 
 			ArticuloVO art = item.getArticulo();
 
 			if (art.isNuevo()) {
-				((DefaultTableModel) artNuevos.getModel())
-				.addRow(new Object[] { art.getReferencia(),
-						art.getDescripcion(), art.getPrecioLista(),
-						art.getPrecioOferta() });
+				((DefaultTableModel) artNuevos.getModel()).addRow(new Object[] {
+						art.getReferencia(), art.getDescripcion(),
+						art.getPrecioLista(), art.getPrecioOferta() });
 
 			} else {
-				((DefaultTableModel) artDisponibles.getModel())
-						.addRow(new Object[] { art.getReferencia(),
-								art.getDescripcion(), art.getPrecioLista(),
-								art.getPrecioOferta() });
+				((DefaultTableModel) artDisponibles.getModel()).addRow(new Object[] { 
+						art.getReferencia(), art.getDescripcion(), 
+						art.getPrecioLista(), art.getPrecioOferta() });
 			}
 		}
 		vistaGrafica.setVisible(true);
@@ -74,14 +82,9 @@ public class VistaOfAD extends Vista {
 				JOptionPane.YES_NO_OPTION);
 	}
 
-	public void actualizar() {
-		// TODO Auto-generated method stub
-	}
 
 	public OfAD getVistaGrafica() {
 		return vistaGrafica;
 	}
-	
-	
 
 }

@@ -8,7 +8,6 @@
 package framework.modeloCliente;
 
 import framework.vista.*;
-import java.util.Vector;
 
 
 public abstract class ProxyModelo {

@@ -7,7 +7,6 @@
 package cliente.vistas.gui;
 
 import cliente.vistas.VistaFactura;
-import cliente.vistas.VistaMainMenu;
 
 /**
  *
@@ -81,11 +80,13 @@ public class Factura extends javax.swing.JFrame {
                 false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex) {
+            @Override
+			public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
+            @Override
+			public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });

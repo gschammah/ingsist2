@@ -54,13 +54,28 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 		ofad.setArticulos(items);
 		
 		em.persist(ofad);
+		
+		
 		return ofad.getVO();
 	}
 	
 	public Date checkExistingOfad(String hash){
-		Query q = em.createQuery("SELECT o FROM OfAD o where o.xmlHash = ? ORDER BY o.fecha DESC");
-		q.setParameter(1, hash);
-				
+		String query;
+		Query q;
+		
+		// Si no le mando un hash, entonces me trae la fecha de la ultima actualizacion
+		if (hash == null)
+		{
+			query = "SELECT o FROM OfAD o ORDER BY o.fecha DESC";
+			q = em.createQuery(query);
+		}
+		else
+		{
+			query = "SELECT o FROM OfAD o where o.xmlHash = ? ORDER BY o.fecha DESC";
+			q = em.createQuery(query);
+			q.setParameter(1, hash);
+		}
+							
 		List ofad = q.getResultList();
 		
 		if (ofad.size() > 0)

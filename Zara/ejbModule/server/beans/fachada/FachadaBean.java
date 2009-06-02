@@ -4,13 +4,13 @@ import java.util.Date;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
-import javax.ejb.Stateless;
 
 import server.VO.EnvT.EnvTVO;
 import server.VO.OfAD.OfADVO;
+import server.VO.articulos.ArticuloVO;
 import server.beans.articulos.AdministradorArticulos;
-import server.beans.fachada.Fachada;
 import server.beans.pedidos.AdministradorPedidos;
+import server.beans.ventas.AdministradorVentas;
 import server.entidades.articulos.Articulo;
 
 @Stateful
@@ -21,6 +21,9 @@ public class FachadaBean implements Fachada {
 	
 	@EJB(name="ZaraEAR/AdministradorPedidosBean/local") 
     AdministradorPedidos admPedidos;
+	
+	@EJB(name="ZaraEAR/AdministradorVentasBean/local") 
+    AdministradorVentas admVentas;
 	
 	
 	//Articulos
@@ -46,6 +49,12 @@ public class FachadaBean implements Fachada {
 
 	public Date checkExistingEnvT(String hash) {
 		return admPedidos.checkExistingEnvT(hash);
+	}
+	
+	//Ventas
+
+	public ArticuloVO buscarArticuloVO(long ref) {
+		return admVentas.buscarArticuloVO(ref);
 	}
 	
 }

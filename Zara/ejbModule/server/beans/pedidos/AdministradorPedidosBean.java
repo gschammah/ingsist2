@@ -14,6 +14,7 @@ import javax.persistence.Query;
 
 import server.VO.EnvT.EnvTVO;
 import server.VO.OfAD.OfADVO;
+import server.VO.articulos.ArticuloVO;
 import server.beans.articulos.AdministradorArticulos;
 import server.beans.articulos.AdministradorArticulosBean;
 import server.beans.pedidos.AdministradorPedidos;
@@ -86,6 +87,6 @@ public class AdministradorPedidosBean implements AdministradorPedidos {
 		} else {
 			return null;
 		}
-	}
+	}	
 
 }

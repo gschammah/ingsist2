@@ -6,6 +6,7 @@ import javax.ejb.Remote;
 
 import server.VO.EnvT.EnvTVO;
 import server.VO.OfAD.OfADVO;
+import server.VO.articulos.ArticuloVO;
 import server.entidades.articulos.Articulo;
 
 @Remote
@@ -20,4 +21,6 @@ public interface Fachada {
 	public EnvTVO nuevoEnvT(EnvTVO envtVO, boolean save);
 	
 	public Date checkExistingEnvT(String hash);
+	
+	public ArticuloVO buscarArticuloVO(long ref);
 }

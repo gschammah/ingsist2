@@ -18,7 +18,8 @@ public class ItemEnvTVO implements Serializable{
 	
 	private int id;
 	private ArticuloVO articulo;
-	private int cantidad;
+	private int cantidadRecibida;
+	private int cantidadPendiente;
 	private EnvTVO envt;
 	
 	public int getId() {
@@ -37,12 +38,20 @@ public class ItemEnvTVO implements Serializable{
 		this.articulo = articulo;
 	}
 	
-	public int getCantidad() {
-		return cantidad;
+	public int getCantidadRecibida() {
+		return cantidadRecibida;
 	}
 	
-	public void setCantidad(int cantidad) {
-		this.cantidad = cantidad;
+	public void setCantidadRecibida(int cantidad) {
+		this.cantidadRecibida = cantidad;
+	}
+	
+	public int getCantidadPendiente() {
+		return cantidadPendiente;
+	}
+	
+	public void setCantidadPendiente(int cantidad) {
+		this.cantidadPendiente = cantidad;
 	}
 	
 	public EnvTVO getEnvt() {

@@ -1,18 +1,23 @@
-package server.beans.pedidos;
+package server.beans.fachada;
 
 import java.util.Date;
 
 import javax.ejb.Remote;
-import javax.persistence.NoResultException;
 
 import server.VO.EnvT.EnvTVO;
+import server.VO.OfAD.OfADVO;
 import server.entidades.articulos.Articulo;
 
 @Remote
-public interface AdministradorPedidos {
+public interface Fachada {
 
+	public OfADVO nuevoOfad(OfADVO ofadVO);
+	
+	public Date checkExistingOfad(String hash);
+	
+	public Articulo buscarArticulo(long ref);
+		
 	public EnvTVO nuevoEnvT(EnvTVO envtVO, boolean save);
 	
 	public Date checkExistingEnvT(String hash);
-			
 }

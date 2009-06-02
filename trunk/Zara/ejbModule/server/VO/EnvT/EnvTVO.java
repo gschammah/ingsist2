@@ -20,6 +20,7 @@ public class EnvTVO implements Serializable {
 	
 	private int id;
 	private Date fecha;
+	private String xmlHash;
 	private Collection<ItemEnvTVO> articulos = new ArrayList<ItemEnvTVO>();
 	
 	public int getId() {
@@ -48,5 +49,13 @@ public class EnvTVO implements Serializable {
 	
 	public void addItem(ItemEnvTVO item){
 		this.articulos.add(item);
+	}
+
+	public String getXmlHash() {
+		return xmlHash;
+	}
+
+	public void setXmlHash(String xmlHash) {
+		this.xmlHash = xmlHash;
 	}
 }

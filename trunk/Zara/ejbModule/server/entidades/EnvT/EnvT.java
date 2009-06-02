@@ -26,6 +26,7 @@ public class EnvT implements Serializable {
 	
 	private int id;
 	private Date fecha;
+	private String xmlHash;
 	private Collection<ItemEnvT> articulos = new ArrayList<ItemEnvT>();
 	//TODO hash
 	
@@ -61,6 +62,7 @@ public class EnvT implements Serializable {
             EnvTVO vo = new EnvTVO();
             vo.setId(this.getId());
             vo.setFecha(this.fecha);
+            vo.setXmlHash(this.getXmlHash());
             vo.setArticulos(this.envTToVO());            
             return vo;
     }
@@ -81,7 +83,7 @@ public class EnvT implements Serializable {
     	
     	for (ItemEnvTVO itemEnvtVO : vo) {
     		ItemEnvT item = new ItemEnvT();
-    		item.setVO(itemEnvtVO);
+    		item.setVO(itemEnvtVO);    		
     		item.setEnvt(this);
 			result.add(item);
 		}
@@ -91,8 +93,17 @@ public class EnvT implements Serializable {
 
 	public void setVO(EnvTVO vo){            
             this.id = vo.getId();
-            this.fecha = vo.getFecha();            
+            this.fecha = vo.getFecha();
+            this.xmlHash = vo.getXmlHash();
             this.articulos = this.voToEnvT(vo.getArticulos());            
     }
+
+	public String getXmlHash() {
+		return xmlHash;
+	}
+
+	public void setXmlHash(String xmlHash) {
+		this.xmlHash = xmlHash;
+	}
 	
 }

@@ -80,12 +80,12 @@ public class ArtHogar extends Articulo {
 		return vo;		
 	}
 
-	public void setVO(ArtHogarVO vo){
-		super.setVO(vo);		
-		this.setNombre(vo.getNombre());
-		this.setComposicion(vo.getComposicion());
-		this.setMedidas(vo.getMedidas());
-		this.setCategoria(vo.getCategoria());
+	public void setVO(ArticuloVO artVO){
+		super.setVO(artVO);		
+		this.setNombre(((ArtHogarVO)artVO).getNombre());
+		this.setComposicion(((ArtHogarVO)artVO).getComposicion());
+		this.setMedidas(((ArtHogarVO)artVO).getMedidas());
+		this.setCategoria(((ArtHogarVO)artVO).getCategoria());
 	}
 
 }

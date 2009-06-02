@@ -6,6 +6,7 @@ import framework.vista.Vista;
 
 public class VistaListadoPALC extends Vista {
 	
+	private static VistaListadoPALC instance;
 	private ListadoPALC vistaGrafica;
 
 	public VistaListadoPALC(ZaraModel modelo){
@@ -16,6 +17,16 @@ public class VistaListadoPALC extends Vista {
 		
 		vistaGrafica.pack();
 		vistaGrafica.setVisible(true);
+	}
+	
+	public static VistaListadoPALC getInstance(ZaraModel modelo){
+		
+		if (instance == null)
+		{
+			instance = new VistaListadoPALC(modelo);
+		}
+		
+		return instance;
 	}
 		
 }

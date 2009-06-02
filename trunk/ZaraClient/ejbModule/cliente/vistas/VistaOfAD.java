@@ -19,6 +19,7 @@ import framework.controlador.Controlador;
 import framework.vista.Vista;
 
 public class VistaOfAD extends Vista {
+	private static VistaOfAD instance;
 	private OfAD vistaGrafica;
 
 	public VistaOfAD(ZaraModel modelo) {
@@ -82,7 +83,17 @@ public class VistaOfAD extends Vista {
 				JOptionPane.YES_NO_OPTION);
 	}
 
-
+	
+	public static VistaOfAD getInstance(ZaraModel modelo){
+		
+		if (instance == null)
+		{
+			instance = new VistaOfAD(modelo);
+		}
+		
+		return instance;
+	}
+	
 	public OfAD getVistaGrafica() {
 		return vistaGrafica;
 	}

@@ -21,6 +21,7 @@ import framework.vista.Vista;
 
 public class VistaRecEnvT extends Vista {
 	
+	private static VistaRecEnvT instance;
 	private RecEnvT vistaGrafica;
 
 	public VistaRecEnvT(ZaraModel modelo){
@@ -89,6 +90,16 @@ public class VistaRecEnvT extends Vista {
 						+ DateFormat.getTimeInstance().format(fecha)
 						+ ". Desea cargarlo de todos modos?", "Confirmación",
 				JOptionPane.YES_NO_OPTION);
+	}
+	
+	public static VistaRecEnvT getInstance(ZaraModel modelo){
+		
+		if (instance == null)
+		{
+			instance = new VistaRecEnvT(modelo);
+		}
+		
+		return instance;
 	}
 
 

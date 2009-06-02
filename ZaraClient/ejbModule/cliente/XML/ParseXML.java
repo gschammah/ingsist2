@@ -73,19 +73,17 @@ public class ParseXML {
 				((ArtHogarVO) nuevoArt).setCategoria(art.getChildText("categoria"));
 				((ArtHogarVO) nuevoArt).setComposicion(art.getChildText("composicion"));
 				((ArtHogarVO) nuevoArt).setMedidas(art.getChildText("medidas"));
-				((ArtHogarVO) nuevoArt).setNombre(art.getChildText("nombre"));								
+				((ArtHogarVO) nuevoArt).setNombre(art.getChildText("nombre"));									
 			}
 			
 			nuevoArt.setColor(art.getChildText("color"));
 			nuevoArt.setDescripcion(art.getChildText("descripcion"));
 			nuevoArt.setLinea(art.getChildText("linea"));
-			nuevoArt.setPrecioLista(Double.parseDouble(art
-					.getChildText("precioLista")));
-			nuevoArt.setPrecioOferta(Double.parseDouble(art
-					.getChildText("precioOferta")));
-			nuevoArt.setReferencia(Long.parseLong(art
-					.getChildText("Referencia")));
+			nuevoArt.setPrecioLista(Double.parseDouble(art.getChildText("precioLista")));
+			nuevoArt.setPrecioOferta(Double.parseDouble(art.getChildText("precioOferta")));
+			nuevoArt.setReferencia(Long.parseLong(art.getChildText("Referencia")));
 			nuevoArt.setSeccion(art.getChildText("seccion"));
+			nuevoArt.setPuntoReposicion(Integer.parseInt(art.getChildText("stockReposicion")));			
 			
 			itemOfadVO.setArticulo(nuevoArt);					
 			
@@ -118,7 +116,7 @@ public class ParseXML {
 		List articulos = root.getChild("itemsenvt").getChildren();
 		EnvTVO envt = new EnvTVO();
 		envt.setFecha(Calendar.getInstance().getTime());				
-		//envt.setXmlHash(md5.obtenerMD5Hash());		
+		envt.setXmlHash(md5.obtenerMD5Hash());		
 				
 				
 		for (Object articulo : articulos) {
@@ -130,7 +128,8 @@ public class ParseXML {
 			
 			artVO.setReferencia(Long.parseLong(art.getChildText("referencia")));
 			
-			itemEnvT.setCantidad(Integer.parseInt(art.getChildText("cantidadenviada")));			
+			itemEnvT.setCantidadRecibida(Integer.parseInt(art.getChildText("cantidadenviada")));			
+			itemEnvT.setCantidadPendiente(Integer.parseInt(art.getChildText("cantidadpendiente")));
 			itemEnvT.setArticulo(artVO);
 			
 			envt.addItem(itemEnvT);

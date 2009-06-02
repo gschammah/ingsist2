@@ -1,9 +1,6 @@
 package cliente.vistas;
 
-import java.awt.Window;
-
 import cliente.modelo.ZaraModel;
-import cliente.vistas.gui.OfAD;
 import cliente.vistas.gui.PALC;
 import framework.vista.Vista;
 
@@ -21,8 +18,4 @@ public class VistaPALC extends Vista {
 		vistaGrafica.setVisible(true);
 	}
 	
-	public void actualizar() {
-		// TODO Auto-generated method stub		
-	}
-
 }

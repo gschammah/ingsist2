@@ -10,12 +10,9 @@ package cliente.tools;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -24,7 +21,7 @@ import java.security.NoSuchAlgorithmException;
  * 
  */
 public class MD5 {
-	private String file;
+	
 	private FileInputStream fileInputStream = null;
 
 	public FileInputStream getFileInputStream() {
@@ -35,8 +32,7 @@ public class MD5 {
 		this.fileInputStream = fileInputStream;
 	}
 
-	public MD5(String file) {
-		this.file = file;
+	public MD5(String file) {		
 		try {
 			this.fileInputStream = new FileInputStream(file);
 		} catch (FileNotFoundException e) {

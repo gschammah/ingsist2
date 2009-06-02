@@ -2,7 +2,6 @@ package cliente.vistas;
 
 import cliente.modelo.ZaraModel;
 import cliente.vistas.gui.Factura;
-import cliente.vistas.gui.OfAD;
 import framework.vista.Vista;
 
 public class VistaFactura extends Vista {
@@ -18,9 +17,5 @@ public class VistaFactura extends Vista {
 		vistaGrafica.pack();
 		vistaGrafica.setVisible(true);
 	}
-	
-	public void actualizar() {
-		// TODO Auto-generated method stub		
-	}
-
+		
 }

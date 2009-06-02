@@ -1,6 +1,13 @@
 
 package cliente.vistas.gui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JTable;
+
+import cliente.controladores.EnvTController;
+import cliente.controladores.OfADController;
 import cliente.vistas.VistaRecEnvT;
 
 public class RecEnvT extends javax.swing.JFrame {
@@ -28,14 +35,14 @@ public class RecEnvT extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaArtRecibidos = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        btn_generar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        tablaArtPendientes = new javax.swing.JTable();
+        btn_salir = new javax.swing.JButton();
+        btn_registrarEnvT = new javax.swing.JButton();
         
-        setTitle("Recepciín de Envíos a Tienda");
+        setTitle("Recepción de Envíos a Tienda");
         
         jLabel1.setText("Recepción de Envios a Tienda (EnvT)");
 
@@ -46,24 +53,8 @@ public class RecEnvT extends javax.swing.JFrame {
 
         jLabel3.setText("Artículos Recibidos");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
+        tablaArtRecibidos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {},
             new String [] {
                 "Artículo", "Descripción", "Cant. Recibida", "Stock Total"
             }
@@ -75,47 +66,33 @@ public class RecEnvT extends javax.swing.JFrame {
                 false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex) {
+            @Override
+			public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
+            @Override
+			public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        jTable1.getColumnModel().getColumn(0).setMinWidth(100);
-        jTable1.getColumnModel().getColumn(0).setPreferredWidth(100);
-        jTable1.getColumnModel().getColumn(0).setMaxWidth(100);
-        jTable1.getColumnModel().getColumn(2).setMinWidth(100);
-        jTable1.getColumnModel().getColumn(2).setPreferredWidth(100);
-        jTable1.getColumnModel().getColumn(2).setMaxWidth(100);
-        jTable1.getColumnModel().getColumn(3).setMinWidth(100);
-        jTable1.getColumnModel().getColumn(3).setPreferredWidth(100);
-        jTable1.getColumnModel().getColumn(3).setMaxWidth(100);
+        jScrollPane1.setViewportView(tablaArtRecibidos);
+        tablaArtRecibidos.getColumnModel().getColumn(0).setMinWidth(100);
+        tablaArtRecibidos.getColumnModel().getColumn(0).setPreferredWidth(100);
+        tablaArtRecibidos.getColumnModel().getColumn(0).setMaxWidth(100);
+        tablaArtRecibidos.getColumnModel().getColumn(2).setMinWidth(100);
+        tablaArtRecibidos.getColumnModel().getColumn(2).setPreferredWidth(100);
+        tablaArtRecibidos.getColumnModel().getColumn(2).setMaxWidth(100);
+        tablaArtRecibidos.getColumnModel().getColumn(3).setMinWidth(100);
+        tablaArtRecibidos.getColumnModel().getColumn(3).setPreferredWidth(100);
+        tablaArtRecibidos.getColumnModel().getColumn(3).setMaxWidth(100);
 
         jLabel4.setText("Artículos Pendientes");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
+        tablaArtPendientes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {},
             new String [] {
-                "Artículo", "Descripción", "Cant. Recivida", "Cant. Pendiente", "Stock Actual"
+                "Artículo", "Descripción", "Cant. Recibida", "Cant. Pendiente", "Stock Actual"
             }
         ) {
             Class[] types = new Class [] {
@@ -125,37 +102,45 @@ public class RecEnvT extends javax.swing.JFrame {
                 false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex) {
+            @Override
+			public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
+            @Override
+			public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
-        jTable2.getColumnModel().getColumn(0).setMinWidth(100);
-        jTable2.getColumnModel().getColumn(0).setPreferredWidth(100);
-        jTable2.getColumnModel().getColumn(0).setMaxWidth(100);
-        jTable2.getColumnModel().getColumn(2).setMinWidth(100);
-        jTable2.getColumnModel().getColumn(2).setPreferredWidth(100);
-        jTable2.getColumnModel().getColumn(2).setMaxWidth(100);
-        jTable2.getColumnModel().getColumn(3).setMinWidth(100);
-        jTable2.getColumnModel().getColumn(3).setPreferredWidth(100);
-        jTable2.getColumnModel().getColumn(3).setMaxWidth(100);
-        jTable2.getColumnModel().getColumn(4).setMinWidth(100);
-        jTable2.getColumnModel().getColumn(4).setPreferredWidth(100);
-        jTable2.getColumnModel().getColumn(4).setMaxWidth(100);
+        jScrollPane2.setViewportView(tablaArtPendientes);
+        tablaArtPendientes.getColumnModel().getColumn(0).setMinWidth(100);
+        tablaArtPendientes.getColumnModel().getColumn(0).setPreferredWidth(100);
+        tablaArtPendientes.getColumnModel().getColumn(0).setMaxWidth(100);
+        tablaArtPendientes.getColumnModel().getColumn(2).setMinWidth(100);
+        tablaArtPendientes.getColumnModel().getColumn(2).setPreferredWidth(100);
+        tablaArtPendientes.getColumnModel().getColumn(2).setMaxWidth(100);
+        tablaArtPendientes.getColumnModel().getColumn(3).setMinWidth(100);
+        tablaArtPendientes.getColumnModel().getColumn(3).setPreferredWidth(100);
+        tablaArtPendientes.getColumnModel().getColumn(3).setMaxWidth(100);
+        tablaArtPendientes.getColumnModel().getColumn(4).setMinWidth(100);
+        tablaArtPendientes.getColumnModel().getColumn(4).setPreferredWidth(100);
+        tablaArtPendientes.getColumnModel().getColumn(4).setMaxWidth(100);
 
 
-        btn_generar.setText("Salir");
-        btn_generar.addActionListener(new java.awt.event.ActionListener() {
+        btn_salir.setText("Salir");
+        btn_salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+            	((EnvTController)vistaPadre.getControlador()).cerrar();
             }
         });
 
-        jButton2.setText("Registrar EnvT");
+        btn_registrarEnvT.setText("Registrar EnvT");
+        
+        btn_registrarEnvT.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				((EnvTController)vistaPadre.getControlador()).cargarEnvT(true);				
+			}        	
+        });
 
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -188,9 +173,9 @@ public class RecEnvT extends javax.swing.JFrame {
                         .addContainerGap()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 204, Short.MAX_VALUE)
-                        .addComponent(jButton2)
+                        .addComponent(btn_registrarEnvT)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_generar)))
+                        .addComponent(btn_salir)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -213,8 +198,8 @@ public class RecEnvT extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btn_generar)
-                        .addComponent(jButton2))
+                        .addComponent(btn_salir)
+                        .addComponent(btn_registrarEnvT))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         ))
                 .addContainerGap())
@@ -223,26 +208,30 @@ public class RecEnvT extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     /**
     * @param args the command line arguments
     */    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_generar;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btn_salir;
+    private javax.swing.JButton btn_registrarEnvT;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable tablaArtRecibidos;
+    private javax.swing.JTable tablaArtPendientes;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
+
+	public JTable getTablaArtRecibidos() {
+		return this.tablaArtRecibidos;
+	}
+
+	public JTable getTablaArtPendientes() {
+		return this.tablaArtPendientes;
+	}
 
 }

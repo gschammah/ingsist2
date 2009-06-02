@@ -1,8 +1,5 @@
 package cliente.vistas;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
-
 import cliente.modelo.ZaraModel;
 import cliente.vistas.gui.MainMenu;
 import framework.vista.Vista;
@@ -21,8 +18,5 @@ public class VistaMainMenu extends Vista {
 		vistaGrafica.setVisible(true);
 	}
 	
-	public void actualizar() {
-		// TODO Auto-generated method stub		
-	}
 
 }

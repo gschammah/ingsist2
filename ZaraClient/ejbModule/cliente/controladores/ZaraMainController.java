@@ -17,20 +17,20 @@ public class ZaraMainController extends Controlador{
 	}
 	
 	public void mostrarOfAD(){
-		VistaOfAD vista = new VistaOfAD((ZaraModel) this.getModelo());
+		VistaOfAD vista = VistaOfAD.getInstance((ZaraModel) this.getModelo());
 		new OfADController(this.getModelo(), vista);		
 	}
 
 	public void mostrarVentas() {
-		new VistaVentaArticulos((ZaraModel) this.getModelo());
+		VistaVentaArticulos vista = VistaVentaArticulos.getInstance((ZaraModel) this.getModelo());
 	}
 
 	public void mostrarPALC() {
-		new VistaPALC((ZaraModel) this.getModelo());
+		VistaPALC vista = VistaPALC.getInstance((ZaraModel) this.getModelo());
 	}
 
 	public void mostrarEnvT() {
-		VistaRecEnvT vista = new VistaRecEnvT((ZaraModel) this.getModelo());
+		VistaRecEnvT vista = VistaRecEnvT.getInstance((ZaraModel) this.getModelo());
 		new EnvTController(this.getModelo(), vista);
 	}
 	

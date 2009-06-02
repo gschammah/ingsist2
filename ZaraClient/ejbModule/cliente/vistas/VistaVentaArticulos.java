@@ -6,6 +6,7 @@ import framework.vista.Vista;
 
 public class VistaVentaArticulos extends Vista {
 	
+	private static VistaVentaArticulos instance;
 	private VentaArticulos vistaGrafica;
 
 	public VistaVentaArticulos(ZaraModel modelo){
@@ -16,6 +17,16 @@ public class VistaVentaArticulos extends Vista {
 		
 		vistaGrafica.pack();
 		vistaGrafica.setVisible(true);
+	}
+	
+	public static VistaVentaArticulos getInstance(ZaraModel modelo){
+		
+		if (instance == null)
+		{
+			instance = new VistaVentaArticulos(modelo);
+		}
+		
+		return instance;
 	}
 
 }

@@ -4,14 +4,22 @@ package cliente.vistas.gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.GroupLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle;
+import javax.swing.table.DefaultTableModel;
 
 import cliente.controladores.EnvTController;
-import cliente.controladores.OfADController;
 import cliente.vistas.VistaRecEnvT;
 
 public class RecEnvT extends javax.swing.JFrame {
-    private VistaRecEnvT vistaPadre;
+
+	private static final long serialVersionUID = 1L;
+	private VistaRecEnvT vistaPadre;
     
 	/** Creates new form RecEnvT */
     public RecEnvT(VistaRecEnvT vista) {
@@ -30,17 +38,17 @@ public class RecEnvT extends javax.swing.JFrame {
     	
     	this.setTitle("Recibir 'Envío a tienda' (EnvT)");
     
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tablaArtRecibidos = new javax.swing.JTable();
-        jLabel4 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tablaArtPendientes = new javax.swing.JTable();
-        btn_salir = new javax.swing.JButton();
-        btn_registrarEnvT = new javax.swing.JButton();
+        jLabel1 = new JLabel();
+        jLabel2 = new JLabel();
+        jTextField1 = new JTextField();
+        jLabel3 = new JLabel();
+        jScrollPane1 = new JScrollPane();
+        tablaArtRecibidos = new JTable();
+        jLabel4 = new JLabel();
+        jScrollPane2 = new JScrollPane();
+        tablaArtPendientes = new JTable();
+        btn_salir = new JButton();
+        btn_registrarEnvT = new JButton();
         
         setTitle("Recepción de Envíos a Tienda");
         
@@ -53,7 +61,7 @@ public class RecEnvT extends javax.swing.JFrame {
 
         jLabel3.setText("Artículos Recibidos");
 
-        tablaArtRecibidos.setModel(new javax.swing.table.DefaultTableModel(
+        tablaArtRecibidos.setModel(new DefaultTableModel(
             new Object [][] {},
             new String [] {
                 "Artículo", "Descripción", "Cant. Recibida", "Stock Total"
@@ -89,7 +97,7 @@ public class RecEnvT extends javax.swing.JFrame {
 
         jLabel4.setText("Artículos Pendientes");
 
-        tablaArtPendientes.setModel(new javax.swing.table.DefaultTableModel(
+        tablaArtPendientes.setModel(new DefaultTableModel(
             new Object [][] {},
             new String [] {
                 "Artículo", "Descripción", "Cant. Recibida", "Cant. Pendiente", "Stock Actual"
@@ -143,64 +151,64 @@ public class RecEnvT extends javax.swing.JFrame {
         });
 
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 715, Short.MAX_VALUE))
+                        .addComponent(jScrollPane2, GroupLayout.DEFAULT_SIZE, 715, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 715, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 715, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(297, 297, 297)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField1, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel3))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel4))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 204, Short.MAX_VALUE)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 204, Short.MAX_VALUE)
                         .addComponent(btn_registrarEnvT)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_salir)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 146, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, GroupLayout.PREFERRED_SIZE, 147, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                         .addComponent(btn_salir)
                         .addComponent(btn_registrarEnvT))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                         ))
                 .addContainerGap())
         );
@@ -213,17 +221,17 @@ public class RecEnvT extends javax.swing.JFrame {
     */    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_salir;
-    private javax.swing.JButton btn_registrarEnvT;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tablaArtRecibidos;
-    private javax.swing.JTable tablaArtPendientes;
-    private javax.swing.JTextField jTextField1;
+    private JButton btn_salir;
+    private JButton btn_registrarEnvT;
+    private JLabel jLabel1;
+    private JLabel jLabel2;
+    private JLabel jLabel3;
+    private JLabel jLabel4;
+    private JScrollPane jScrollPane1;
+    private JScrollPane jScrollPane2;
+    private JTable tablaArtRecibidos;
+    private JTable tablaArtPendientes;
+    private JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 
 	public JTable getTablaArtRecibidos() {

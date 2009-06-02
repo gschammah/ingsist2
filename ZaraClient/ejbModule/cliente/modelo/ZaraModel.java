@@ -17,19 +17,15 @@ public class ZaraModel extends ProxyModelo{
 	protected InitialContext initialContext;	
 	private Fachada fachada; 
 	
-	public ZaraModel(){	
+	public ZaraModel() throws NamingException{	
 				
 		contextProperties = new Hashtable<String, String>();
 		contextProperties.put(Context.INITIAL_CONTEXT_FACTORY, "org.jnp.interfaces.NamingContextFactory");
 		contextProperties.put(Context.PROVIDER_URL, "jnp://127.0.0.1:1099");
 		String naming = "ZaraEAR/FachadaBean/remote";
 		
-		try {
 			initialContext = new InitialContext(contextProperties);
-			fachada = (Fachada) initialContext.lookup(naming);					
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
+			fachada = (Fachada) initialContext.lookup(naming);							
 		
 	}
 	

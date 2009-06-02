@@ -22,7 +22,12 @@ public abstract class Vista {
 	
 	public Vista(ProxyModelo mod) {
 		modelo = mod;
-		mod.setVista(this);
+		try {
+			mod.setVista(this);
+		}
+		catch (NullPointerException e) {
+			
+		}
 	} 
 	
 	public void centrarVista(JFrame vistaGrafica){

@@ -3,6 +3,8 @@ package cliente.vistas.gui;
 
 import java.awt.event.ActionEvent;
 
+import javax.swing.WindowConstants;
+
 import cliente.vistas.VistaPALC;
 
 public class PALC extends javax.swing.JFrame {
@@ -38,6 +40,8 @@ public class PALC extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTable5 = new javax.swing.JTable();
+        
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         
         setTitle("Pedidos de Articulos a La Coruña");
         

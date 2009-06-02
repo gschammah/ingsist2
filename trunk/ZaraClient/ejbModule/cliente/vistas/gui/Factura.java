@@ -6,6 +6,8 @@
 
 package cliente.vistas.gui;
 
+import javax.swing.WindowConstants;
+
 import cliente.vistas.VistaFactura;
 
 /**
@@ -49,6 +51,8 @@ public class Factura extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Artículos"));
 

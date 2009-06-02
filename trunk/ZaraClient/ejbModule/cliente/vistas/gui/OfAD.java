@@ -3,12 +3,21 @@ package cliente.vistas.gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.GroupLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle;
+import javax.swing.WindowConstants;
+import javax.swing.table.DefaultTableModel;
 
 import cliente.controladores.OfADController;
 import cliente.vistas.VistaOfAD;
 
-public class OfAD extends javax.swing.JFrame {
+public class OfAD extends JFrame {
 	private VistaOfAD vistaPadre;
 
 	/** Creates new form test */
@@ -29,20 +38,23 @@ public class OfAD extends javax.swing.JFrame {
 
 		this.setTitle("Oferta de Artículos disponibles (OfAD)");
 
-		jScrollPane1 = new javax.swing.JScrollPane();
+		jScrollPane1 = new JScrollPane();
 		tablaArtDisponibles = new JTable();
-		jScrollPane2 = new javax.swing.JScrollPane();
-		tablaArtNuevos = new javax.swing.JTable();
-		jLabel1 = new javax.swing.JLabel();
-		jLabel2 = new javax.swing.JLabel();
-		jLabel3 = new javax.swing.JLabel();
-		btn_salir = new javax.swing.JButton();
-		jLabel4 = new javax.swing.JLabel();
-		jTextField1 = new javax.swing.JTextField();
+		jScrollPane2 = new JScrollPane();
+		tablaArtNuevos = new JTable();
+		jLabel1 = new JLabel();
+		jLabel2 = new JLabel();
+		jLabel3 = new JLabel();
+		btn_salir = new JButton();
+		lblActualizacion = new JLabel();
+		txtActualizacion = new JTextField();
+		btn_registrarOfAD = new JButton();
+		
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
 		setTitle("Oferta de Artículos Disponibles");
 
-		tablaArtDisponibles.setModel(new javax.swing.table.DefaultTableModel(
+		tablaArtDisponibles.setModel(new DefaultTableModel(
 				new Object[][] {}, new String[] { "Artículo", "Descripción",
 						"Precio", "Oferta" }) {
 			Class[] types = new Class[] { java.lang.String.class,
@@ -72,7 +84,7 @@ public class OfAD extends javax.swing.JFrame {
 		tablaArtDisponibles.getColumnModel().getColumn(3).setPreferredWidth(70);
 		tablaArtDisponibles.getColumnModel().getColumn(3).setMaxWidth(70);
 
-		tablaArtNuevos.setModel(new javax.swing.table.DefaultTableModel(
+		tablaArtNuevos.setModel(new DefaultTableModel(
 				new Object[][] {}, new String[] { "Artículo", "Descripción",
 						"Precio", "Oferta" }) {
 			Class[] types = new Class[] { java.lang.String.class,
@@ -108,6 +120,15 @@ public class OfAD extends javax.swing.JFrame {
 		jLabel3.setText("Oferta de Artículos Disponibles (OfAD)");
 
 		btn_salir.setText("Salir");
+		
+		btn_registrarOfAD.setText("Registrar OfAD");
+		btn_registrarOfAD.addActionListener(new ActionListener(){
+
+			public void actionPerformed(ActionEvent arg0) {		
+				((OfADController)vistaPadre.getControlador()).cargarOfAD(true);
+			}
+			
+		});
 
 		btn_salir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
@@ -115,35 +136,32 @@ public class OfAD extends javax.swing.JFrame {
 			}
 		});
 
-		jLabel4.setText("Última Actualización:");
+		lblActualizacion.setText("Última Actualización:");
 
-		jTextField1.setEditable(false);
-		jTextField1.setText("DD/MM/AAAA");
+		txtActualizacion.setEditable(false);		
+		txtActualizacion.setText("DD/MM/AAAA");
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
+		GroupLayout layout = new GroupLayout(
 				getContentPane());
 		getContentPane().setLayout(layout);
 		layout
 				.setHorizontalGroup(layout
-						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
-						.addGroup(
-								javax.swing.GroupLayout.Alignment.TRAILING,
-								layout
+						.createParallelGroup(GroupLayout.Alignment.LEADING)
+						.addGroup(GroupLayout.Alignment.TRAILING, layout
 										.createSequentialGroup()
 										.addGroup(
 												layout
 														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.TRAILING)
+																GroupLayout.Alignment.TRAILING)
 														.addGroup(
-																javax.swing.GroupLayout.Alignment.LEADING,
+																GroupLayout.Alignment.LEADING,
 																layout
 																		.createSequentialGroup()
 																		.addContainerGap()
 																		.addGroup(
 																				layout
 																						.createParallelGroup(
-																								javax.swing.GroupLayout.Alignment.LEADING)
+																								GroupLayout.Alignment.LEADING)
 																						.addComponent(
 																								jLabel1)
 																						.addComponent(
@@ -152,16 +170,16 @@ public class OfAD extends javax.swing.JFrame {
 																								layout
 																										.createSequentialGroup()
 																										.addComponent(
-																												jLabel4)
+																												lblActualizacion)
 																										.addPreferredGap(
-																												javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+																												LayoutStyle.ComponentPlacement.UNRELATED)
 																										.addComponent(
-																												jTextField1,
-																												javax.swing.GroupLayout.PREFERRED_SIZE,
-																												90,
-																												javax.swing.GroupLayout.PREFERRED_SIZE))))
+																												txtActualizacion,
+																												GroupLayout.PREFERRED_SIZE,
+																												200,
+																												GroupLayout.PREFERRED_SIZE))))
 														.addGroup(
-																javax.swing.GroupLayout.Alignment.LEADING,
+																GroupLayout.Alignment.LEADING,
 																layout
 																		.createSequentialGroup()
 																		.addGap(
@@ -171,43 +189,45 @@ public class OfAD extends javax.swing.JFrame {
 																		.addComponent(
 																				jLabel3))
 														.addGroup(
-																javax.swing.GroupLayout.Alignment.LEADING,
+																GroupLayout.Alignment.LEADING,
 																layout
 																		.createSequentialGroup()
 																		.addContainerGap()
 																		.addGroup(
 																				layout
 																						.createParallelGroup(
-																								javax.swing.GroupLayout.Alignment.TRAILING,
+																								GroupLayout.Alignment.TRAILING,
 																								false)
 																						.addComponent(
 																								jScrollPane2,
-																								javax.swing.GroupLayout.Alignment.LEADING)
+																								GroupLayout.Alignment.LEADING)
 																						.addComponent(
 																								jScrollPane1,
-																								javax.swing.GroupLayout.Alignment.LEADING,
-																								javax.swing.GroupLayout.DEFAULT_SIZE,
+																								GroupLayout.Alignment.LEADING,
+																								GroupLayout.DEFAULT_SIZE,
 																								683,
 																								Short.MAX_VALUE))))
 										.addContainerGap())
 						.addGroup(
-								javax.swing.GroupLayout.Alignment.TRAILING,
+								GroupLayout.Alignment.TRAILING,
 								layout
 										.createSequentialGroup()
 										.addContainerGap()
 
 										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+												LayoutStyle.ComponentPlacement.RELATED)
 
 										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+												LayoutStyle.ComponentPlacement.RELATED,
 												268, Short.MAX_VALUE)
+										.addComponent(btn_registrarOfAD)
+										.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 										.addComponent(btn_salir).addGap(33, 33,
 												33)));
 		layout
 				.setVerticalGroup(layout
 						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
+								GroupLayout.Alignment.LEADING)
 						.addGroup(
 								layout
 										.createSequentialGroup()
@@ -217,39 +237,40 @@ public class OfAD extends javax.swing.JFrame {
 										.addGroup(
 												layout
 														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.BASELINE)
-														.addComponent(jLabel4)
+																GroupLayout.Alignment.BASELINE)
+														.addComponent(lblActualizacion)
 														.addComponent(
-																jTextField1,
-																javax.swing.GroupLayout.PREFERRED_SIZE,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																javax.swing.GroupLayout.PREFERRED_SIZE))
+																txtActualizacion,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE))
 										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+												LayoutStyle.ComponentPlacement.UNRELATED)
 										.addComponent(jLabel1)
 										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+												LayoutStyle.ComponentPlacement.UNRELATED)
 										.addComponent(
 												jScrollPane1,
-												javax.swing.GroupLayout.PREFERRED_SIZE,
+												GroupLayout.PREFERRED_SIZE,
 												155,
-												javax.swing.GroupLayout.PREFERRED_SIZE)
+												GroupLayout.PREFERRED_SIZE)
 										.addGap(18, 18, 18)
 										.addComponent(jLabel2)
 										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+												LayoutStyle.ComponentPlacement.UNRELATED)
 										.addComponent(
 												jScrollPane2,
-												javax.swing.GroupLayout.PREFERRED_SIZE,
+												GroupLayout.PREFERRED_SIZE,
 												157,
-												javax.swing.GroupLayout.PREFERRED_SIZE)
+												GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+												LayoutStyle.ComponentPlacement.RELATED)
 										.addGroup(
 												layout
 														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.TRAILING)
-														.addComponent(btn_salir))
+																GroupLayout.Alignment.TRAILING)
+														.addComponent(btn_salir)
+														.addComponent(btn_registrarOfAD))
 										.addContainerGap(16, Short.MAX_VALUE)));
 
 		pack();
@@ -261,25 +282,30 @@ public class OfAD extends javax.swing.JFrame {
 	 */
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private javax.swing.JButton btn_salir;
-	private javax.swing.JLabel jLabel1;
-	private javax.swing.JLabel jLabel2;
-	private javax.swing.JLabel jLabel3;
-	private javax.swing.JLabel jLabel4;
-	private javax.swing.JScrollPane jScrollPane1;
-	private javax.swing.JScrollPane jScrollPane2;
-	private javax.swing.JTable tablaArtNuevos;
-	private javax.swing.JTable tablaArtDisponibles;
-	private javax.swing.JTextField jTextField1;
+	private JButton btn_salir;
+	private JLabel jLabel1;
+	private JLabel jLabel2;
+	private JLabel jLabel3;
+	private JLabel lblActualizacion;
+	private JScrollPane jScrollPane1;
+	private JScrollPane jScrollPane2;
+	private JTable tablaArtNuevos;
+	private JTable tablaArtDisponibles;
+	private JTextField txtActualizacion;
+	private JButton btn_registrarOfAD;
 
 	// End of variables declaration//GEN-END:variables
 
-	public javax.swing.JTable getTablaArtDisponibles() {
+	public JTable getTablaArtDisponibles() {
 		return tablaArtDisponibles;
 	}
 
-	public javax.swing.JTable getTablaArtNuevos() {
+	public JTable getTablaArtNuevos() {
 		return tablaArtNuevos;
+	}
+
+	public JTextField getTxtActualizacion() {
+		return txtActualizacion;
 	}
 
 }

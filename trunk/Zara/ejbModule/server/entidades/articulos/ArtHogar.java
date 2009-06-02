@@ -62,7 +62,7 @@ public class ArtHogar extends Articulo {
 	}
 	
 	@Transient
-	public ArtHogarVO getVO(){
+	public ArticuloVO getVO(){
 		ArtHogarVO vo = new ArtHogarVO();
 		vo.setColor(this.getColor());
 		vo.setDescripcion(this.getDescripcion());

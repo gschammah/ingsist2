@@ -46,8 +46,8 @@ public class ArtRopa extends Articulo {
 	}
 	
 	@Transient
-	public ArtRopaVO getVO(){
-		ArtRopaVO vo = new ArtRopaVO();
+	public ArticuloVO getVO(){
+		ArtRopaVO vo = new ArtRopaVO();		
 		vo.setColor(this.getColor());
 		vo.setDescripcion(this.getDescripcion());
 		vo.setLinea(this.getLinea());

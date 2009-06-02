@@ -28,7 +28,8 @@ public class ItemEnvT implements Serializable{
 	
 	private int id;
 	private Articulo articulo;
-	private int cantidad;
+	private int cantidadRecibida;
+	private int cantidadPendiente;
 	private EnvT envt;
 	
 	@Id
@@ -50,12 +51,12 @@ public class ItemEnvT implements Serializable{
 		this.articulo = articulo;
 	}
 
-	public int getCantidad() {
-		return cantidad;
+	public int getCantidadRecibida() {
+		return cantidadRecibida;
 	}
 	
-	public void setCantidad(int cantidad) {
-		this.cantidad = cantidad;
+	public void setCantidadRecibida(int cantidad) {
+		this.cantidadRecibida = cantidad;
 	}
 	
 	@ManyToOne
@@ -71,16 +72,26 @@ public class ItemEnvT implements Serializable{
     public ItemEnvTVO getVO(){
             ItemEnvTVO vo = new ItemEnvTVO();
             vo.setId(this.getId());
-            vo.setCantidad(this.getCantidad());
+            vo.setCantidadRecibida(this.getCantidadRecibida());
+            vo.setCantidadPendiente(this.getCantidadPendiente());
             vo.setArticulo(this.articulo.getVO());
             return vo;
     }
 	
 	public void setVO(ItemEnvTVO vo){						
 		this.id = vo.getId();		
-		this.cantidad = vo.getCantidad();
+		this.cantidadRecibida = vo.getCantidadRecibida();
+		this.cantidadPendiente = vo.getCantidadPendiente();
 		this.articulo = new Articulo();
 		this.articulo.setReferencia(vo.getArticulo().getReferencia());
+	}
+
+	public int getCantidadPendiente() {
+		return cantidadPendiente;
+	}
+
+	public void setCantidadPendiente(int cantidadPendiente) {
+		this.cantidadPendiente = cantidadPendiente;
 	}
 	
 }

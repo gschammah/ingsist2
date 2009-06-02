@@ -96,7 +96,7 @@ public class ItemOfAD implements Serializable{
 			this.articulo = new ArtRopa();			
 		} 
 		
-		this.id = vo.getId();		
+		this.id = vo.getId();
 		this.articulo.setVO(vo.getArticulo());
 		
 		this.precioLista = vo.getPrecioLista();

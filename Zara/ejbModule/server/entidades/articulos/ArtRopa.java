@@ -62,10 +62,10 @@ public class ArtRopa extends Articulo {
 		return vo;		
 	}
 
-	public void setVO(ArtRopaVO vo){
+	public void setVO(ArticuloVO vo){
 		super.setVO(vo);		
-		this.setTalle(vo.getTalle());
-		this.setOrigen(vo.getOrigen());		
+		this.setTalle(((ArtRopaVO) vo).getTalle());
+		this.setOrigen(((ArtRopaVO) vo).getOrigen());		
 	}
 
 }

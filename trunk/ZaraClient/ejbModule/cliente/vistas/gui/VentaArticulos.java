@@ -11,12 +11,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -31,13 +33,18 @@ import javax.swing.table.DefaultTableModel;
 
 import cliente.controladores.VentaArticulosController;
 import cliente.vistas.VistaVentaArticulos;
+import cliente.vistas.gui.renderers.VentasTableRenderer;
 
 /**
  *
  * @author  chama
  */
 public class VentaArticulos extends JFrame {
-    private VistaVentaArticulos vistaPadre;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private VistaVentaArticulos vistaPadre;
     
 	/** Creates new form VentaArticulos */
     public VentaArticulos(VistaVentaArticulos vista) {
@@ -59,10 +66,12 @@ public class VentaArticulos extends JFrame {
         jPanel1 = new JPanel();
         txt_referencia = new JTextField();
 
-        jTextArea3 = new JTextArea();
-        jTextArea3.setEditable(false);
-        jTextArea3.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
+        txtDetalles = new JEditorPane();
+        txtDetalles.setAutoscrolls(false);
+        txtDetalles.setEditable(false);
+        txtDetalles.setContentType("text/html"); 
         
+        lblDetalles = new JLabel();
         jLabel1 = new JLabel();
         btn_agregar = new JButton();
         jScrollPane1 = new JScrollPane();
@@ -76,15 +85,20 @@ public class VentaArticulos extends JFrame {
         jLabel3 = new JLabel();
         jLabel6 = new JLabel();
         jLabel7 = new JLabel();
-        jButton2 = new JButton();
+        btn_generarFactura = new JButton();
         btn_salir = new JButton();
         
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
        
+        lblDetalles.setText("Detalles: ");
 
         jPanel1.setBorder(BorderFactory.createTitledBorder("Artículos"));
 
         jLabel1.setText("ID:");
+                        
+        JScrollPane scrollingArea = new JScrollPane(txtDetalles);
+        scrollingArea.setAutoscrolls(false);
+
         
         txt_referencia.addKeyListener(new KeyListener(){
 
@@ -107,25 +121,27 @@ public class VentaArticulos extends JFrame {
 			}
         	
         });
+        
+        tablaArticulos.setDefaultRenderer(Object.class, new VentasTableRenderer());        
 
         tablaArticulos.setModel(new DefaultTableModel(
             new Object [][] {},
             new String [] {
-                "Referencia", "Línea", "Descripción", "Precio", "Precio Oferta?", "Cantidad"
+                "Referencia", "Línea", "Descripción", "Precio", "Precio Oferta?", "Cantidad", ""
             }
         ) {
             Class[] types = new Class [] {
-                Integer.class, Object.class, Object.class, Object.class, Boolean.class, Integer.class
+                Object.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true, true
+                false, false, false, false, false, true, false 
             };
 
             @Override
 			public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
-
+                        
             @Override
 			public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -149,6 +165,9 @@ public class VentaArticulos extends JFrame {
         tablaArticulos.getColumnModel().getColumn(5).setMinWidth(70);
         tablaArticulos.getColumnModel().getColumn(5).setPreferredWidth(70);
         tablaArticulos.getColumnModel().getColumn(5).setMaxWidth(70);
+        tablaArticulos.getColumnModel().getColumn(6).setMinWidth(50);
+        tablaArticulos.getColumnModel().getColumn(6).setPreferredWidth(50);
+        tablaArticulos.getColumnModel().getColumn(6).setMaxWidth(50);
 
 
 
@@ -161,35 +180,34 @@ public class VentaArticulos extends JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(6, 6, 6)
-                .addComponent(txt_referencia, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                
-                .addComponent(jTextArea3, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                
-                
+                .addComponent(txt_referencia, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)                                              
                 .addComponent(btn_agregar)
-                .addContainerGap(330, Short.MAX_VALUE))
+                .addGap(6, 6, 6)                                           
+            	.addContainerGap(20, Short.MAX_VALUE)
+            	.addComponent(lblDetalles)
+            	.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+            	.addComponent(scrollingArea, GroupLayout.PREFERRED_SIZE, 500, GroupLayout.PREFERRED_SIZE)
+            	.addContainerGap())
             .addGroup(GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 847, GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+                .addContainerGap()));
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                //.addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txt_referencia, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
-                    
-                    .addComponent(jTextArea3, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-                    
-                    .addComponent(btn_agregar, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jLabel1)                    
+                    .addComponent(txt_referencia, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)                                                           
+                    .addComponent(btn_agregar, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+                    .addGap(18, 18, 18)
+                    .addComponent(lblDetalles)
+                    .addComponent(scrollingArea, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE)                  
+                    .addGap(18, 18, 18))
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
-        );
+                .addContainerGap(21, Short.MAX_VALUE)));
 
         jPanel1Layout.linkSize(SwingConstants.VERTICAL, new java.awt.Component[] {btn_agregar, jLabel1, txt_referencia, jTextField2});
 
@@ -238,10 +256,10 @@ public class VentaArticulos extends JFrame {
 
         jLabel7.setText("TOTAL: xxx");
 
-        jButton2.setText("Generar Factura");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btn_generarFactura.setText("Generar Factura");
+        btn_generarFactura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                doGenerarFactura(evt);
             }
         });
 
@@ -274,7 +292,7 @@ public class VentaArticulos extends JFrame {
                                 .addComponent(jPanel2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addContainerGap()))
                     .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addComponent(btn_generarFactura)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_salir)
                         .addGap(26, 26, 26))))
@@ -294,22 +312,16 @@ public class VentaArticulos extends JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_salir)
-                    .addComponent(jButton2))
+                    .addComponent(btn_generarFactura))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
-
-private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-    
-}//GEN-LAST:event_jButton2ActionPerformed
-
-   
-
+    }
+	   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JButton btn_agregar;
-    private JButton jButton2;
+    private JButton btn_generarFactura;
     private JButton btn_salir;
     private JComboBox jComboBox1;
     private JLabel jLabel1;
@@ -319,30 +331,43 @@ private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private JLabel lblFecha;
     private JLabel jLabel6;
     private JLabel jLabel7;
+    private JLabel lblDetalles;
     private JPanel jPanel1;
     private JPanel jPanel2;
     private JScrollPane jScrollPane1;
     private JTable tablaArticulos;
     private JTextField txt_referencia;
     private JTextField jTextField2;
-    private JTextArea jTextArea3;
+    private JEditorPane txtDetalles;
 
 	public JTable getTablaArticulos() {
 		return tablaArticulos;
 	}
 	
-	public void doSalir(){
+	private void doSalir(){
 		((VentaArticulosController)vistaPadre.getControlador()).cerrar();
 	}
 	
-	public void doAgregarArticulo(){
+	private void doAgregarArticulo(){
 		try {
-			long ref = Long.parseLong(txt_referencia.getText());
+			long ref = Long.parseLong(txt_referencia.getText());			
 			((VentaArticulosController)vistaPadre.getControlador()).agregarArticulo(ref);
 		}
 		catch (NullPointerException n) {
 			vistaPadre.showErrorPopup("El número de referencia está faltando");
 		}
+		catch (NumberFormatException e){
+			vistaPadre.showErrorPopup("El codigo debe ser numérico");
+		}
+	}
+	
+	private void doGenerarFactura(ActionEvent evt) {
+	    DefaultTableModel model = (DefaultTableModel) tablaArticulos.getModel();
+	    ((VentaArticulosController)vistaPadre.getControlador()).nuevaVenta(model.getDataVector());	    	    	    	    	   	    
+	}
+
+	public JEditorPane getTxtDetalles() {
+		return txtDetalles;
 	}
 
     // End of variables declaration//GEN-END:variables

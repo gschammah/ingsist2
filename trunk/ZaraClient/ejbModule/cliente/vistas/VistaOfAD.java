@@ -27,17 +27,31 @@ public class VistaOfAD extends Vista {
 	public VistaOfAD(ZaraModel modelo) {
 		super(modelo);
 		vistaGrafica = new OfAD(this);
-		
-		vistaGrafica.addWindowListener(new WindowListener(){						
-			public void windowClosed(WindowEvent e) { instance = null;}			
-			public void windowActivated(WindowEvent e) {}
-			public void windowClosing(WindowEvent e) {}
-			public void windowDeactivated(WindowEvent e) {}
-			public void windowDeiconified(WindowEvent e) {}
-			public void windowIconified(WindowEvent e) {}
-			public void windowOpened(WindowEvent e) {}										
+
+		vistaGrafica.addWindowListener(new WindowListener() {
+			public void windowClosed(WindowEvent e) {
+				instance = null;
+			}
+
+			public void windowActivated(WindowEvent e) {
+			}
+
+			public void windowClosing(WindowEvent e) {
+			}
+
+			public void windowDeactivated(WindowEvent e) {
+			}
+
+			public void windowDeiconified(WindowEvent e) {
+			}
+
+			public void windowIconified(WindowEvent e) {
+			}
+
+			public void windowOpened(WindowEvent e) {
+			}
 		});
-		
+
 		this.centrarVista(vistaGrafica);
 	}
 
@@ -46,8 +60,8 @@ public class VistaOfAD extends Vista {
 		super.addControlador(cp);
 		((OfADController) this.getControlador()).cargarOfAD(false);
 	}
-	
-	public void borrarTabla(JTable tabla){
+
+	public void borrarTabla(JTable tabla) {
 		while (((DefaultTableModel) tabla.getModel()).getRowCount() > 0) {
 			((DefaultTableModel) tabla.getModel()).removeRow(0);
 		}
@@ -59,12 +73,12 @@ public class VistaOfAD extends Vista {
 	}
 
 	public void cargarDatos(OfADVO ofad) {
-		
+
 		Collection<ItemOfADVO> items = ofad.getArticulos();
-		
+
 		JTable artDisponibles = vistaGrafica.getTablaArtDisponibles();
 		JTable artNuevos = vistaGrafica.getTablaArtNuevos();
-		
+
 		borrarTabla(artDisponibles);
 		borrarTabla(artNuevos);
 
@@ -78,17 +92,19 @@ public class VistaOfAD extends Vista {
 						art.getPrecioLista(), art.getPrecioOferta() });
 
 			} else {
-				((DefaultTableModel) artDisponibles.getModel()).addRow(new Object[] { 
-						art.getReferencia(), art.getDescripcion(), 
-						art.getPrecioLista(), art.getPrecioOferta() });
+				((DefaultTableModel) artDisponibles.getModel())
+						.addRow(new Object[] { art.getReferencia(),
+								art.getDescripcion(), art.getPrecioLista(),
+								art.getPrecioOferta() });
 			}
 		}
-		
+
 		Date fecha = ofad.getFecha();
-		
-		vistaGrafica.getTxtActualizacion().setText(
-				DateFormat.getDateInstance().format(fecha) + " " + DateFormat.getTimeInstance().format(fecha) 
-		);
+		if (fecha != null) {
+			vistaGrafica.getTxtActualizacion().setText(
+					DateFormat.getDateInstance().format(fecha) + " "
+							+ DateFormat.getTimeInstance().format(fecha));
+		}
 		vistaGrafica.setVisible(true);
 	}
 
@@ -102,17 +118,14 @@ public class VistaOfAD extends Vista {
 				JOptionPane.YES_NO_OPTION);
 	}
 
-	
-	public static VistaOfAD getInstance(ZaraModel modelo){
-		
-		if (instance == null)
-		{
+	public static VistaOfAD getInstance(ZaraModel modelo) {
+
+		if (instance == null) {
 			instance = new VistaOfAD(modelo);
 		}
-		
+
 		return instance;
 	}
-
 
 	public void cerrar() {
 		vistaGrafica.dispose();

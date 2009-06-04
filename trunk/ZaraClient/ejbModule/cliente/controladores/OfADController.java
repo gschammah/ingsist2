@@ -26,19 +26,21 @@ public class OfADController extends Controlador {
 	public void cargarOfAD(boolean save) {
 
 		OfADVO ofadVO = ParseXML.parseOfAD("/UADE/workspace/ZaraClient/ejbModule/cliente/XML/xmls/OFAD.xml");
+		
 
 		if (save) {
 
 			Date fechaOfad = checkOfAD(ofadVO.getXmlHash());
 
 			if (fechaOfad == null || (fechaOfad != null && ((VistaOfAD) this.getVista()).showPopup(fechaOfad) == 0)) {
-				ofadVO = ((ZaraModel) this.getModelo()).getFachada().nuevoOfad(ofadVO);
+				ofadVO = ((ZaraModel) this.getModelo()).getFachada().nuevoOfad(ofadVO, save);
 			} else if (fechaOfad != null) {
 				System.err.println("Carga OfAD cancelada");
 			}
 		}
 		else
 		{
+			ofadVO = ((ZaraModel) this.getModelo()).getFachada().nuevoOfad(ofadVO, save);
 			ofadVO.setFecha(checkOfAD(null));
 		}
 		

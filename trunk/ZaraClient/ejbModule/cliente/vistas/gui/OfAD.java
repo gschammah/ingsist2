@@ -139,7 +139,7 @@ public class OfAD extends JFrame {
 		lblActualizacion.setText("Última Actualización:");
 
 		txtActualizacion.setEditable(false);		
-		txtActualizacion.setText("DD/MM/AAAA");
+		txtActualizacion.setText("Nunca");
 
 		GroupLayout layout = new GroupLayout(
 				getContentPane());

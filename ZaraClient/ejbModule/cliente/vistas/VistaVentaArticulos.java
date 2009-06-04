@@ -3,6 +3,7 @@ package cliente.vistas;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.awt.event.WindowStateListener;
+import java.util.Collection;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -10,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
 import server.VO.articulos.ArticuloVO;
 import cliente.modelo.ZaraModel;
 import cliente.vistas.gui.VentaArticulos;
+import cliente.vistas.gui.renderers.VentasTableRenderer;
 import framework.vista.Vista;
 
 public class VistaVentaArticulos extends Vista {
@@ -48,6 +50,8 @@ public class VistaVentaArticulos extends Vista {
 
 	public void agregarArticulo(ArticuloVO articulo) {
 
+		vistaGrafica.getTxtDetalles().setText(articulo.toString());
+		
 		Object[] datosArticulo = new Object[] { articulo.getReferencia(),
 				articulo.getLinea(), articulo.getDescripcion(),
 				articulo.getPrecioLista(), null, 1 };
@@ -59,6 +63,10 @@ public class VistaVentaArticulos extends Vista {
 	public void showErrorPopup(String mensaje) {
 		JOptionPane.showMessageDialog(vistaGrafica, mensaje, "Error de conexión",
 				JOptionPane.ERROR_MESSAGE);
+	}
+	
+	public void toggleError(Collection<ArticuloVO> articulos){
+		((VentasTableRenderer)vistaGrafica.getTablaArticulos().getDefaultRenderer(Object.class)).setArticulos(articulos);
 	}
 
 	public void cerrar() {

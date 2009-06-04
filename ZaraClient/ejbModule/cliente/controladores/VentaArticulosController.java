@@ -1,6 +1,12 @@
 package cliente.controladores;
 
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.Vector;
+
 import server.VO.articulos.ArticuloVO;
+import server.VO.ventas.ItemVentaVO;
+import server.VO.ventas.VentaVO;
 import cliente.modelo.ZaraModel;
 import cliente.vistas.VistaVentaArticulos;
 import framework.controlador.Controlador;
@@ -32,6 +38,33 @@ public class VentaArticulosController extends Controlador {
 		{
 			((VistaVentaArticulos)this.getVista()).agregarArticulo(art);
 		}
+	}
+
+	public void nuevaVenta(Vector<Vector<Object>> datos) {
+		
+		VentaVO venta = new VentaVO();
+		
+		venta.setFecha(Calendar.getInstance().getTime());
+		venta.setTipoFactura('A');
+		
+		for (Vector<Object> fila : datos) {
+			ItemVentaVO itemVenta = new ItemVentaVO(); 
+			ArticuloVO art = getArticulo(Long.parseLong(fila.get(0).toString()));			
+			
+			itemVenta.setArticulo(art);			
+			itemVenta.setPrecio(Float.parseFloat(fila.get(3).toString()));
+			itemVenta.setCantidad(Integer.parseInt(fila.get(5).toString()));
+			
+			venta.addItem(itemVenta);  
+		}
+		
+		Collection<ArticuloVO> result = ((ZaraModel)this.getModelo()).getFachada().nuevaVenta(venta);
+		
+		if (result != null)
+		{
+			((VistaVentaArticulos)this.getVista()).toggleError(result);
+		}
+		
 	}
 
 }

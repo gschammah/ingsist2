@@ -50,9 +50,9 @@ public class ParseXML {
 			Element art = ((Element) articulo);
 
 			ItemOfADVO itemOfadVO = new ItemOfADVO();
-			itemOfadVO.setPrecioLista(Double.parseDouble(art
+			itemOfadVO.setPrecioLista(Float.parseFloat(art
 					.getChildText("precioLista")));
-			itemOfadVO.setPrecioOferta(Double.parseDouble(art
+			itemOfadVO.setPrecioOferta(Float.parseFloat(art
 					.getChildText("precioOferta")));		
 			
 			ArticuloVO nuevoArt = null;						
@@ -79,8 +79,8 @@ public class ParseXML {
 			nuevoArt.setColor(art.getChildText("color"));
 			nuevoArt.setDescripcion(art.getChildText("descripcion"));
 			nuevoArt.setLinea(art.getChildText("linea"));
-			nuevoArt.setPrecioLista(Double.parseDouble(art.getChildText("precioLista")));
-			nuevoArt.setPrecioOferta(Double.parseDouble(art.getChildText("precioOferta")));
+			nuevoArt.setPrecioLista(Float.parseFloat(art.getChildText("precioLista")));
+			nuevoArt.setPrecioOferta(Float.parseFloat(art.getChildText("precioOferta")));
 			nuevoArt.setReferencia(Long.parseLong(art.getChildText("Referencia")));
 			nuevoArt.setSeccion(art.getChildText("seccion"));
 			nuevoArt.setPuntoReposicion(Integer.parseInt(art.getChildText("stockReposicion")));			

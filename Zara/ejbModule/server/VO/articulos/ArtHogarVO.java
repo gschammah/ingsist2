@@ -13,7 +13,7 @@ public class ArtHogarVO extends ArticuloVO {
 		
 	}
 	
-	public ArtHogarVO(long ref, String desc, String linea, double pL, double pO, 
+	public ArtHogarVO(long ref, String desc, String linea, float pL, float pO, 
 			 String color, String sec, int stock, String nom, 
 			 String comp, String med, String cat) {
 
@@ -55,6 +55,19 @@ public class ArtHogarVO extends ArticuloVO {
 
 	public void setCategoria(String categoria) {
 		this.categoria = categoria;
+	}
+	
+	public String toString(){
+		StringBuffer result = new StringBuffer();
+		
+		result.append("<b>Tipo:</b> Hogar<br>");
+		result.append(super.toString());
+		result.append("<b>Nombre:</b> " + nombre + "<br>");
+		result.append("<b>Categoría:</b> " + categoria + "<br>");
+		result.append("<b>Medidas:</b> " + medidas + "<br>");
+		result.append("<b>Composición:</b> " + composicion);
+		
+		return result.toString();
 	}
 		
 }

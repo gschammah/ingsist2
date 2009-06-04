@@ -6,22 +6,15 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import server.VO.EnvT.EnvTVO;
-import server.VO.OfAD.OfADVO;
-import server.VO.articulos.ArticuloVO;
 import server.beans.articulos.AdministradorArticulos;
-import server.beans.articulos.AdministradorArticulosBean;
-import server.beans.pedidos.AdministradorPedidos;
+import server.beans.fachada.Fachada;
 import server.entidades.EnvT.EnvT;
 import server.entidades.EnvT.ItemEnvT;
-import server.entidades.OfAD.ItemOfAD;
-import server.entidades.OfAD.OfAD;
 import server.entidades.articulos.Articulo;
 
 @Stateful
@@ -31,7 +24,7 @@ public class AdministradorPedidosBean implements AdministradorPedidos {
 	private EntityManager em;
 
 	@EJB(name = "ZaraEAR/AdministradorArticulosBean/local")
-	AdministradorArticulos admArt;
+	AdministradorArticulos admArticulos;
 
 	public EnvTVO nuevoEnvT(EnvTVO envtVO, boolean save) {
 
@@ -47,7 +40,7 @@ public class AdministradorPedidosBean implements AdministradorPedidos {
 				
 			for (ItemEnvT item : articulos) {
 
-				Articulo art = admArt.buscarArticulo(item.getArticulo().getReferencia());
+				Articulo art = admArticulos.buscarArticulo(item.getArticulo().getReferencia());
 
 				if (art == null) {
 					// TODO Articulo no existe

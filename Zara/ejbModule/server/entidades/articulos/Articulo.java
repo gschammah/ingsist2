@@ -37,8 +37,8 @@ public class Articulo implements Serializable{
 	private long referencia;
 	private String linea;
 	private String descripcion;
-	private double precioLista;
-	private double precioOferta;
+	private float precioLista;
+	private float precioOferta;
 	private String color;
 	private String seccion;
 	private int stock;
@@ -46,7 +46,7 @@ public class Articulo implements Serializable{
 	private int puntoReposicion;
 	  	
 	
-	public Articulo(long ref, String desc, String linea, double pL, double pO, String color, String sec, int stock) {
+	public Articulo(long ref, String desc, String linea, float pL, float pO, String color, String sec, int stock) {
 		this.referencia = ref;
 		this.descripcion = desc;
 		this.precioLista = pL;
@@ -85,19 +85,19 @@ public class Articulo implements Serializable{
 		this.descripcion = descripcion;
 	}
 
-	public double getPrecioLista() {
+	public float getPrecioLista() {
 		return precioLista;
 	}
 
-	public void setPrecioLista(double precioLista) {
+	public void setPrecioLista(float precioLista) {
 		this.precioLista = precioLista;
 	}
 
-	public double getPrecioOferta() {
+	public float getPrecioOferta() {
 		return precioOferta;
 	}
 
-	public void setPrecioOferta(double precioOferta) {
+	public void setPrecioOferta(float precioOferta) {
 		this.precioOferta = precioOferta;
 	}
 

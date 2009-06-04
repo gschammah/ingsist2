@@ -30,7 +30,7 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 	private EntityManager em;
 		
 	
-	public OfADVO nuevoOfad(OfADVO ofadVO) {
+	public OfADVO nuevoOfad(OfADVO ofadVO, boolean save) {
 		OfAD ofad = new OfAD();
 		ofad.setVO(ofadVO);
 		
@@ -43,17 +43,24 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 			if (art != null)
 			{
 				art.setVO(itemOfAD.getArticulo().getVO());
+				art.setNuevo(false);				
 				itemOfAD.setArticulo(art);			
 			}
 			else
 			{
-				itemOfAD.getArticulo().setNuevo(true);
+				if (!save)
+				{
+					itemOfAD.getArticulo().setNuevo(true);
+				}
 			}
 		}
 		//actualizo la lista de articulos con los precios cambiados
 		ofad.setArticulos(items);
 		
-		em.persist(ofad);
+		if (save)
+		{
+			em.persist(ofad);
+		}
 		
 		
 		return ofad.getVO();
@@ -91,6 +98,18 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 	public Articulo buscarArticulo(long ref){		
 		Articulo result = em.find(Articulo.class, ref);
 		return result;
+	}
+	
+	public ArticuloVO buscarArticuloVO(long ref) {
+		Articulo result = em.find(Articulo.class, ref);
+		if (result == null)
+		{
+			return null;
+		}
+		else
+		{
+			return result.getVO();
+		}
 	}
 
 

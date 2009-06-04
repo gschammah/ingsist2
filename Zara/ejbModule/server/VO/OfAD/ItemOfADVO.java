@@ -11,8 +11,8 @@ public class ItemOfADVO implements Serializable {
 	
 	private int id;
 	private ArticuloVO articulo;
-	private double precioLista;
-	private double precioOferta;
+	private float precioLista;
+	private float precioOferta;
 	private OfADVO ofad;
 	
 	public ItemOfADVO(){
@@ -27,19 +27,19 @@ public class ItemOfADVO implements Serializable {
 		this.articulo = articulo;
 	}
 	
-	public double getPrecioLista() {
+	public float getPrecioLista() {
 		return precioLista;
 	}
 	
-	public void setPrecioLista(double precioLista) {
+	public void setPrecioLista(float precioLista) {
 		this.precioLista = precioLista;
 	}
 	
-	public double getPrecioOferta() {
+	public float getPrecioOferta() {
 		return precioOferta;
 	}
 	
-	public void setPrecioOferta(double precioOferta) {
+	public void setPrecioOferta(float precioOferta) {
 		this.precioOferta = precioOferta;
 	}
 	

@@ -1,5 +1,6 @@
 package server.beans.fachada;
 
+import java.util.Collection;
 import java.util.Date;
 
 import javax.ejb.EJB;
@@ -8,6 +9,7 @@ import javax.ejb.Stateful;
 import server.VO.EnvT.EnvTVO;
 import server.VO.OfAD.OfADVO;
 import server.VO.articulos.ArticuloVO;
+import server.VO.ventas.VentaVO;
 import server.beans.articulos.AdministradorArticulos;
 import server.beans.pedidos.AdministradorPedidos;
 import server.beans.ventas.AdministradorVentas;
@@ -29,8 +31,8 @@ public class FachadaBean implements Fachada {
 	//Articulos
 	 
 	
-	public OfADVO nuevoOfad(OfADVO ofadVO) {
-		return admArticulos.nuevoOfad(ofadVO);
+	public OfADVO nuevoOfad(OfADVO ofadVO, boolean save) {
+		return admArticulos.nuevoOfad(ofadVO, save);
 	}
 	
 	public Date checkExistingOfad(String hash){
@@ -39,6 +41,10 @@ public class FachadaBean implements Fachada {
 	
 	public Articulo buscarArticulo(long ref){
 		return admArticulos.buscarArticulo(ref);
+	}
+	
+	public ArticuloVO buscarArticuloVO(long ref) {
+		return admArticulos.buscarArticuloVO(ref);
 	}
 	
 	//Pedidos
@@ -52,9 +58,9 @@ public class FachadaBean implements Fachada {
 	}
 	
 	//Ventas
-
-	public ArticuloVO buscarArticuloVO(long ref) {
-		return admVentas.buscarArticuloVO(ref);
+	
+	public Collection<ArticuloVO> nuevaVenta(VentaVO vo) {
+		return admVentas.nuevaVenta(vo);
 	}
 	
 }

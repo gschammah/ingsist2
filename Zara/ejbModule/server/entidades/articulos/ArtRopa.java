@@ -21,7 +21,7 @@ public class ArtRopa extends Articulo {
 	public ArtRopa(){
 		
 	}
-	public ArtRopa(long ref, String desc, String linea, double pL, double pO, 
+	public ArtRopa(long ref, String desc, String linea, float pL, float pO, 
 			 String color, String sec, int stock, String talle, String origen) { 			 
 
 		super(ref, desc, linea, pL, pO, color, sec, stock);

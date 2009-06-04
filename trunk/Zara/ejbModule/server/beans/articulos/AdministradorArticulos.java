@@ -11,10 +11,12 @@ import server.entidades.articulos.Articulo;
 @Remote
 public interface AdministradorArticulos {
 
-	public OfADVO nuevoOfad(OfADVO ofad);
+	public OfADVO nuevoOfad(OfADVO ofad, boolean save);
 	
 	public Date checkExistingOfad(String hash);
 	
 	public Articulo buscarArticulo(long ref);
+	
+	public ArticuloVO buscarArticuloVO(long ref);
 
 }

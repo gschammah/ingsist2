@@ -11,7 +11,7 @@ public class ArtRopaVO extends ArticuloVO {
 
 	}
 
-	public ArtRopaVO(long ref, String desc, String linea, double pL, double pO,
+	public ArtRopaVO(long ref, String desc, String linea, float pL, float pO,
 			String color, String sec, int stock, String talle, String origen) {
 
 		super(ref, desc, linea, pL, pO, color, sec, stock);
@@ -36,5 +36,15 @@ public class ArtRopaVO extends ArticuloVO {
 		this.origen = origen;
 	}
 	
+	public String toString(){
+		StringBuffer result = new StringBuffer();
+		
+		result.append("<b>Tipo:</b> Ropa<br>");
+		result.append(super.toString());
+		result.append("<b>Talle:</b> " + talle + "<br>");
+		result.append("<b>Origen:</b> " + origen);
+		
+		return result.toString();
+	}
 
 }

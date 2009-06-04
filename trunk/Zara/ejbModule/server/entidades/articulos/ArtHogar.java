@@ -24,7 +24,7 @@ public class ArtHogar extends Articulo {
 		
 	}
 	
-	public ArtHogar(long ref, String desc, String linea, double pL, double pO, 
+	public ArtHogar(long ref, String desc, String linea, float pL, float pO, 
 							 String color, String sec, int stock, String nom, 
 							 String comp, String med, String cat) {
 		

@@ -17,6 +17,9 @@ import cliente.vistas.VistaMainMenu;
  * @author  chama
  */
 public class MainMenu extends javax.swing.JFrame {
+			
+	private static final long serialVersionUID = 1L;
+	
 	private VistaMainMenu vistaPadre = null;
 
     /** Creates new form MainMenu */

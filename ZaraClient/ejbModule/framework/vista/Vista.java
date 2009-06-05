@@ -13,8 +13,8 @@ import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 
-import framework.controlador.*;
-import framework.modeloCliente.*;
+import framework.controlador.Controlador;
+import framework.modeloCliente.ProxyModelo;
 
 public abstract class Vista {	
 	ProxyModelo modelo;

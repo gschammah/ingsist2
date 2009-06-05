@@ -8,7 +8,9 @@ import javax.swing.WindowConstants;
 import cliente.vistas.VistaPALC;
 
 public class PALC extends javax.swing.JFrame {
-    private VistaPALC vistaPadre;
+
+	private static final long serialVersionUID = 1L;
+	private VistaPALC vistaPadre;
     
 	/** Creates new form PALC */
     public PALC(VistaPALC vista) {

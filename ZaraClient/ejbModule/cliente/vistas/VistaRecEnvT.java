@@ -12,10 +12,8 @@ import javax.swing.table.DefaultTableModel;
 
 import server.VO.EnvT.EnvTVO;
 import server.VO.EnvT.ItemEnvTVO;
-import server.VO.OfAD.ItemOfADVO;
 import server.VO.articulos.ArticuloVO;
 import cliente.controladores.EnvTController;
-import cliente.controladores.OfADController;
 import cliente.modelo.ZaraModel;
 import cliente.vistas.gui.RecEnvT;
 import framework.controlador.Controlador;
@@ -77,6 +75,11 @@ public class VistaRecEnvT extends Vista {
 		for (ItemEnvTVO item : items) {
 
 			ArticuloVO art = item.getArticulo();
+			
+			if (art.getDescripcion() == null)
+			{
+				art.setDescripcion("ERROR: Artículo no existe en la base de datos");
+			}
 			
 			if (item.getCantidadPendiente() == 0 ) {
 				((DefaultTableModel) artRecibidos.getModel()).addRow(new Object[] {

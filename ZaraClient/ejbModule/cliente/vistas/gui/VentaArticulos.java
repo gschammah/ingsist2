@@ -126,7 +126,8 @@ public class VentaArticulos extends JFrame {
         });
         
        tablaArticulos.setModel(new DefaultTableModel() {
-            Class[] types = new Class [] {
+		private static final long serialVersionUID = 1L;
+			Class[] types = new Class [] {
                 Object.class, Object.class, Object.class, Object.class, Boolean.class, Integer.class, JButton.class
             };
             boolean[] canEdit = new boolean [] {

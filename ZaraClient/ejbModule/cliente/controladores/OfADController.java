@@ -3,11 +3,9 @@ package cliente.controladores;
 import java.util.Date;
 
 import server.VO.OfAD.OfADVO;
-
 import cliente.XML.ParseXML;
 import cliente.modelo.ZaraModel;
 import cliente.vistas.VistaOfAD;
-import cliente.vistas.VistaRecEnvT;
 import framework.controlador.Controlador;
 import framework.modeloCliente.ProxyModelo;
 import framework.vista.Vista;

@@ -13,7 +13,6 @@ import javax.swing.table.DefaultTableModel;
 import server.VO.OfAD.ItemOfADVO;
 import server.VO.OfAD.OfADVO;
 import server.VO.articulos.ArticuloVO;
-
 import cliente.controladores.OfADController;
 import cliente.modelo.ZaraModel;
 import cliente.vistas.gui.OfAD;

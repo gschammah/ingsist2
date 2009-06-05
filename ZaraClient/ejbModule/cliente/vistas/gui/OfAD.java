@@ -17,10 +17,13 @@ import javax.swing.table.DefaultTableModel;
 import cliente.controladores.OfADController;
 import cliente.vistas.VistaOfAD;
 
-public class OfAD extends JFrame {
+public class OfAD extends JFrame {	
+	
+	private static final long serialVersionUID = 1L;
+	
 	private VistaOfAD vistaPadre;
 
-	/** Creates new form test */
+	
 	public OfAD(VistaOfAD vista) {
 		initComponents();
 		vistaPadre = vista;
@@ -56,7 +59,8 @@ public class OfAD extends JFrame {
 
 		tablaArtDisponibles.setModel(new DefaultTableModel(
 				new Object[][] {}, new String[] { "Artículo", "Descripción",
-						"Precio", "Oferta" }) {
+						"Precio", "Oferta" }) {			
+			private static final long serialVersionUID = 1L;
 			Class[] types = new Class[] { java.lang.String.class,
 					java.lang.String.class, java.lang.String.class,
 					java.lang.String.class };
@@ -86,7 +90,8 @@ public class OfAD extends JFrame {
 
 		tablaArtNuevos.setModel(new DefaultTableModel(
 				new Object[][] {}, new String[] { "Artículo", "Descripción",
-						"Precio", "Oferta" }) {
+						"Precio", "Oferta" }) {	
+			private static final long serialVersionUID = 1L;
 			Class[] types = new Class[] { java.lang.String.class,
 					java.lang.String.class, java.lang.String.class,
 					java.lang.String.class };

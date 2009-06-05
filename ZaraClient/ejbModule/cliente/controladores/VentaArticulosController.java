@@ -1,5 +1,6 @@
 package cliente.controladores;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Vector;
@@ -38,7 +39,7 @@ public class VentaArticulosController extends Controlador {
 			((VistaVentaArticulos) this.getVista()).agregarArticulo(art);
 		}
 	}
-
+	
 	public void nuevaVenta(Vector<Vector<Object>> datos) {
 
 		VentaVO venta = new VentaVO();
@@ -59,10 +60,10 @@ public class VentaArticulosController extends Controlador {
 
 		Collection<ArticuloVO> result = ((ZaraModel) this.getModelo())
 				.getFachada().nuevaVenta(venta);
-
-		if (result != null) {
-			((VistaVentaArticulos) this.getVista()).toggleError(result);
-		}
+				
+				
+		((VistaVentaArticulos) this.getVista()).toggleError(result);
+		
 
 	}
 

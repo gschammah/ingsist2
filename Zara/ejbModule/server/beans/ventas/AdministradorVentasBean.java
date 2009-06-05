@@ -12,7 +12,6 @@ import server.VO.articulos.ArticuloVO;
 import server.VO.ventas.ItemVentaVO;
 import server.VO.ventas.VentaVO;
 import server.beans.articulos.AdministradorArticulos;
-import server.beans.fachada.Fachada;
 import server.entidades.articulos.Articulo;
 import server.entidades.ventas.ItemVenta;
 import server.entidades.ventas.Venta;
@@ -25,30 +24,51 @@ public class AdministradorVentasBean implements AdministradorVentas {
 
 	@EJB(name = "ZaraEAR/AdministradorArticulosBean/local")
 	AdministradorArticulos admArticulos;
+	
+	private int mergeArticulos(ItemVenta itemVenta, Collection<ItemVenta> items) {
+		
+		int result = 0;
+		
+		for (int i = 0; i < items.size(); i++) {
+			ItemVenta item = ((ArrayList<ItemVenta>) items).get(i);
+			if (item.getArticulo().getReferencia() == itemVenta.getArticulo().getReferencia()) {
+				result += item.getCantidad();
+			}
+		}
+		return result;
+	}
 
 	public Collection<ArticuloVO> nuevaVenta(VentaVO vo) {
-
+		
 		Collection<ArticuloVO> result = new ArrayList<ArticuloVO>();		
 		
 		Venta venta = new Venta();
 		venta.setVO(vo);
+		
+		Collection<ItemVenta> items = venta.getItems();
 
-		for (ItemVenta item : venta.getItems()) {									
+		for (ItemVenta item : items) {									
 
-			Articulo art = item.getArticulo();
+			Articulo art = admArticulos.buscarArticulo(item.getArticulo().getReferencia());
 			
-			if (art.getStock() < item.getCantidad()) {				
+			if (art.getStock() < mergeArticulos(item, items)) {				
 				result.add(art.getVO());
 			}
 			else {
-				art.setStock(art.getStock() - item.getCantidad());				
+				art.setStock(art.getStock() - item.getCantidad());
+				item.setArticulo(art);
 			}
 		}
+		
 
 		if (result.size() != 0) {
 			return result;
-		} else {						
-			//em.persist(venta);
+		} else {
+			
+			for (ItemVenta item : items) {
+				em.merge(item.getArticulo());
+			}
+			em.persist(venta);
 			return null;
 		}
 	}

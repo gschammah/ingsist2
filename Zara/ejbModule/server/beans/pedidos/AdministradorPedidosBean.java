@@ -43,7 +43,7 @@ public class AdministradorPedidosBean implements AdministradorPedidos {
 				Articulo art = admArticulos.buscarArticulo(item.getArticulo().getReferencia());
 
 				if (art == null) {
-					// TODO Articulo no existe
+					
 				} else {
 					
 					item.setArticulo(art);
@@ -52,6 +52,7 @@ public class AdministradorPedidosBean implements AdministradorPedidos {
 					{
 						item.getArticulo().setStock(item.getArticulo().getStock() + item.getCantidadRecibida());
 						em.merge(item.getArticulo());
+						em.persist(item);
 					}					
 				}
 			}
@@ -60,7 +61,7 @@ public class AdministradorPedidosBean implements AdministradorPedidos {
 		// Si save es true, persisto
 			
 		if (save) {			
-			em.persist(envt);
+			em.persist(envt);			
 		}
 
 		

@@ -1,7 +1,5 @@
 package server.VO.articulos;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-
 public class ArtHogarVO extends ArticuloVO {
 	
 	private String nombre;

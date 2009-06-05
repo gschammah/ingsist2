@@ -48,7 +48,7 @@ public class EnvT implements Serializable {
 		this.fecha = fecha;
 	}
 	
-	@OneToMany(mappedBy="envt", fetch=FetchType.EAGER, cascade=(CascadeType.ALL))
+	@OneToMany(mappedBy="envt", fetch=FetchType.EAGER)
 	public Collection<ItemEnvT> getArticulos() {
 		return articulos;
 	}

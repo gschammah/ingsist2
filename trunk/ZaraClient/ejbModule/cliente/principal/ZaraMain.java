@@ -18,6 +18,7 @@ public class ZaraMain {
 		try {
 			modelo = new ZaraModel();
 		} catch (NamingException e) {
+			e.printStackTrace();
 			modelo = null;
 		}		
 		VistaMainMenu mainMenu = new VistaMainMenu(modelo);

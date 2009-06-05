@@ -5,17 +5,17 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
-import server.VO.OfAD.ItemOfADVO;
 import server.VO.ventas.ItemVentaVO;
 import server.VO.ventas.VentaVO;
-import server.entidades.OfAD.ItemOfAD;
 
 @Entity
 public class Venta implements Serializable {
@@ -53,7 +53,7 @@ public class Venta implements Serializable {
 		this.tipoFactura = tipoFactura;
 	}
 
-	@OneToMany(mappedBy = "venta", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "venta", fetch = FetchType.EAGER, cascade=(CascadeType.ALL))
 	public Collection<ItemVenta> getItems() {
 		return items;
 	}
@@ -69,6 +69,7 @@ public class Venta implements Serializable {
 		this.items = voToVenta(vo.getItems());
 	}
 
+	@Transient
 	public VentaVO getVO() {
 		VentaVO vo = new VentaVO();
 		vo.setFecha(this.fecha);

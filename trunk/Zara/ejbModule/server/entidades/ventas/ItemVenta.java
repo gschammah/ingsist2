@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 import server.VO.ventas.ItemVentaVO;
 import server.entidades.articulos.Articulo;
@@ -67,6 +68,7 @@ public class ItemVenta implements Serializable {
 		this.precio = vo.getPrecio();
 	}
 
+	@Transient
 	public ItemVentaVO getVO() {
 		ItemVentaVO vo = new ItemVentaVO();
 		vo.setArticulo(this.articulo.getVO());

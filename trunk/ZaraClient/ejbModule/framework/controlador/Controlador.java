@@ -7,8 +7,8 @@
  */
 package framework.controlador;
 
-import framework.vista.*;
-import framework.modeloCliente.*;
+import framework.modeloCliente.ProxyModelo;
+import framework.vista.Vista;
 
 
 public abstract class Controlador {

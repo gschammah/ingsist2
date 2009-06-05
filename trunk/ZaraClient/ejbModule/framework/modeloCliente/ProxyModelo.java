@@ -7,7 +7,7 @@
  */
 package framework.modeloCliente;
 
-import framework.vista.*;
+import framework.vista.Vista;
 
 
 public abstract class ProxyModelo {

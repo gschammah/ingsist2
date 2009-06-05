@@ -21,17 +21,31 @@ public class VistaVentaArticulos extends Vista {
 	public VistaVentaArticulos(ZaraModel modelo) {
 		super(modelo);
 		vistaGrafica = new VentaArticulos(this);
-		
-		vistaGrafica.addWindowListener(new WindowListener(){						
-			public void windowClosed(WindowEvent e) { instance = null;}			
-			public void windowActivated(WindowEvent e) {}
-			public void windowClosing(WindowEvent e) {}
-			public void windowDeactivated(WindowEvent e) {}
-			public void windowDeiconified(WindowEvent e) {}
-			public void windowIconified(WindowEvent e) {}
-			public void windowOpened(WindowEvent e) {}										
-			});
-		
+
+		vistaGrafica.addWindowListener(new WindowListener() {
+			public void windowClosed(WindowEvent e) {
+				instance = null;
+			}
+
+			public void windowActivated(WindowEvent e) {
+			}
+
+			public void windowClosing(WindowEvent e) {
+			}
+
+			public void windowDeactivated(WindowEvent e) {
+			}
+
+			public void windowDeiconified(WindowEvent e) {
+			}
+
+			public void windowIconified(WindowEvent e) {
+			}
+
+			public void windowOpened(WindowEvent e) {
+			}
+		});
+
 		this.centrarVista(vistaGrafica);
 
 		vistaGrafica.pack();
@@ -50,7 +64,7 @@ public class VistaVentaArticulos extends Vista {
 	public void agregarArticulo(ArticuloVO articulo) {
 
 		vistaGrafica.getTxtDetalles().setText(articulo.toString());
-		
+
 		Object[] datosArticulo = new Object[] { articulo.getReferencia(),
 				articulo.getLinea(), articulo.getDescripcion(),
 				articulo.getPrecioLista(), null, 1 };
@@ -58,27 +72,35 @@ public class VistaVentaArticulos extends Vista {
 		((DefaultTableModel) vistaGrafica.getTablaArticulos().getModel())
 				.addRow(datosArticulo);
 	}
-	
+
 	public void showErrorPopup(String mensaje) {
-		JOptionPane.showMessageDialog(vistaGrafica, mensaje, "Error de conexión",
-				JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(vistaGrafica, mensaje,
+				"Error de conexión", JOptionPane.ERROR_MESSAGE);
 	}
-	
-	public void toggleError(Collection<ArticuloVO> articulos){
-		((VentasCantidadTableRenderer)vistaGrafica.getTablaArticulos().getDefaultRenderer(Integer.class)).setArticulos(articulos);		
+
+	public void toggleError(Collection<ArticuloVO> articulos) {
+		if (articulos == null) {
+			((VentasCantidadTableRenderer) vistaGrafica.getTablaArticulos()
+					.getDefaultRenderer(Integer.class)).getArticulos().clear();
+		} else {
+			((VentasCantidadTableRenderer) vistaGrafica.getTablaArticulos()
+					.getDefaultRenderer(Integer.class)).setArticulos(articulos);
+		}
 	}
 
 	public void cerrar() {
-		vistaGrafica.dispose();		
+		vistaGrafica.dispose();
 	}
 
-	public void togglePrecio(int fila, float precioLista) { 
-		vistaGrafica.getTablaArticulos().getModel().setValueAt(precioLista, fila, 3);
+	public void togglePrecio(int fila, float precioLista) {
+		vistaGrafica.getTablaArticulos().getModel().setValueAt(precioLista,
+				fila, 3);
 	}
 
 	public void borrarArticulo(int row) {
-		((DefaultTableModel)vistaGrafica.getTablaArticulos().getModel()).removeRow(row);
-		
+		((DefaultTableModel) vistaGrafica.getTablaArticulos().getModel())
+				.removeRow(row);
+
 	}
-	
+
 }

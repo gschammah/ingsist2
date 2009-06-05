@@ -6,9 +6,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-import server.beans.articulos.AdministradorArticulos;
 import server.beans.fachada.Fachada;
-
 import framework.modeloCliente.ProxyModelo;
 
 public class ZaraModel extends ProxyModelo{

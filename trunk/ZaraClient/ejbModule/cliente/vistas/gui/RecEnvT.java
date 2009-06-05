@@ -70,7 +70,9 @@ public class RecEnvT extends javax.swing.JFrame {
                 "Artículo", "Descripción", "Cant. Recibida", "Stock Total"
             }
         ) {
-            Class[] types = new Class [] {
+
+			private static final long serialVersionUID = 1L;
+			Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
@@ -106,7 +108,8 @@ public class RecEnvT extends javax.swing.JFrame {
                 "Artículo", "Descripción", "Cant. Recibida", "Cant. Pendiente", "Stock Actual"
             }
         ) {
-            Class[] types = new Class [] {
+			private static final long serialVersionUID = 1L;
+			Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {

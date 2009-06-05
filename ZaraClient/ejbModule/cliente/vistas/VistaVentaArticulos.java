@@ -2,7 +2,6 @@ package cliente.vistas;
 
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.awt.event.WindowStateListener;
 import java.util.Collection;
 
 import javax.swing.JOptionPane;
@@ -11,7 +10,7 @@ import javax.swing.table.DefaultTableModel;
 import server.VO.articulos.ArticuloVO;
 import cliente.modelo.ZaraModel;
 import cliente.vistas.gui.VentaArticulos;
-import cliente.vistas.gui.renderers.VentasTableRenderer;
+import cliente.vistas.gui.tables.VentasCantidadTableRenderer;
 import framework.vista.Vista;
 
 public class VistaVentaArticulos extends Vista {
@@ -66,10 +65,20 @@ public class VistaVentaArticulos extends Vista {
 	}
 	
 	public void toggleError(Collection<ArticuloVO> articulos){
-		((VentasTableRenderer)vistaGrafica.getTablaArticulos().getDefaultRenderer(Object.class)).setArticulos(articulos);
+		((VentasCantidadTableRenderer)vistaGrafica.getTablaArticulos().getDefaultRenderer(Integer.class)).setArticulos(articulos);		
 	}
 
 	public void cerrar() {
 		vistaGrafica.dispose();		
 	}
+
+	public void togglePrecio(int fila, float precioLista) { 
+		vistaGrafica.getTablaArticulos().getModel().setValueAt(precioLista, fila, 3);
+	}
+
+	public void borrarArticulo(int row) {
+		((DefaultTableModel)vistaGrafica.getTablaArticulos().getModel()).removeRow(row);
+		
+	}
+	
 }

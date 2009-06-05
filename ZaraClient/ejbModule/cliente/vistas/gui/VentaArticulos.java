@@ -6,17 +6,16 @@
 
 package cliente.vistas.gui;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
@@ -24,16 +23,20 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
+import javax.swing.event.CellEditorListener;
+import javax.swing.event.ChangeEvent;
 import javax.swing.table.DefaultTableModel;
 
+import cliente.constantes.ZaraConstants;
 import cliente.controladores.VentaArticulosController;
 import cliente.vistas.VistaVentaArticulos;
-import cliente.vistas.gui.renderers.VentasTableRenderer;
+import cliente.vistas.gui.tables.VentasCantidadTableRenderer;
+import cliente.vistas.gui.tables.VentasTableButtonEditor;
+import cliente.vistas.gui.tables.VentasTableButtonRenderer;
 
 /**
  *
@@ -122,19 +125,12 @@ public class VentaArticulos extends JFrame {
         	
         });
         
-        tablaArticulos.setDefaultRenderer(Object.class, new VentasTableRenderer());        
-
-        tablaArticulos.setModel(new DefaultTableModel(
-            new Object [][] {},
-            new String [] {
-                "Referencia", "Línea", "Descripción", "Precio", "Precio Oferta?", "Cantidad", ""
-            }
-        ) {
+       tablaArticulos.setModel(new DefaultTableModel() {
             Class[] types = new Class [] {
-                Object.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class
+                Object.class, Object.class, Object.class, Object.class, Boolean.class, Integer.class, JButton.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true, false 
+                false, false, false, false, true, true, true 
             };
 
             @Override
@@ -147,8 +143,48 @@ public class VentaArticulos extends JFrame {
                 return canEdit [columnIndex];
             }
         });
+        
+        ((DefaultTableModel)tablaArticulos.getModel()).setDataVector(
+        		new Object[][]{},
+        		new Object[]{"Referencia", "Línea", "Descripción", "Precio", "Precio Oferta?", "Cantidad", "Borrar"}
+        );
+        
         tablaArticulos.setEditingColumn(1);
         jScrollPane1.setViewportView(tablaArticulos);
+        
+        tablaArticulos.setDefaultRenderer(Integer.class, new VentasCantidadTableRenderer());                
+        tablaArticulos.setDefaultRenderer(JButton.class, new VentasTableButtonRenderer());
+        tablaArticulos.setDefaultEditor(JButton.class, new VentasTableButtonEditor(new JCheckBox()));
+        
+        ((VentasTableButtonEditor)tablaArticulos.getDefaultEditor(JButton.class)).addCellEditorListener(new CellEditorListener(){
+
+			public void editingCanceled(ChangeEvent e) {}
+
+			public void editingStopped(ChangeEvent e) {
+				long ref = (Long)tablaArticulos.getModel().getValueAt(tablaArticulos.getSelectedRow(), 0);
+				
+				((VentaArticulosController)vistaPadre.getControlador()).borrarArticulo(ref, tablaArticulos.getSelectedRow());
+			}});
+        
+        tablaArticulos.getDefaultEditor(Boolean.class).addCellEditorListener(new CellEditorListener(){
+
+			public void editingCanceled(ChangeEvent e) {}
+
+			public void editingStopped(ChangeEvent e) {
+				
+				long ref = (Long)tablaArticulos.getModel().getValueAt(tablaArticulos.getSelectedRow(), 0);
+				
+				if ((Boolean)tablaArticulos.getModel().getValueAt(tablaArticulos.getSelectedRow(), tablaArticulos.getSelectedColumn())){
+					((VentaArticulosController)vistaPadre.getControlador()).togglePrecio(ref, ZaraConstants.PRECIO_OFERTA, tablaArticulos.getSelectedRow());
+				}
+				else
+				{
+					((VentaArticulosController)vistaPadre.getControlador()).togglePrecio(ref, ZaraConstants.PRECIO_LISTA, tablaArticulos.getSelectedRow());
+				}
+			}});
+                
+                
+
         
         tablaArticulos.getColumnModel().getColumn(0).setMinWidth(100);
         tablaArticulos.getColumnModel().getColumn(0).setPreferredWidth(100);

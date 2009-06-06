@@ -25,7 +25,34 @@ public class Venta implements Serializable {
 	private int id;
 	private Date fecha;
 	private char tipoFactura;
-	private Collection<ItemVenta> items = new ArrayList<ItemVenta>();
+	private Collection<ItemVenta> items = new ArrayList<ItemVenta>();	
+	private float subTotal;
+	private float iva;
+	private float total;
+
+	public float getSubTotal() {
+		return subTotal;
+	}
+
+	public void setSubTotal(float subTotal) {
+		this.subTotal = subTotal;
+	}
+
+	public float getIva() {
+		return iva;
+	}
+
+	public void setIva(float iva) {
+		this.iva = iva;
+	}
+
+	public float getTotal() {
+		return total;
+	}
+
+	public void setTotal(float total) {
+		this.total = total;
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)

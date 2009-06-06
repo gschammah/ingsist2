@@ -17,7 +17,7 @@ public class EnvTController extends Controlador {
 	}
 	
 	public Date checkEnvT(String hash){		
-		return ((ZaraModel)this.getModelo()).getFachada().checkExistingEnvT(hash);			
+		return ((ZaraModel)this.getModelo()).getFachada().checkPedidoExistente(hash);			
 	}
 	
 	public void cargarEnvT(boolean save){

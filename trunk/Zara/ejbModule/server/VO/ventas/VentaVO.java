@@ -13,6 +13,33 @@ public class VentaVO implements Serializable {
 	private Date fecha;
 	private char tipoFactura;
 	private Collection<ItemVentaVO> items = new ArrayList<ItemVentaVO>();
+	private float subTotal;
+	private float iva;
+	private float total;
+
+	public float getSubTotal() {
+		return subTotal;
+	}
+
+	public void setSubTotal(float subTotal) {
+		this.subTotal = subTotal;
+	}
+
+	public float getIva() {
+		return iva;
+	}
+
+	public void setIva(float iva) {
+		this.iva = iva;
+	}
+
+	public float getTotal() {
+		return total;
+	}
+
+	public void setTotal(float total) {
+		this.total = total;
+	}
 
 	public int getId() {
 		return id;

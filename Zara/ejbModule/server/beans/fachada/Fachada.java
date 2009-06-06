@@ -7,6 +7,7 @@ import javax.ejb.Remote;
 
 import server.VO.EnvT.EnvTVO;
 import server.VO.OfAD.OfADVO;
+import server.VO.PALC.PALCVO;
 import server.VO.articulos.ArticuloVO;
 import server.VO.ventas.VentaVO;
 import server.entidades.articulos.Articulo;
@@ -22,9 +23,13 @@ public interface Fachada {
 		
 	public EnvTVO nuevoEnvT(EnvTVO envtVO, boolean save);
 	
-	public Date checkExistingEnvT(String hash);
+	public Date checkPedidoExistente(String hash);
 	
 	public ArticuloVO buscarArticuloVO(long ref);
 	
 	public Collection<ArticuloVO> nuevaVenta(VentaVO vo);
+	
+	public PALCVO getPALC();
+	
+	public void registraPALC(PALCVO palc);
 }

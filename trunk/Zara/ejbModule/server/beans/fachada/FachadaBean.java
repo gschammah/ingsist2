@@ -8,6 +8,7 @@ import javax.ejb.Stateful;
 
 import server.VO.EnvT.EnvTVO;
 import server.VO.OfAD.OfADVO;
+import server.VO.PALC.PALCVO;
 import server.VO.articulos.ArticuloVO;
 import server.VO.ventas.VentaVO;
 import server.beans.articulos.AdministradorArticulos;
@@ -53,8 +54,16 @@ public class FachadaBean implements Fachada {
 		return admPedidos.nuevoEnvT(envtVO, save);
 	}
 
-	public Date checkExistingEnvT(String hash) {
-		return admPedidos.checkExistingEnvT(hash);
+	public Date checkPedidoExistente(String hash) {
+		return admPedidos.checkPedidoExistente(hash);
+	}
+	
+	public PALCVO getPALC(){
+		return admPedidos.getPALC();
+	}
+	
+	public void registraPALC(PALCVO palc){
+		admPedidos.registraPALC(palc);
 	}
 	
 	//Ventas

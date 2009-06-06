@@ -11,6 +11,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import server.VO.EnvT.EnvTVO;
+import server.VO.PALC.PALCVO;
 import server.beans.articulos.AdministradorArticulos;
 import server.beans.fachada.Fachada;
 import server.entidades.EnvT.EnvT;
@@ -69,7 +70,7 @@ public class AdministradorPedidosBean implements AdministradorPedidos {
 
 	}
 
-	public Date checkExistingEnvT(String hash) {
+	public Date checkPedidoExistente(String hash) {
 		Query q = em
 				.createQuery("SELECT e FROM EnvT e where e.xmlHash = ? ORDER BY e.fecha DESC");
 		q.setParameter(1, hash);
@@ -81,6 +82,17 @@ public class AdministradorPedidosBean implements AdministradorPedidos {
 		} else {
 			return null;
 		}
-	}	
+	}
+	
+	public PALCVO getPALC(){
+		
+		//TODO getPALC
+		return null;
+	}
+	
+	public void registraPALC(PALCVO palc){
+		
+	}
+
 
 }

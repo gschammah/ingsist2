@@ -15,6 +15,7 @@ import server.VO.EnvT.EnvTVO;
 import server.VO.EnvT.ItemEnvTVO;
 import server.VO.OfAD.ItemOfADVO;
 import server.VO.OfAD.OfADVO;
+import server.VO.PALC.PALCVO;
 import server.VO.articulos.ArtHogarVO;
 import server.VO.articulos.ArtRopaVO;
 import server.VO.articulos.ArticuloVO;
@@ -138,6 +139,10 @@ public class ParseXML {
 
 		return envt;
 
+	}
+	
+	public static void generaPALC(String file, PALCVO palc){
+		
 	}
 	
 	

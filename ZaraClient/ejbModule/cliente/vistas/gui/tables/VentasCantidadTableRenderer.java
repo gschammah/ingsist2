@@ -9,23 +9,24 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import server.VO.articulos.ArticuloVO;
+import server.VO.ventas.ItemVentaVO;
 
 public class VentasCantidadTableRenderer extends DefaultTableCellRenderer {
 		
 	private static final long serialVersionUID = 1L;
-	private Collection<ArticuloVO> articulos = new ArrayList<ArticuloVO>();
+	private Collection<ItemVentaVO> articulos = new ArrayList<ItemVentaVO>();
 
-	public Collection<ArticuloVO> getArticulos() {
+	public Collection<ItemVentaVO> getArticulos() {
 		return articulos;
 	}
 
-	public void setArticulos(Collection<ArticuloVO> articulos) {
+	public void setArticulos(Collection<ItemVentaVO> articulos) {
 		this.articulos = articulos;
 	}
 	
 	private boolean inArray(long ref){
-		for (ArticuloVO art : articulos) {
-			if (art.getReferencia() == ref)
+		for (ItemVentaVO item : articulos) {
+			if (item.getArticulo().getReferencia() == ref)
 			{
 				return true;
 			}

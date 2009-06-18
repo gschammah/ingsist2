@@ -10,6 +10,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.util.Calendar;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
@@ -29,6 +32,8 @@ import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.event.CellEditorListener;
 import javax.swing.event.ChangeEvent;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
 import cliente.constantes.ZaraConstants;
@@ -85,9 +90,9 @@ public class VentaArticulos extends JFrame {
         jLabel4 = new JLabel();
         jTextField2 = new JTextField();
         lblFecha = new JLabel();
-        jLabel3 = new JLabel();
-        jLabel6 = new JLabel();
-        jLabel7 = new JLabel();
+        subtotal = new JLabel();
+        iva = new JLabel();
+        total = new JLabel();
         btn_generarFactura = new JButton();
         btn_salir = new JButton();
         
@@ -207,7 +212,17 @@ public class VentaArticulos extends JFrame {
         tablaArticulos.getColumnModel().getColumn(6).setMaxWidth(50);
 
 
+        tablaArticulos.getModel().addTableModelListener(new TableModelListener(){
 
+			public void tableChanged(TableModelEvent arg0) {
+				setVals();
+				
+			}
+        	
+        	
+        });
+
+        
 
         GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -254,11 +269,21 @@ public class VentaArticulos extends JFrame {
 
         jComboBox1.setModel(new DefaultComboBoxModel(new String[] { "A", "B", "C" }));
 
+        jComboBox1.addActionListener(new ActionListener(){
+
+			public void actionPerformed(ActionEvent arg0) {
+				setIVA();				
+			}
+        	
+        	
+        });
+        
+        
         jLabel4.setText("Cliente:");
 
-        jTextField2.setText("xxxx");
+        jTextField2.setText("");
 
-        lblFecha.setText("Fecha: DD/MM/YYYY");
+        lblFecha.setText("Fecha: " + DateFormat.getInstance().format((Calendar.getInstance().getTime())));
 
         GroupLayout jPanel2Layout = new GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -287,16 +312,20 @@ public class VentaArticulos extends JFrame {
                 .addComponent(jTextField2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         );
 
-        jLabel3.setText("Subtotal: xxx");
+        sub =0;
+        subtotal.setText("Subtotal: " + sub);
 
-        jLabel6.setText("IVA: xxx");
+        imp=0;
+        iva.setText("IVA: " + imp);
 
-        jLabel7.setText("TOTAL: xxx");
+        tot=0;
+        total.setText("TOTAL: "+ tot);
 
         btn_generarFactura.setText("Generar Factura");
         btn_generarFactura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 doGenerarFactura(evt);
+                
             }
         });
 
@@ -319,9 +348,9 @@ public class VentaArticulos extends JFrame {
                         .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addGap(59, 59, 59)
                             .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel6)
-                                .addComponent(jLabel7))
+                                .addComponent(subtotal)
+                                .addComponent(iva)
+                                .addComponent(total))
                             .addGap(36, 36, 36))
                         .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
@@ -341,11 +370,11 @@ public class VentaArticulos extends JFrame {
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
+                .addComponent(subtotal)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6)
+                .addComponent(iva)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7)
+                .addComponent(total)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_salir)
@@ -353,6 +382,8 @@ public class VentaArticulos extends JFrame {
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
+        
+               
         pack();
     }
 	   
@@ -363,11 +394,11 @@ public class VentaArticulos extends JFrame {
     private JComboBox jComboBox1;
     private JLabel jLabel1;
     private JLabel jLabel2;
-    private JLabel jLabel3;
+    private JLabel subtotal;
     private JLabel jLabel4;
     private JLabel lblFecha;
-    private JLabel jLabel6;
-    private JLabel jLabel7;
+    private JLabel iva;
+    private JLabel total;
     private JLabel lblDetalles;
     private JPanel jPanel1;
     private JPanel jPanel2;
@@ -376,6 +407,9 @@ public class VentaArticulos extends JFrame {
     private JTextField txt_referencia;
     private JTextField jTextField2;
     private JEditorPane txtDetalles;
+    private double sub;
+    private double imp;
+    private double tot;
 
 	public JTable getTablaArticulos() {
 		return tablaArticulos;
@@ -399,12 +433,77 @@ public class VentaArticulos extends JFrame {
 	}
 	
 	private void doGenerarFactura(ActionEvent evt) {
+		
+		
+		Object[] datosT = {this.sub, this.imp, this.tot };
+		
+		//borrar
+		Object[] datosF = {this.jTextField2.getText(), this.lblFecha.getText(), this.jComboBox1.getSelectedItem().toString()};
+	    
+		
 	    DefaultTableModel model = (DefaultTableModel) tablaArticulos.getModel();
-	    ((VentaArticulosController)vistaPadre.getControlador()).nuevaVenta(model.getDataVector());	    	    	    	    	   	    
+	    ((VentaArticulosController)vistaPadre.getControlador()).nuevaVenta(model.getDataVector(), datosT);
+	    
+	    
+	    //tiene que pasar un VO
+	    //TODO falta pasar el vo
+	    
+	    //((VentaArticulosController)vistaPadre.getControlador()).nuevaFactura(ultimaVenta);
+	    
+	    
 	}
 
 	public JEditorPane getTxtDetalles() {
 		return txtDetalles;
+	}
+	
+	public String getTipoFactura(){
+		return this.jComboBox1.getSelectedItem().toString();
+	}
+	
+	public void setIVA(){
+		
+		DecimalFormat dec = new DecimalFormat("$#0.00");
+		
+		if (this.jComboBox1.getSelectedItem().toString().equalsIgnoreCase("A")){
+			imp=0;
+	        iva.setText("IVA: " + dec.format(imp));
+	    };
+		
+		if (this.jComboBox1.getSelectedItem().toString().equalsIgnoreCase("B")){
+			imp=(sub*(0.21));
+	        iva.setText("IVA: " + dec.format(imp));
+		};
+
+		if (this.jComboBox1.getSelectedItem().toString().equalsIgnoreCase("C")){
+			imp=(sub*(0.21));
+	        iva.setText("IVA: " + dec.format(imp));
+		};
+		setTotal();
+	}
+	
+	public void setSubtotal(){
+		DecimalFormat dec = new DecimalFormat("$#0.00");
+		sub=0;
+		
+		for (int i=0;i<tablaArticulos.getRowCount();i++){
+			sub=sub+(Double.parseDouble(tablaArticulos.getModel().getValueAt(i, 3).toString())* Double.parseDouble(tablaArticulos.getModel().getValueAt(i, 5).toString()));
+		}
+        subtotal.setText("Subtotal: " + dec.format(sub));
+
+	}
+	
+	public void setTotal(){
+		DecimalFormat dec = new DecimalFormat("$#0.00");
+		
+		tot=sub+imp;
+        total.setText("TOTAL: "+ dec.format(tot));
+	}
+	
+	public void setVals(){
+		setSubtotal();
+		setIVA();
+		setTotal();
 	}
 
     // End of variables declaration//GEN-END:variables

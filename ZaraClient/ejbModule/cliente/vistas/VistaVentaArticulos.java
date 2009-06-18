@@ -8,6 +8,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import server.VO.articulos.ArticuloVO;
+import server.VO.ventas.ItemVentaVO;
+import cliente.controladores.VentaArticulosController;
 import cliente.modelo.ZaraModel;
 import cliente.vistas.gui.VentaArticulos;
 import cliente.vistas.gui.tables.VentasCantidadTableRenderer;
@@ -78,10 +80,10 @@ public class VistaVentaArticulos extends Vista {
 				"Error de conexión", JOptionPane.ERROR_MESSAGE);
 	}
 
-	public void toggleError(Collection<ArticuloVO> articulos) {
+	public void toggleError(Collection<ItemVentaVO> articulos) {
 		if (articulos == null) {
 			((VentasCantidadTableRenderer) vistaGrafica.getTablaArticulos()
-					.getDefaultRenderer(Integer.class)).getArticulos().clear();
+					.getDefaultRenderer(Integer.class)).getArticulos().clear();									
 		} else {
 			((VentasCantidadTableRenderer) vistaGrafica.getTablaArticulos()
 					.getDefaultRenderer(Integer.class)).setArticulos(articulos);
@@ -102,5 +104,12 @@ public class VistaVentaArticulos extends Vista {
 				.removeRow(row);
 
 	}
+	
+	public char getTipoFactura(){
+		
+		return vistaGrafica.getTipoFactura().charAt(0);
+	}
+	
+	
 
 }

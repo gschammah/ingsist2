@@ -27,7 +27,7 @@ public interface Fachada {
 	
 	public ArticuloVO buscarArticuloVO(long ref);
 	
-	public Collection<ArticuloVO> nuevaVenta(VentaVO vo);
+	public VentaVO nuevaVenta(VentaVO vo);
 	
 	public PALCVO getPALC();
 	

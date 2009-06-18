@@ -10,6 +10,6 @@ import server.VO.ventas.VentaVO;
 @Remote
 public interface AdministradorVentas {
 	
-	public Collection<ArticuloVO> nuevaVenta(VentaVO vo);
+	public VentaVO nuevaVenta(VentaVO vo);
 	
 }

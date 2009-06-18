@@ -102,6 +102,9 @@ public class Venta implements Serializable {
 	public void setVO(VentaVO vo) {
 		this.fecha = vo.getFecha();
 		this.id = vo.getId();
+		this.total = vo.getTotal();
+		this.subTotal = vo.getSubTotal();
+		this.iva = vo.getIva();
 		this.hayStock = vo.isHayStock();
 		this.tipoFactura = vo.getTipoFactura();
 		this.items = voToVenta(vo.getItems());
@@ -111,6 +114,9 @@ public class Venta implements Serializable {
 	public VentaVO getVO() {
 		VentaVO vo = new VentaVO();
 		vo.setFecha(this.fecha);
+		vo.setIva(this.iva);
+		vo.setSubTotal(this.subTotal);
+		vo.setTotal(this.total);
 		vo.setId(this.id);
 		vo.setTipoFactura(this.tipoFactura);
 		vo.setItems(this.ventaToVO());

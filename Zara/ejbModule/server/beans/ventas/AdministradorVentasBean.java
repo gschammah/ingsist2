@@ -38,9 +38,9 @@ public class AdministradorVentasBean implements AdministradorVentas {
 		return result;
 	}
 
-	public Collection<ArticuloVO> nuevaVenta(VentaVO vo) {
+	public VentaVO nuevaVenta(VentaVO vo) {
 		
-		Collection<ArticuloVO> result = new ArrayList<ArticuloVO>();		
+		Collection<ItemVenta> result = new ArrayList<ItemVenta>();		
 		
 		Venta venta = new Venta();
 		venta.setVO(vo);
@@ -51,8 +51,10 @@ public class AdministradorVentasBean implements AdministradorVentas {
 
 			Articulo art = admArticulos.buscarArticulo(item.getArticulo().getReferencia());
 			
-			if (art.getStock() < mergeArticulos(item, items)) {				
-				result.add(art.getVO());
+			if (art.getStock() < mergeArticulos(item, items)) {
+				ItemVenta i = new ItemVenta();
+				i.setArticulo(art);
+				result.add(i);
 			}
 			else {
 				art.setStock(art.getStock() - item.getCantidad());
@@ -62,15 +64,18 @@ public class AdministradorVentasBean implements AdministradorVentas {
 		
 
 		if (result.size() != 0) {
-			return result;
+			// no hay stock
+			venta.setHayStock(false);
+			venta.setItems(result);
 		} else {
-			
+			// hay stock
 			for (ItemVenta item : items) {
 				em.merge(item.getArticulo());
 			}
 			em.persist(venta);
-			return null;
+			venta.setHayStock(true);			
 		}
+		return venta.getVO();
 	}
 
 }

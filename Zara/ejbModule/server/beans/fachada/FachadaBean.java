@@ -68,7 +68,7 @@ public class FachadaBean implements Fachada {
 	
 	//Ventas
 	
-	public Collection<ArticuloVO> nuevaVenta(VentaVO vo) {
+	public VentaVO nuevaVenta(VentaVO vo) {
 		return admVentas.nuevaVenta(vo);
 	}
 	

@@ -16,6 +16,15 @@ public class VentaVO implements Serializable {
 	private float subTotal;
 	private float iva;
 	private float total;
+	private boolean hayStock = true;
+
+	public boolean isHayStock() {
+		return hayStock;
+	}
+
+	public void setHayStock(boolean hayStock) {
+		this.hayStock = hayStock;
+	}
 
 	public float getSubTotal() {
 		return subTotal;

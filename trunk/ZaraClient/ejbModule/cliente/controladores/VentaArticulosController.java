@@ -10,6 +10,8 @@ import server.VO.ventas.ItemVentaVO;
 import server.VO.ventas.VentaVO;
 import cliente.constantes.ZaraConstants;
 import cliente.modelo.ZaraModel;
+import cliente.vistas.VistaFactura;
+import cliente.vistas.VistaOfAD;
 import cliente.vistas.VistaVentaArticulos;
 import framework.controlador.Controlador;
 import framework.modeloCliente.ProxyModelo;
@@ -40,12 +42,12 @@ public class VentaArticulosController extends Controlador {
 		}
 	}
 	
-	public void nuevaVenta(Vector<Vector<Object>> datos) {
+	public void nuevaVenta(Vector<Vector<Object>> datos, Object[] datosT) {
 
 		VentaVO venta = new VentaVO();
 
 		venta.setFecha(Calendar.getInstance().getTime());
-		venta.setTipoFactura('A');
+		venta.setTipoFactura(((VistaVentaArticulos) this.getVista()).getTipoFactura());
 
 		for (Vector<Object> fila : datos) {
 			ItemVentaVO itemVenta = new ItemVentaVO();
@@ -57,14 +59,36 @@ public class VentaArticulosController extends Controlador {
 
 			venta.addItem(itemVenta);
 		}
+		
+		venta.setSubTotal(Float.parseFloat(datosT[0].toString()));
+		venta.setIva(Float.parseFloat(datosT[1].toString()));
+		venta.setTotal(Float.parseFloat(datosT[2].toString()));
 
-		Collection<ArticuloVO> result = ((ZaraModel) this.getModelo())
+		VentaVO result = ((ZaraModel) this.getModelo())
 				.getFachada().nuevaVenta(venta);
 				
-				
-		((VistaVentaArticulos) this.getVista()).toggleError(result);
+		if (result.isHayStock()){
+			nuevaFactura(result);
+		}
+		else
+		{
+			((VistaVentaArticulos) this.getVista()).toggleError(result.getItems());	
+		}
+		
+		
+		
 		
 
+	}
+	public void nuevaFactura(VentaVO ventaVO){
+		
+		//if result==null
+		
+		VistaFactura vista = VistaFactura.getInstance((ZaraModel) this.getModelo());
+		new FacturaController(this.getModelo(), vista);
+		
+		//((FacturaController) vista.getControlador()).setData(ventaVO);
+		
 	}
 
 	public void togglePrecio(long ref, String tipo, int fila) {					
@@ -87,5 +111,7 @@ public class VentaArticulosController extends Controlador {
 	public void borrarArticulo(long ref, int row) {
 		((VistaVentaArticulos)this.getVista()).borrarArticulo(row);
 	}
+	
+	
 
 }

@@ -6,8 +6,14 @@
 
 package cliente.vistas.gui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
+
 import javax.swing.WindowConstants;
 
+import cliente.controladores.FacturaController;
+import cliente.controladores.VentaArticulosController;
 import cliente.vistas.VistaFactura;
 
 /**
@@ -48,27 +54,16 @@ public class Factura extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        total = new javax.swing.JLabel();
+        iva = new javax.swing.JLabel();
+        subtotal = new javax.swing.JLabel();
         
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Artículos"));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
+            new Object [][] {},
             new String [] {
                 "Referencia", "Cantidad", "Descripción", "Precio Unitario", "Total"
             }
@@ -131,15 +126,15 @@ public class Factura extends javax.swing.JFrame {
 
         jLabel4.setText("Cliente:");
 
-        jLabel5.setText("Fecha: DD/MM/YYYY");
+        jLabel5.setText("Fecha: ");
 
-        jLabel8.setText("xxxxx");
+        jLabel8.setText("");
 
         jLabel9.setText("Factura Nro.");
 
         jLabel10.setText("xxxxx");
 
-        jLabel1.setText("Factura A");
+        jLabel1.setText("Factura ");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -179,12 +174,17 @@ public class Factura extends javax.swing.JFrame {
         );
 
         jButton1.setText("Salir");
+        jButton1.addActionListener(new ActionListener(){
 
-        jLabel7.setText("TOTAL: xxx");
+			public void actionPerformed(ActionEvent arg0) {
+				doSalir();
+			}});
 
-        jLabel6.setText("IVA: xxx");
+        total.setText("TOTAL: ");
 
-        jLabel3.setText("Subtotal: xxx");
+        iva.setText("IVA: ");
+
+        subtotal.setText("Subtotal: ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -202,9 +202,9 @@ public class Factura extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(782, 782, 782)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel3)
+                    .addComponent(iva)
+                    .addComponent(total)
+                    .addComponent(subtotal)
                     .addComponent(jButton1))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
@@ -215,11 +215,11 @@ public class Factura extends javax.swing.JFrame {
                 .addGap(6, 6, 6)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
+                .addComponent(subtotal)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6)
+                .addComponent(iva)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7)
+                .addComponent(total)
                 .addGap(12, 12, 12)
                 .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -232,11 +232,11 @@ public class Factura extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel subtotal;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel iva;
+    private javax.swing.JLabel total;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -244,5 +244,31 @@ public class Factura extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+    
+    
+    public javax.swing.JTable getTabla(){
+    	return this.jTable1;
+    }
+    
+    public void setDatosT(Object[] datosT){
+    	DecimalFormat dec = new DecimalFormat("$#0.00");
+    	
+    	subtotal.setText("Subtotal: "+ dec.format(datosT[0]));
+    	iva.setText("IVA: "+ dec.format(datosT[1]));
+    	total.setText("TOTAL: "+ dec.format(datosT[2]));
+    	 	
+    }
+    
+    public void setDatosF(Object[] datosF){
+    	
+    	this.jLabel8.setText(datosF[0].toString());
+    	this.jLabel5.setText(datosF[1].toString());
+    	this.jLabel1.setText("Factura "+ datosF[2].toString());
+    	  	
+    }
+    
+    private void doSalir(){
+		((FacturaController)vistaPadre.getControlador()).cerrar();
+	}
 
 }

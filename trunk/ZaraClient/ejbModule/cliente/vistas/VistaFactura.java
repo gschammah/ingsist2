@@ -3,6 +3,7 @@ package cliente.vistas;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
+import server.VO.ventas.VentaVO;
 import cliente.modelo.ZaraModel;
 import cliente.vistas.gui.Factura;
 import framework.vista.Vista;
@@ -41,5 +42,19 @@ public class VistaFactura extends Vista {
 		
 		return instance;
 	}
+	
+	public void agregarInfo(VentaVO venta) {
 		
+		/*
+		((DefaultTableModel) vistaGrafica.getTabla().getModel())
+				.addRow(datosArticulo);
+		
+		vistaGrafica.setDatosT(datosT);
+		vistaGrafica.setDatosF(datosF);
+		*/
+	}
+		
+	public void cerrar() {
+		vistaGrafica.dispose();
+	}
 }

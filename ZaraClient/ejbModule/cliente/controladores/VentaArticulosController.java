@@ -12,6 +12,7 @@ import cliente.constantes.ZaraConstants;
 import cliente.modelo.ZaraModel;
 import cliente.vistas.VistaFactura;
 import cliente.vistas.VistaOfAD;
+import cliente.vistas.VistaUtils;
 import cliente.vistas.VistaVentaArticulos;
 import framework.controlador.Controlador;
 import framework.modeloCliente.ProxyModelo;
@@ -35,8 +36,7 @@ public class VentaArticulosController extends Controlador {
 	public void agregarArticulo(long ref) {
 		ArticuloVO art = getArticulo(ref);
 		if (art == null) {
-			((VistaVentaArticulos) this.getVista())
-					.showErrorPopup("El articulo no existe");
+			VistaUtils.showErrorPopup(((VistaVentaArticulos)this.getVista()).getVistaGrafica(), "El articulo no existe");
 		} else {
 			((VistaVentaArticulos) this.getVista()).agregarArticulo(art);
 		}
@@ -110,6 +110,10 @@ public class VentaArticulosController extends Controlador {
 
 	public void borrarArticulo(long ref, int row) {
 		((VistaVentaArticulos)this.getVista()).borrarArticulo(row);
+	}
+	
+	public void showNumericoPopup() {
+		VistaUtils.showNumericoPopup(((VistaVentaArticulos)this.getVista()).getVistaGrafica());		
 	}
 	
 	

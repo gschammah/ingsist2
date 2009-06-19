@@ -224,13 +224,11 @@ public class PALC extends javax.swing.JFrame {
     protected void doAgregarArticulo(String referencia) {
     	try {
 		((PalcController)vistaPadre.getControlador()).agregaArticulo(new Long(referencia));
-    	}
+    	}    	
     	catch (NumberFormatException e) {
-    		((PalcController)vistaPadre.getControlador()).showPopup("El nro de referencia debe ser numérico");
+    		((PalcController)vistaPadre.getControlador()).showNumericoPopup();
     	}
 	}
-
-	
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_generar;

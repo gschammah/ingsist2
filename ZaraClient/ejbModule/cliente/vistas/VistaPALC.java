@@ -95,15 +95,17 @@ public class VistaPALC extends Vista {
 						art.getReferencia(), art.getDescripcion(),
 						palc.getVentas(), palc.getPendientes(), art.getStock(), art.getPuntoReposicion(), true, 0 });
 			} else {
-				((PalcController)this.getControlador()).showPopup("El artículo ingresado ya figura en el PALC sugerido");
+				((PalcController)this.getControlador()).showExistentePopup();
 			}
 	}
-	
-	public void showErrorPopup(String mensaje) {
-		JOptionPane.showMessageDialog(vistaGrafica, mensaje,
-				"Error", JOptionPane.ERROR_MESSAGE);
+
+	public PALC getVistaGrafica() {
+		return vistaGrafica;
 	}
-		
-	
+
+	public void setVistaGrafica(PALC vistaGrafica) {
+		this.vistaGrafica = vistaGrafica;
+	}
+				
 	
 }

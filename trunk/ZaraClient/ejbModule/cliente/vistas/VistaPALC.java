@@ -2,7 +2,16 @@ package cliente.vistas;
 
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.util.Collection;
 
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import server.VO.PALC.ItemPALCVO;
+import server.VO.articulos.ArticuloVO;
+import server.entidades.PALC.PalcPropuestoVO;
+import cliente.controladores.PalcController;
 import cliente.modelo.ZaraModel;
 import cliente.vistas.gui.PALC;
 import framework.vista.Vista;
@@ -42,5 +51,59 @@ public class VistaPALC extends Vista {
 		
 		return instance;
 	}
+
+	public void cerrar() {		
+		vistaGrafica.dispose();
+	}
+	
+	public void borrarTabla(JTable tabla) {
+		while (((DefaultTableModel) tabla.getModel()).getRowCount() > 0) {
+			((DefaultTableModel) tabla.getModel()).removeRow(0);
+		}
+	}
+
+	public void cargarDatos(Collection<PalcPropuestoVO> palc) {
+		JTable tablaArt = vistaGrafica.getArticulos();
+		borrarTabla(tablaArt);
+		
+		for (PalcPropuestoVO item: palc) {
+			
+			ArticuloVO art = item.getArticulo();
+			
+			((DefaultTableModel) tablaArt.getModel()).addRow(new Object[] {
+					art.getReferencia(), art.getDescripcion(),
+					item.getVentas(), item.getPendientes(), art.getStock(), art.getPuntoReposicion(), true, 0 });
+		}
+		
+	}
+	
+	public void cargarDatos(PalcPropuestoVO palc) {
+		JTable tablaArt = vistaGrafica.getArticulos();
+		boolean flag = true;
+		
+			ArticuloVO art = palc.getArticulo();
+			
+			for (int i = 0; i < ((DefaultTableModel) tablaArt.getModel()).getRowCount(); i++) {
+				if ( new Long (((DefaultTableModel) tablaArt.getModel()).getValueAt(i, 0).toString()) == art.getReferencia()){
+					flag = false;
+				}
+			}
+			
+			if (flag)
+			{
+				((DefaultTableModel) tablaArt.getModel()).addRow(new Object[] {
+						art.getReferencia(), art.getDescripcion(),
+						palc.getVentas(), palc.getPendientes(), art.getStock(), art.getPuntoReposicion(), true, 0 });
+			} else {
+				((PalcController)this.getControlador()).showPopup("El artículo ingresado ya figura en el PALC sugerido");
+			}
+	}
+	
+	public void showErrorPopup(String mensaje) {
+		JOptionPane.showMessageDialog(vistaGrafica, mensaje,
+				"Error", JOptionPane.ERROR_MESSAGE);
+	}
+		
+	
 	
 }

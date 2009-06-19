@@ -2,9 +2,11 @@
 package cliente.vistas.gui;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.WindowConstants;
 
+import cliente.controladores.PalcController;
 import cliente.vistas.VistaPALC;
 
 public class PALC extends javax.swing.JFrame {
@@ -33,15 +35,15 @@ public class PALC extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         btn_generar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btn_salir = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
+        txtArticulo = new javax.swing.JTextField();
+        btn_agregar = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable5 = new javax.swing.JTable();
+        articulos = new javax.swing.JTable();
         
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         
@@ -52,50 +54,41 @@ public class PALC extends javax.swing.JFrame {
         jLabel2.setText("Último PALC:");
 
         jTextField1.setEditable(false);
-        jTextField1.setText("DD/MM/AAAA");
+        jTextField1.setText("Nunca");
 
         btn_generar.setText("Generar PALC");
         btn_generar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGenerarActionPerformed(evt);
-            }
-
-            private void btnGenerarActionPerformed(ActionEvent evt) {
-                
-            }
+                doGeneraPALC();
+            }            
         });
 
-        jButton2.setText("Salir");
+        btn_salir.setText("Salir");
+        
+        btn_salir.addActionListener(new ActionListener(){
+
+			public void actionPerformed(ActionEvent e) {
+				doSalir();				
+			}});
 
 
         jLabel7.setText("Artículos a Incluir");
 
         jLabel8.setText("Ingrese ID del Artículo:");
+        
 
-        jTextField3.setText("XXXXXXXXXXXXX");
+        btn_agregar.setText("Agregar");
+        
+        btn_agregar.addActionListener(new ActionListener(){
 
-        jButton3.setText("Agregar");
+			public void actionPerformed(ActionEvent e) {
+				doAgregarArticulo(txtArticulo.getText());				
+			}});
 
-        jTable5.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
-            },
+        articulos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {},
             new String [] {
-                "Artículo", "Descripción", "Ventas", "Pend d/Envio", "Stock", "PdP", "Pedir", "Cant."
+                "Artículo", "Descripción", "Ventas", "Pend d/Envío", "Stock", "PdP", "Pedir", "Cant."
             }
         ) {
             Class[] types = new Class [] {
@@ -115,28 +108,28 @@ public class PALC extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane5.setViewportView(jTable5);
-        jTable5.getColumnModel().getColumn(0).setMinWidth(100);
-        jTable5.getColumnModel().getColumn(0).setPreferredWidth(100);
-        jTable5.getColumnModel().getColumn(0).setMaxWidth(100);
-        jTable5.getColumnModel().getColumn(2).setMinWidth(70);
-        jTable5.getColumnModel().getColumn(2).setPreferredWidth(70);
-        jTable5.getColumnModel().getColumn(2).setMaxWidth(70);
-        jTable5.getColumnModel().getColumn(3).setMinWidth(70);
-        jTable5.getColumnModel().getColumn(3).setPreferredWidth(70);
-        jTable5.getColumnModel().getColumn(3).setMaxWidth(70);
-        jTable5.getColumnModel().getColumn(4).setMinWidth(70);
-        jTable5.getColumnModel().getColumn(4).setPreferredWidth(70);
-        jTable5.getColumnModel().getColumn(4).setMaxWidth(70);
-        jTable5.getColumnModel().getColumn(5).setMinWidth(70);
-        jTable5.getColumnModel().getColumn(5).setPreferredWidth(70);
-        jTable5.getColumnModel().getColumn(5).setMaxWidth(70);
-        jTable5.getColumnModel().getColumn(6).setMinWidth(70);
-        jTable5.getColumnModel().getColumn(6).setPreferredWidth(70);
-        jTable5.getColumnModel().getColumn(6).setMaxWidth(70);
-        jTable5.getColumnModel().getColumn(7).setMinWidth(70);
-        jTable5.getColumnModel().getColumn(7).setPreferredWidth(70);
-        jTable5.getColumnModel().getColumn(7).setMaxWidth(70);
+        jScrollPane5.setViewportView(articulos);
+        articulos.getColumnModel().getColumn(0).setMinWidth(100);
+        articulos.getColumnModel().getColumn(0).setPreferredWidth(100);
+        articulos.getColumnModel().getColumn(0).setMaxWidth(100);
+        articulos.getColumnModel().getColumn(2).setMinWidth(70);
+        articulos.getColumnModel().getColumn(2).setPreferredWidth(70);
+        articulos.getColumnModel().getColumn(2).setMaxWidth(70);
+        articulos.getColumnModel().getColumn(3).setMinWidth(70);
+        articulos.getColumnModel().getColumn(3).setPreferredWidth(70);
+        articulos.getColumnModel().getColumn(3).setMaxWidth(70);
+        articulos.getColumnModel().getColumn(4).setMinWidth(70);
+        articulos.getColumnModel().getColumn(4).setPreferredWidth(70);
+        articulos.getColumnModel().getColumn(4).setMaxWidth(70);
+        articulos.getColumnModel().getColumn(5).setMinWidth(70);
+        articulos.getColumnModel().getColumn(5).setPreferredWidth(70);
+        articulos.getColumnModel().getColumn(5).setMaxWidth(70);
+        articulos.getColumnModel().getColumn(6).setMinWidth(70);
+        articulos.getColumnModel().getColumn(6).setPreferredWidth(70);
+        articulos.getColumnModel().getColumn(6).setMaxWidth(70);
+        articulos.getColumnModel().getColumn(7).setMinWidth(70);
+        articulos.getColumnModel().getColumn(7).setPreferredWidth(70);
+        articulos.getColumnModel().getColumn(7).setMaxWidth(70);
 
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -151,9 +144,9 @@ public class PALC extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3)))
+                        .addComponent(btn_agregar)))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -164,8 +157,8 @@ public class PALC extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton3))
+                        .addComponent(txtArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_agregar))
                     .addComponent(jLabel8))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
@@ -198,7 +191,7 @@ public class PALC extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 281, Short.MAX_VALUE)
                         .addComponent(btn_generar)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)))
+                        .addComponent(btn_salir)))
                 .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
@@ -216,7 +209,7 @@ public class PALC extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton2)
+                            .addComponent(btn_salir)
                             .addComponent(btn_generar))
                         .addGap(24, 24, 24))
                     .addGroup(layout.createSequentialGroup()
@@ -228,19 +221,21 @@ public class PALC extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    protected void doAgregarArticulo(String referencia) {
+    	try {
+		((PalcController)vistaPadre.getControlador()).agregaArticulo(new Long(referencia));
+    	}
+    	catch (NumberFormatException e) {
+    		((PalcController)vistaPadre.getControlador()).showPopup("El nro de referencia debe ser numérico");
+    	}
+	}
 
-    /**
-    * @param args the command line arguments
-    */
-   
+	
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_generar;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btn_salir;
+    private javax.swing.JButton btn_agregar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel7;
@@ -248,9 +243,27 @@ public class PALC extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable5;
+    private javax.swing.JTable articulos;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField txtArticulo;
     // End of variables declaration//GEN-END:variables
+    
+    private void doGeneraPALC() {
+    	((PalcController)vistaPadre.getControlador()).generaPALC();
+    }
+    
+    private void doSalir() {
+    	((PalcController)vistaPadre.getControlador()).cerrar();
+    }
+
+	public javax.swing.JTable getArticulos() {
+		return articulos;
+	}
+
+	public void setArticulos(javax.swing.JTable articulos) {
+		this.articulos = articulos;
+	}
+    
+    
 
 }

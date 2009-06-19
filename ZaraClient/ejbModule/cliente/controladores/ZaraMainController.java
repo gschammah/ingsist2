@@ -28,6 +28,7 @@ public class ZaraMainController extends Controlador{
 
 	public void mostrarPALC() {
 		VistaPALC vista = VistaPALC.getInstance((ZaraModel) this.getModelo());
+		new PalcController(this.getModelo(), vista);		
 	}
 
 	public void mostrarEnvT() {

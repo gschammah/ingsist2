@@ -77,7 +77,7 @@ public class VistaVentaArticulos extends Vista {
 
 	public void showErrorPopup(String mensaje) {
 		JOptionPane.showMessageDialog(vistaGrafica, mensaje,
-				"Error de conexión", JOptionPane.ERROR_MESSAGE);
+				"Error", JOptionPane.ERROR_MESSAGE);
 	}
 
 	public void toggleError(Collection<ItemVentaVO> articulos) {

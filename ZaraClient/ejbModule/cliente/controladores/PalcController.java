@@ -1,11 +1,12 @@
 package cliente.controladores;
 
+import java.util.Collection;
 import java.util.Date;
 
-import server.VO.EnvT.EnvTVO;
-import cliente.XML.ParseXML;
+import server.entidades.PALC.PalcPropuestoVO;
+
 import cliente.modelo.ZaraModel;
-import cliente.vistas.VistaRecEnvT;
+import cliente.vistas.VistaPALC;
 import framework.controlador.Controlador;
 import framework.modeloCliente.ProxyModelo;
 import framework.vista.Vista;
@@ -14,22 +15,37 @@ public class PalcController extends Controlador {
 
 	public PalcController(ProxyModelo mod, Vista vis) {
 		super(mod, vis);
+		cargaPALC();
 	}
 	
 	public Date checkPALC(String hash){		
 		return ((ZaraModel)this.getModelo()).getFachada().checkPedidoExistente(hash);			
 	}
 	
-	public void generaPALC(){
+	public void generaPALC(){		
+	}
 	
+	public void cargaPALC(){
+		Collection<PalcPropuestoVO> palc = ((ZaraModel)this.getModelo()).getFachada().getPALC();
+		((VistaPALC)this.getVista()).cargarDatos(palc);
 	}
 	
 	public void registraPALC(){
 		
 	}
 	
-	public void cerrar(){
-		((VistaRecEnvT)this.getVista()).cerrar();
+	public void cerrar(){		
+		((VistaPALC)this.getVista()).cerrar();
 	}
+
+	public void agregaArticulo(Long ref) {				
+		PalcPropuestoVO palc = ((ZaraModel)this.getModelo()).getFachada().getPALC(ref);
+		((VistaPALC)this.getVista()).cargarDatos(palc);
+	}
+
+	public void showPopup(String mensaje) {
+		((VistaPALC)this.getVista()).showErrorPopup(mensaje);		
+	}
+
 
 }

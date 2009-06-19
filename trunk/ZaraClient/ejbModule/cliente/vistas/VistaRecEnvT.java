@@ -16,6 +16,7 @@ import server.VO.articulos.ArticuloVO;
 import cliente.controladores.EnvTController;
 import cliente.modelo.ZaraModel;
 import cliente.vistas.gui.RecEnvT;
+import cliente.vistas.gui.tables.TablaUtils;
 import framework.controlador.Controlador;
 import framework.vista.Vista;
 
@@ -50,11 +51,6 @@ public class VistaRecEnvT extends Vista {
 		((EnvTController) this.getControlador()).cargarEnvT(false);
 	}
 	
-	public void borrarTabla(JTable tabla){
-		while (((DefaultTableModel) tabla.getModel()).getRowCount() > 0) {
-			((DefaultTableModel) tabla.getModel()).removeRow(0);
-		}
-	}
 
 	public void cargarDatos(EnvTVO envt) {
 		
@@ -63,8 +59,8 @@ public class VistaRecEnvT extends Vista {
 		JTable artRecibidos = vistaGrafica.getTablaArtRecibidos();
 		JTable artPendientes = vistaGrafica.getTablaArtPendientes();
 		
-		borrarTabla(artRecibidos);
-		borrarTabla(artPendientes);
+		TablaUtils.borrarTabla(artRecibidos);
+		TablaUtils.borrarTabla(artPendientes);
 		
 		Date fecha = envt.getFecha();
 		

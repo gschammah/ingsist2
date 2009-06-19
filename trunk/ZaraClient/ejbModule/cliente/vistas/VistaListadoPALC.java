@@ -3,8 +3,15 @@ package cliente.vistas;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import server.VO.PALC.ItemPALCVO;
+import server.VO.PALC.PALCVO;
+import server.VO.articulos.ArticuloVO;
 import cliente.modelo.ZaraModel;
 import cliente.vistas.gui.ListadoPALC;
+import cliente.vistas.gui.tables.TablaUtils;
 import framework.vista.Vista;
 
 public class VistaListadoPALC extends Vista {
@@ -40,6 +47,29 @@ public class VistaListadoPALC extends Vista {
 		}
 		
 		return instance;
+	}
+		
+
+	public void cargarDatos(PALCVO palc) {
+		
+		JTable tablaArt = vistaGrafica.getTablaArt();
+		
+		TablaUtils.borrarTabla(tablaArt);
+		
+		for (ItemPALCVO item : palc.getArticulos()) {
+			
+			ArticuloVO art = item.getArticulo();
+			
+			((DefaultTableModel) tablaArt.getModel()).addRow(new Object[] {
+					art.getReferencia(), art.getDescripcion(),
+					item.getCantidadSolicitada()});
+		}
+		
+		
+	}
+
+	public void cerrar() {
+		vistaGrafica.dispose();
 	}
 		
 }

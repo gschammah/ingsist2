@@ -16,6 +16,7 @@ import server.VO.articulos.ArticuloVO;
 import cliente.controladores.OfADController;
 import cliente.modelo.ZaraModel;
 import cliente.vistas.gui.OfAD;
+import cliente.vistas.gui.tables.TablaUtils;
 import framework.controlador.Controlador;
 import framework.vista.Vista;
 
@@ -60,12 +61,7 @@ public class VistaOfAD extends Vista {
 		((OfADController) this.getControlador()).cargarOfAD(false);
 	}
 
-	public void borrarTabla(JTable tabla) {
-		while (((DefaultTableModel) tabla.getModel()).getRowCount() > 0) {
-			((DefaultTableModel) tabla.getModel()).removeRow(0);
-		}
-	}
-
+	
 	public void showOfAD() {
 		vistaGrafica.pack();
 		vistaGrafica.setVisible(true);
@@ -78,8 +74,8 @@ public class VistaOfAD extends Vista {
 		JTable artDisponibles = vistaGrafica.getTablaArtDisponibles();
 		JTable artNuevos = vistaGrafica.getTablaArtNuevos();
 
-		borrarTabla(artDisponibles);
-		borrarTabla(artNuevos);
+		TablaUtils.borrarTabla(artDisponibles);
+		TablaUtils.borrarTabla(artNuevos);
 
 		for (ItemOfADVO item : items) {
 

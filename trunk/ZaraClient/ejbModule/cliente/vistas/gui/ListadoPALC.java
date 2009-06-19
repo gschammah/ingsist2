@@ -1,13 +1,21 @@
 
 package cliente.vistas.gui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.WindowConstants;
 
+import cliente.controladores.ListadoPalcController;
 import cliente.vistas.VistaListadoPALC;
 
 public class ListadoPALC extends javax.swing.JFrame {
     private VistaListadoPALC vistaPadre;
     
+	public javax.swing.JTable getTablaArt() {
+		return tablaArt;
+	}
+
 	/** Creates new form ListadoPALC */
     public ListadoPALC(VistaListadoPALC vista) {
         initComponents();
@@ -27,48 +35,23 @@ public class ListadoPALC extends javax.swing.JFrame {
     	
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        tablaArt = new javax.swing.JTable();
+        btn_salir = new javax.swing.JButton();
         
         setTitle("Listado de Pedidos a La Coruña");
         
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         	
         jLabel1.setText("Listado Completo de Artículos a Pedir");
+        
+        btn_salir.addActionListener(new ActionListener(){
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
+			public void actionPerformed(ActionEvent e) {
+				doSalir();
+			}});
+
+        tablaArt.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {},
             new String [] {
                 "Artículo", "Descripción", "Cant. Pedida"
             }
@@ -90,15 +73,15 @@ public class ListadoPALC extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        jTable1.getColumnModel().getColumn(0).setMinWidth(100);
-        jTable1.getColumnModel().getColumn(0).setPreferredWidth(100);
-        jTable1.getColumnModel().getColumn(0).setMaxWidth(100);
-        jTable1.getColumnModel().getColumn(2).setMinWidth(100);
-        jTable1.getColumnModel().getColumn(2).setPreferredWidth(100);
-        jTable1.getColumnModel().getColumn(2).setMaxWidth(100);
+        jScrollPane1.setViewportView(tablaArt);
+        tablaArt.getColumnModel().getColumn(0).setMinWidth(100);
+        tablaArt.getColumnModel().getColumn(0).setPreferredWidth(100);
+        tablaArt.getColumnModel().getColumn(0).setMaxWidth(100);
+        tablaArt.getColumnModel().getColumn(2).setMinWidth(100);
+        tablaArt.getColumnModel().getColumn(2).setPreferredWidth(100);
+        tablaArt.getColumnModel().getColumn(2).setMaxWidth(100);
 
-        jButton1.setText("Salir");
+        btn_salir.setText("Salir");
 
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -117,7 +100,7 @@ public class ListadoPALC extends javax.swing.JFrame {
                         .addContainerGap()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 317, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                        .addComponent(btn_salir)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -129,7 +112,7 @@ public class ListadoPALC extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
+                    .addComponent(btn_salir)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         ))
                 .addContainerGap())
@@ -139,11 +122,16 @@ public class ListadoPALC extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
   
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private void doSalir() {
+    	((ListadoPalcController)vistaPadre.getControlador()).cerrar();
+	}
+
+
+	// Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_salir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tablaArt;
     // End of variables declaration//GEN-END:variables
 
 }

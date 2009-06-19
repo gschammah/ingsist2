@@ -3,6 +3,8 @@ package server.entidades.PALC;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -17,11 +19,12 @@ public class ItemPALC implements Serializable{
 private static final long serialVersionUID = 1L;
 	
 	private int id;
-	private Articulo articulo;
+	private Articulo articulo = new Articulo();
 	private int cantidadSolicitada;	
 	private PALC palc;
 	
 	@Id
+	@GeneratedValue(strategy=GenerationType.TABLE)
 	public int getId() {
 		return id;
 	}

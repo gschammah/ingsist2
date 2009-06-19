@@ -17,11 +17,12 @@ import server.VO.EnvT.EnvTVO;
 import server.VO.EnvT.ItemEnvTVO;
 import server.VO.PALC.ItemPALCVO;
 import server.VO.PALC.PALCVO;
+import server.VO.PALC.PalcPropuestoVO;
 import server.VO.articulos.ArticuloVO;
 import server.beans.articulos.AdministradorArticulos;
 import server.entidades.EnvT.EnvT;
 import server.entidades.EnvT.ItemEnvT;
-import server.entidades.PALC.PalcPropuestoVO;
+import server.entidades.PALC.PALC;
 import server.entidades.articulos.Articulo;
 
 @Stateful
@@ -194,8 +195,19 @@ public class AdministradorPedidosBean implements AdministradorPedidos {
 		return palc;
 	}
 
-	public void registraPALC(PALCVO palc) {
-
+	public boolean registraPALC(PALCVO palc) {
+		
+		PALC p = new PALC();
+		p.setVO(palc);
+		
+		try {
+			em.persist(p);
+			return true;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 }

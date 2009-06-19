@@ -9,12 +9,12 @@ import javax.ejb.Stateful;
 import server.VO.EnvT.EnvTVO;
 import server.VO.OfAD.OfADVO;
 import server.VO.PALC.PALCVO;
+import server.VO.PALC.PalcPropuestoVO;
 import server.VO.articulos.ArticuloVO;
 import server.VO.ventas.VentaVO;
 import server.beans.articulos.AdministradorArticulos;
 import server.beans.pedidos.AdministradorPedidos;
 import server.beans.ventas.AdministradorVentas;
-import server.entidades.PALC.PalcPropuestoVO;
 import server.entidades.articulos.Articulo;
 
 @Stateful
@@ -67,8 +67,8 @@ public class FachadaBean implements Fachada {
 		return admPedidos.getPALC(ref);
 	}
 	
-	public void registraPALC(PALCVO palc){
-		admPedidos.registraPALC(palc);
+	public boolean registraPALC(PALCVO palc){
+		return admPedidos.registraPALC(palc);
 	}
 	
 	//Ventas

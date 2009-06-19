@@ -5,7 +5,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
@@ -26,6 +30,7 @@ public class PALC implements Serializable {
 	private String estado;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.TABLE)
 	public int getId() {
 		return id;
 	}
@@ -42,7 +47,7 @@ public class PALC implements Serializable {
 		this.fecha = fecha;
 	}
 
-	@OneToMany(mappedBy = "palc")
+	@OneToMany(mappedBy = "palc", fetch=FetchType.EAGER, cascade=(CascadeType.ALL))
 	public Collection<ItemPALC> getArticulos() {
 		return articulos;
 	}

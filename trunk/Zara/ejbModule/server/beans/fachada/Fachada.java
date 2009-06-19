@@ -8,9 +8,9 @@ import javax.ejb.Remote;
 import server.VO.EnvT.EnvTVO;
 import server.VO.OfAD.OfADVO;
 import server.VO.PALC.PALCVO;
+import server.VO.PALC.PalcPropuestoVO;
 import server.VO.articulos.ArticuloVO;
 import server.VO.ventas.VentaVO;
-import server.entidades.PALC.PalcPropuestoVO;
 import server.entidades.articulos.Articulo;
 
 @Remote
@@ -34,5 +34,5 @@ public interface Fachada {
 	
 	public PalcPropuestoVO getPALC(long ref);
 	
-	public void registraPALC(PALCVO palc);
+	public boolean registraPALC(PALCVO palc);
 }

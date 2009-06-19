@@ -1,4 +1,4 @@
-package server.entidades.PALC;
+package server.VO.PALC;
 
 import java.io.Serializable;
 

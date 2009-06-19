@@ -247,7 +247,7 @@ public class PALC extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     
     private void doGeneraPALC() {
-    	((PalcController)vistaPadre.getControlador()).generaPALC();
+    	((PalcController)vistaPadre.getControlador()).registraPALC();
     }
     
     private void doSalir() {

@@ -2,24 +2,28 @@ package cliente.vistas;
 
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import server.VO.PALC.ItemPALCVO;
+import server.VO.PALC.PalcPropuestoVO;
 import server.VO.articulos.ArticuloVO;
-import server.entidades.PALC.PalcPropuestoVO;
 import cliente.controladores.PalcController;
 import cliente.modelo.ZaraModel;
 import cliente.vistas.gui.PALC;
+import cliente.vistas.gui.tables.TablaUtils;
 import framework.vista.Vista;
 
 public class VistaPALC extends Vista {
 		
 	private static VistaPALC instance;
 	private PALC vistaGrafica;
+	private HashMap<Long, ArticuloVO> articulosDisponibles = new HashMap<Long, ArticuloVO>();
 
 	public VistaPALC(ZaraModel modelo){
 		super(modelo);
@@ -56,32 +60,35 @@ public class VistaPALC extends Vista {
 		vistaGrafica.dispose();
 	}
 	
-	public void borrarTabla(JTable tabla) {
-		while (((DefaultTableModel) tabla.getModel()).getRowCount() > 0) {
-			((DefaultTableModel) tabla.getModel()).removeRow(0);
-		}
-	}
 
 	public void cargarDatos(Collection<PalcPropuestoVO> palc) {
 		JTable tablaArt = vistaGrafica.getArticulos();
-		borrarTabla(tablaArt);
+		
+		TablaUtils.borrarTabla(tablaArt);
+		
+		articulosDisponibles.clear();		
 		
 		for (PalcPropuestoVO item: palc) {
 			
 			ArticuloVO art = item.getArticulo();
 			
+			articulosDisponibles.put(art.getReferencia(), art);
+			
 			((DefaultTableModel) tablaArt.getModel()).addRow(new Object[] {
 					art.getReferencia(), art.getDescripcion(),
-					item.getVentas(), item.getPendientes(), art.getStock(), art.getPuntoReposicion(), true, 0 });
+					item.getVentas(), item.getPendientes(), art.getStock(), art.getPuntoReposicion(), true, 100 });
 		}
 		
 	}
 	
 	public void cargarDatos(PalcPropuestoVO palc) {
+		
 		JTable tablaArt = vistaGrafica.getArticulos();
 		boolean flag = true;
-		
+							
 			ArticuloVO art = palc.getArticulo();
+			
+			articulosDisponibles.put(art.getReferencia(), art);
 			
 			for (int i = 0; i < ((DefaultTableModel) tablaArt.getModel()).getRowCount(); i++) {
 				if ( new Long (((DefaultTableModel) tablaArt.getModel()).getValueAt(i, 0).toString()) == art.getReferencia()){
@@ -103,9 +110,27 @@ public class VistaPALC extends Vista {
 		return vistaGrafica;
 	}
 
-	public void setVistaGrafica(PALC vistaGrafica) {
-		this.vistaGrafica = vistaGrafica;
-	}
+	public Collection<ItemPALCVO> getArticulosElegidos() {
+		
+		JTable tablaArt = vistaGrafica.getArticulos();
+		ArrayList<ItemPALCVO> result = new ArrayList<ItemPALCVO>();
+		
+		for (int i = 0; i < ((DefaultTableModel) tablaArt.getModel()).getRowCount(); i++) {
+			if ((Boolean) ((DefaultTableModel) tablaArt.getModel()).getValueAt(i, 6)){
 				
+				ItemPALCVO item = new ItemPALCVO();
+				
+				long ref = (Long) ((DefaultTableModel) tablaArt.getModel()).getValueAt(i, 0);
+				int cant = (Integer) ((DefaultTableModel) tablaArt.getModel()).getValueAt(i, 7);
+				
+				item.setArticulo(articulosDisponibles.get(ref));
+				item.setCantidadSolicitada(cant);
+												
+				result.add(item);
+			}
+		}		
+		return result;
+	}
+			
 	
 }

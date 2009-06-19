@@ -1,11 +1,15 @@
 package cliente.controladores;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
-import server.entidades.PALC.PalcPropuestoVO;
-
+import server.VO.PALC.ItemPALCVO;
+import server.VO.PALC.PALCVO;
+import server.VO.PALC.PalcPropuestoVO;
 import cliente.modelo.ZaraModel;
+import cliente.vistas.VistaListadoPALC;
 import cliente.vistas.VistaPALC;
 import cliente.vistas.VistaUtils;
 import framework.controlador.Controlador;
@@ -22,16 +26,29 @@ public class PalcController extends Controlador {
 	public Date checkPALC(String hash){		
 		return ((ZaraModel)this.getModelo()).getFachada().checkPedidoExistente(hash);			
 	}
-	
-	public void generaPALC(){		
-	}
-	
+		
 	public void cargaPALC(){
 		Collection<PalcPropuestoVO> palc = ((ZaraModel)this.getModelo()).getFachada().getPALC();
 		((VistaPALC)this.getVista()).cargarDatos(palc);
 	}
 	
 	public void registraPALC(){
+		
+		Collection<ItemPALCVO> articulos = ((VistaPALC)this.getVista()).getArticulosElegidos();
+		PALCVO palc = new PALCVO();
+		palc.setArticulos(articulos);
+		palc.setEstado("Emitido");
+		palc.setFecha(Calendar.getInstance().getTime());
+		
+		if (((ZaraModel)this.getModelo()).getFachada().registraPALC(palc)) {
+			VistaListadoPALC vista = VistaListadoPALC.getInstance((ZaraModel) this.getModelo());
+			new ListadoPalcController(this.getModelo(), vista, palc);
+		}
+		else
+		{
+			VistaUtils.showErrorPopup(((VistaPALC)this.getVista()).getVistaGrafica(), "Se ha producido un error");
+		}
+		
 		
 	}
 	

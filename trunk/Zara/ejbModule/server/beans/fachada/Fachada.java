@@ -10,6 +10,7 @@ import server.VO.OfAD.OfADVO;
 import server.VO.PALC.PALCVO;
 import server.VO.articulos.ArticuloVO;
 import server.VO.ventas.VentaVO;
+import server.entidades.PALC.PalcPropuestoVO;
 import server.entidades.articulos.Articulo;
 
 @Remote
@@ -29,7 +30,9 @@ public interface Fachada {
 	
 	public VentaVO nuevaVenta(VentaVO vo);
 	
-	public PALCVO getPALC();
+	public Collection<PalcPropuestoVO> getPALC();
+	
+	public PalcPropuestoVO getPALC(long ref);
 	
 	public void registraPALC(PALCVO palc);
 }

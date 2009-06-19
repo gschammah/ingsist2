@@ -59,6 +59,7 @@ public class ArtRopa extends Articulo {
 		vo.setStock(this.getStock());
 		vo.setOrigen(this.getOrigen());
 		vo.setTalle(this.getTalle());
+		vo.setPuntoReposicion(this.getPuntoReposicion());
 		return vo;		
 	}
 

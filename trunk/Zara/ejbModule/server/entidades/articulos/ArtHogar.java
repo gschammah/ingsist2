@@ -76,7 +76,8 @@ public class ArtHogar extends Articulo {
 		vo.setCategoria(this.getCategoria());
 		vo.setComposicion(this.getComposicion());
 		vo.setMedidas(this.getMedidas());
-		vo.setNombre(this.getNombre());		
+		vo.setNombre(this.getNombre());
+		vo.setPuntoReposicion(this.getPuntoReposicion());
 		return vo;		
 	}
 

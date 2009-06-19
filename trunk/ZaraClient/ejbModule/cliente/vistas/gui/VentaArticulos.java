@@ -423,12 +423,9 @@ public class VentaArticulos extends JFrame {
 		try {
 			long ref = Long.parseLong(txt_referencia.getText());			
 			((VentaArticulosController)vistaPadre.getControlador()).agregarArticulo(ref);
-		}
-		catch (NullPointerException n) {
-			vistaPadre.showErrorPopup("El número de referencia está faltando");
-		}
+		}		
 		catch (NumberFormatException e){
-			vistaPadre.showErrorPopup("El codigo debe ser numérico");
+			((VentaArticulosController)vistaPadre.getControlador()).showNumericoPopup();			
 		}
 	}
 	

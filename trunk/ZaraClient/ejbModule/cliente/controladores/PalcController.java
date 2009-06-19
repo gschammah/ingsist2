@@ -7,6 +7,7 @@ import server.entidades.PALC.PalcPropuestoVO;
 
 import cliente.modelo.ZaraModel;
 import cliente.vistas.VistaPALC;
+import cliente.vistas.VistaUtils;
 import framework.controlador.Controlador;
 import framework.modeloCliente.ProxyModelo;
 import framework.vista.Vista;
@@ -43,9 +44,13 @@ public class PalcController extends Controlador {
 		((VistaPALC)this.getVista()).cargarDatos(palc);
 	}
 
-	public void showPopup(String mensaje) {
-		((VistaPALC)this.getVista()).showErrorPopup(mensaje);		
+	public void showNumericoPopup() {
+		VistaUtils.showErrorPopup(((VistaPALC)this.getVista()).getVistaGrafica(), "El nro de referencia debe ser numérico");		
 	}
-
+	
+	public void showExistentePopup() {
+		VistaUtils.showErrorPopup(((VistaPALC)this.getVista()).getVistaGrafica(), "El artículo ingresado ya figura en el PALC sugerido");		
+	}
+		
 
 }

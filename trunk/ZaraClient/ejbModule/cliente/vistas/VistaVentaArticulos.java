@@ -74,11 +74,7 @@ public class VistaVentaArticulos extends Vista {
 		((DefaultTableModel) vistaGrafica.getTablaArticulos().getModel())
 				.addRow(datosArticulo);
 	}
-
-	public void showErrorPopup(String mensaje) {
-		JOptionPane.showMessageDialog(vistaGrafica, mensaje,
-				"Error", JOptionPane.ERROR_MESSAGE);
-	}
+	
 
 	public void toggleError(Collection<ItemVentaVO> articulos) {
 		if (articulos == null) {
@@ -108,6 +104,14 @@ public class VistaVentaArticulos extends Vista {
 	public char getTipoFactura(){
 		
 		return vistaGrafica.getTipoFactura().charAt(0);
+	}
+
+	public VentaArticulos getVistaGrafica() {
+		return vistaGrafica;
+	}
+
+	public void setVistaGrafica(VentaArticulos vistaGrafica) {
+		this.vistaGrafica = vistaGrafica;
 	}
 	
 	

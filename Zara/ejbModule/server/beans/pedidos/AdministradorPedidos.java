@@ -1,5 +1,6 @@
 package server.beans.pedidos;
 
+import java.util.Collection;
 import java.util.Date;
 
 import javax.ejb.Remote;
@@ -8,6 +9,7 @@ import javax.persistence.NoResultException;
 import server.VO.EnvT.EnvTVO;
 import server.VO.PALC.PALCVO;
 import server.VO.articulos.ArticuloVO;
+import server.entidades.PALC.PalcPropuestoVO;
 import server.entidades.articulos.Articulo;
 
 @Remote
@@ -17,7 +19,9 @@ public interface AdministradorPedidos {
 	
 	public Date checkPedidoExistente(String hash);
 	
-	public PALCVO getPALC();
+	public Collection<PalcPropuestoVO> getPALC();
+	
+	public PalcPropuestoVO getPALC(long ref);
 	
 	public void registraPALC(PALCVO palc);
 				

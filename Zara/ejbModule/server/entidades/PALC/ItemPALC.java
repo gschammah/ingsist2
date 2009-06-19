@@ -58,10 +58,19 @@ private static final long serialVersionUID = 1L;
 	
 	@Transient
 	public ItemPALCVO getVO(){
-		return null;
+		ItemPALCVO vo = new ItemPALCVO();
+		vo.setArticulo(this.articulo.getVO());
+		vo.setCantidadSolicitada(this.cantidadSolicitada);
+		vo.setId(this.id);
+		
+		return vo;
 	} 
 	
-	public void setVO(){
-		
+
+	public void setVO(ItemPALCVO vo) {		
+		this.articulo.setVO(vo.getArticulo());
+		this.cantidadSolicitada = vo.getCantidadSolicitada();
+		this.id = vo.getId();		
 	}
+
 }

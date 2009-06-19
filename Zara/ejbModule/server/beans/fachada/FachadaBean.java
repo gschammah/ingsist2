@@ -14,6 +14,7 @@ import server.VO.ventas.VentaVO;
 import server.beans.articulos.AdministradorArticulos;
 import server.beans.pedidos.AdministradorPedidos;
 import server.beans.ventas.AdministradorVentas;
+import server.entidades.PALC.PalcPropuestoVO;
 import server.entidades.articulos.Articulo;
 
 @Stateful
@@ -58,8 +59,12 @@ public class FachadaBean implements Fachada {
 		return admPedidos.checkPedidoExistente(hash);
 	}
 	
-	public PALCVO getPALC(){
+	public Collection<PalcPropuestoVO> getPALC() {
 		return admPedidos.getPALC();
+	}
+	
+	public PalcPropuestoVO getPALC(long ref) {
+		return admPedidos.getPALC(ref);
 	}
 	
 	public void registraPALC(PALCVO palc){

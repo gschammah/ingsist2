@@ -2,19 +2,21 @@ package cliente.XML;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
 
 import org.jdom.Document;
 import org.jdom.Element;
-import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
+import org.jdom.output.XMLOutputter;
 
 import server.VO.EnvT.EnvTVO;
 import server.VO.EnvT.ItemEnvTVO;
 import server.VO.OfAD.ItemOfADVO;
 import server.VO.OfAD.OfADVO;
+import server.VO.PALC.ItemPALCVO;
 import server.VO.PALC.PALCVO;
 import server.VO.articulos.ArtHogarVO;
 import server.VO.articulos.ArtRopaVO;
@@ -127,8 +129,47 @@ public class ParseXML {
 
 	}
 	
-	public static void generaPALC(String file, PALCVO palc){
+	public static void generaPALC(String file, PALCVO palc) throws Exception {
 		
+		Element root = new Element ("PalcVo");	
+		
+		Element idPedido = new Element ("IdPedido");		
+		idPedido.setText(new Integer(palc.getId()).toString());		
+		root.addContent (idPedido);
+		
+		Element idTienda = new Element ("IdTienda");		
+		idTienda.setText(new Integer(13).toString());
+		root.addContent (idTienda);
+		
+		Element itemsPedido = new Element ("ItemsPedido");
+		
+		for (ItemPALCVO item : palc.getArticulos()) {
+			Element itemPedidoVO = new Element ("xml.ItemPedidoVO");
+			
+			Element referencia = new Element ("Referencia");
+			referencia.setText(new Long(item.getArticulo().getReferencia()).toString());
+			Element cantSolicitada = new Element ("CantidadSolicitada");
+			cantSolicitada.setText(new Integer(item.getCantidadSolicitada()).toString());
+			
+			itemPedidoVO.addContent(referencia);
+			itemPedidoVO.addContent(cantSolicitada);
+			
+			itemsPedido.addContent(itemPedidoVO);
+		}
+		
+		
+		Element estado = new Element ("Estado");		
+		estado.setText(palc.getEstado());
+		root.addContent (estado);
+		
+		root.addContent (itemsPedido);
+		
+		XMLOutputter out = new XMLOutputter ();
+		
+		out.output (new Document(root), new FileOutputStream (file));			
+		 
+
+
 	}
 	
 	

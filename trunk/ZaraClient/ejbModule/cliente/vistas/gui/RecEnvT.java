@@ -252,4 +252,8 @@ public class RecEnvT extends javax.swing.JFrame {
 		return txt_hora;
 	}
 
+	public JButton getBtn_registrarEnvT() {
+		return btn_registrarEnvT;
+	}
+
 }

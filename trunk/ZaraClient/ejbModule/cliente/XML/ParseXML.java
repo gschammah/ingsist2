@@ -23,26 +23,19 @@ import cliente.tools.MD5;
 
 public class ParseXML {
 
-	public static OfADVO parseOfAD(String file) {
+	public static OfADVO parseOfAD(String file) throws Exception {
 
 		SAXBuilder builder = new SAXBuilder();
 		Document doc = null;
 		
 		MD5 md5 = new MD5(file);
 								
-		try {			
-			doc = builder.build(new FileInputStream(file));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (JDOMException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+					
+		doc = builder.build(new FileInputStream(file));
+		
 		Element root = doc.getRootElement();
 		List articulos = root.getChild("articulos").getChildren();
-		OfADVO ofadVO = new OfADVO();
-		ofadVO.setFecha(Calendar.getInstance().getTime());				
+		OfADVO ofadVO = new OfADVO();					
 		ofadVO.setXmlHash(md5.obtenerMD5Hash());		
 				
 				
@@ -97,22 +90,15 @@ public class ParseXML {
 	}
 	
 	
-	public static EnvTVO parseEnvT(String file) {
+	public static EnvTVO parseEnvT(String file) throws Exception {
 
 		SAXBuilder builder = new SAXBuilder();
 		Document doc = null;
 		
 		MD5 md5 = new MD5(file);
-								
-		try {			
-			doc = builder.build(new FileInputStream(file));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (JDOMException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+												
+		doc = builder.build(new FileInputStream(file));
+		
 		Element root = doc.getRootElement();
 		List articulos = root.getChild("itemsenvt").getChildren();
 		EnvTVO envt = new EnvTVO();

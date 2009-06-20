@@ -67,7 +67,7 @@ public class FachadaBean implements Fachada {
 		return admPedidos.getPALC(ref);
 	}
 	
-	public boolean registraPALC(PALCVO palc){
+	public int registraPALC(PALCVO palc){
 		return admPedidos.registraPALC(palc);
 	}
 	

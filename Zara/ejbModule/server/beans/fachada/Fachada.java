@@ -34,5 +34,5 @@ public interface Fachada {
 	
 	public PalcPropuestoVO getPALC(long ref);
 	
-	public boolean registraPALC(PALCVO palc);
+	public int registraPALC(PALCVO palc);
 }

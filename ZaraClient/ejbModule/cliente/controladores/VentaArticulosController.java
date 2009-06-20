@@ -19,26 +19,30 @@ import framework.modeloCliente.ProxyModelo;
 import framework.vista.Vista;
 
 public class VentaArticulosController extends Controlador {
+	
+	private VistaVentaArticulos vista;
+	private ZaraModel modelo;
 
 	public VentaArticulosController(ProxyModelo mod, Vista vis) {
 		super(mod, vis);
+		this.modelo = (ZaraModel) mod;
+		this.vista = (VistaVentaArticulos) vis;
 	}
 
 	public ArticuloVO getArticulo(long ref) {
-		return ((ZaraModel) this.getModelo()).getFachada()
-				.buscarArticuloVO(ref);
+		return modelo.getFachada().buscarArticuloVO(ref);
 	}
 
 	public void cerrar() {
-		((VistaVentaArticulos) this.getVista()).cerrar();
+		vista.cerrar();
 	}
 
 	public void agregarArticulo(long ref) {
 		ArticuloVO art = getArticulo(ref);
 		if (art == null) {
-			VistaUtils.showErrorPopup(((VistaVentaArticulos)this.getVista()).getVistaGrafica(), "El articulo no existe");
+			VistaUtils.showErrorPopup(vista.getVistaGrafica(), "El articulo no existe");
 		} else {
-			((VistaVentaArticulos) this.getVista()).agregarArticulo(art);
+			vista.agregarArticulo(art);
 		}
 	}
 	
@@ -47,7 +51,7 @@ public class VentaArticulosController extends Controlador {
 		VentaVO venta = new VentaVO();
 
 		venta.setFecha(Calendar.getInstance().getTime());
-		venta.setTipoFactura(((VistaVentaArticulos) this.getVista()).getTipoFactura());
+		venta.setTipoFactura(vista.getTipoFactura());
 
 		for (Vector<Object> fila : datos) {
 			ItemVentaVO itemVenta = new ItemVentaVO();
@@ -64,15 +68,14 @@ public class VentaArticulosController extends Controlador {
 		venta.setIva(Float.parseFloat(datosT[1].toString()));
 		venta.setTotal(Float.parseFloat(datosT[2].toString()));
 
-		VentaVO result = ((ZaraModel) this.getModelo())
-				.getFachada().nuevaVenta(venta);
+		VentaVO result = (modelo.getFachada().nuevaVenta(venta));
 				
 		if (result.isHayStock()){
 			nuevaFactura(result);
 		}
 		else
 		{
-			((VistaVentaArticulos) this.getVista()).toggleError(result.getItems());	
+			vista.toggleError(result.getItems());	
 		}
 		
 		
@@ -84,7 +87,7 @@ public class VentaArticulosController extends Controlador {
 		
 		//if result==null
 		
-		VistaFactura vista = VistaFactura.getInstance((ZaraModel) this.getModelo());
+		VistaFactura vista = VistaFactura.getInstance(modelo);
 		new FacturaController(this.getModelo(), vista);
 		
 		//((FacturaController) vista.getControlador()).setData(ventaVO);
@@ -98,22 +101,22 @@ public class VentaArticulosController extends Controlador {
 			
 			if (precioOferta != 0)
 			{
-				((VistaVentaArticulos)this.getVista()).togglePrecio(fila, precioOferta);
+				vista.togglePrecio(fila, precioOferta);
 			}
 			
 		} else if (tipo == ZaraConstants.PRECIO_LISTA) {
 			
-			((VistaVentaArticulos)this.getVista()).togglePrecio(fila, getArticulo(ref).getPrecioLista());
+			vista.togglePrecio(fila, getArticulo(ref).getPrecioLista());
 			
 		}		
 	}
 
 	public void borrarArticulo(long ref, int row) {
-		((VistaVentaArticulos)this.getVista()).borrarArticulo(row);
+		vista.borrarArticulo(row);
 	}
 	
 	public void showNumericoPopup() {
-		VistaUtils.showNumericoPopup(((VistaVentaArticulos)this.getVista()).getVistaGrafica());		
+		VistaUtils.showNumericoPopup(vista.getVistaGrafica());		
 	}
 	
 	

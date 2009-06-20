@@ -22,15 +22,16 @@ import framework.vista.Vista;
 
 public class VistaOfAD extends Vista {
 	private static VistaOfAD instance;
-	private OfAD vistaGrafica;
+	private OfAD vistaGrafica;	
 
 	public VistaOfAD(ZaraModel modelo) {
-		super(modelo);
-		vistaGrafica = new OfAD(this);
+		super(modelo);		
+		vistaGrafica = new OfAD(this);		
 
 		vistaGrafica.addWindowListener(new WindowListener() {
 			public void windowClosed(WindowEvent e) {
 				instance = null;
+				
 			}
 
 			public void windowActivated(WindowEvent e) {

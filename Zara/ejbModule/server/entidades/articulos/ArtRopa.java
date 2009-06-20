@@ -4,7 +4,6 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Transient;
 
-import server.VO.articulos.ArtHogarVO;
 import server.VO.articulos.ArtRopaVO;
 import server.VO.articulos.ArticuloVO;
 
@@ -45,6 +44,7 @@ public class ArtRopa extends Articulo {
 		this.origen = origen;
 	}
 	
+	@Override
 	@Transient
 	public ArticuloVO getVO(){
 		ArtRopaVO vo = new ArtRopaVO();		
@@ -63,6 +63,7 @@ public class ArtRopa extends Articulo {
 		return vo;		
 	}
 
+	@Override
 	public void setVO(ArticuloVO vo){
 		super.setVO(vo);		
 		this.setTalle(((ArtRopaVO) vo).getTalle());

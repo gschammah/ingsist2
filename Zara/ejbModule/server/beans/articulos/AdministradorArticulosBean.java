@@ -72,6 +72,7 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 		return ofad.getVO();
 	}
 	
+	@SuppressWarnings("unchecked")
 	public Date checkExistingOfad(String hash){
 		String query;
 		Query q;

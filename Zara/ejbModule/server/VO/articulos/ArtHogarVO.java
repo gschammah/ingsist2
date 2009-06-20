@@ -2,6 +2,8 @@ package server.VO.articulos;
 
 public class ArtHogarVO extends ArticuloVO {
 	
+	private static final long serialVersionUID = 1L;
+	
 	private String nombre;
 	private String composicion;
 	private String medidas;
@@ -55,6 +57,7 @@ public class ArtHogarVO extends ArticuloVO {
 		this.categoria = categoria;
 	}
 	
+	@Override
 	public String toString(){
 		StringBuffer result = new StringBuffer();
 		

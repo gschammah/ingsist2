@@ -15,10 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
-import server.VO.EnvT.ItemEnvTVO;
 import server.VO.PALC.ItemPALCVO;
 import server.VO.PALC.PALCVO;
-import server.entidades.EnvT.ItemEnvT;
 
 @Entity
 public class PALC implements Serializable {

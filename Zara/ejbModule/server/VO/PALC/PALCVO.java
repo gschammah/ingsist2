@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
-import server.VO.EnvT.ItemEnvTVO;
-
 public class PALCVO implements Serializable{
 
 	private static final long serialVersionUID = 1L;

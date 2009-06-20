@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -74,6 +75,7 @@ public class Venta implements Serializable {
 		this.id = id;
 	}
 
+	@Column(columnDefinition="datetime")
 	public Date getFecha() {
 		return fecha;
 	}

@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -53,6 +54,7 @@ public class OfAD implements Serializable{
 	}
 
 
+	@Column(columnDefinition="datetime")
 	public Date getFecha() {
 		return fecha;
 	}

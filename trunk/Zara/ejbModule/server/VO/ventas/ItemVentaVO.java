@@ -2,11 +2,7 @@ package server.VO.ventas;
 
 import java.io.Serializable;
 
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-
 import server.VO.articulos.ArticuloVO;
-import server.entidades.articulos.Articulo;
 
 public class ItemVentaVO implements Serializable {
 

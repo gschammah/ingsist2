@@ -112,6 +112,7 @@ public class ArticuloVO implements Serializable {
 		this.puntoReposicion = puntoReposicion;
 	}
 	
+	@Override
 	public String toString() {
 		StringBuffer result = new StringBuffer();
 		

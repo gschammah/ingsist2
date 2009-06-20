@@ -14,8 +14,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import server.VO.EnvT.EnvTVO;
-import server.VO.EnvT.ItemEnvTVO;
-import server.VO.PALC.ItemPALCVO;
 import server.VO.PALC.PALCVO;
 import server.VO.PALC.PalcPropuestoVO;
 import server.VO.articulos.ArticuloVO;
@@ -48,13 +46,10 @@ public class AdministradorPedidosBean implements AdministradorPedidos {
 
 		for (ItemEnvT item : articulos) {
 
-			Articulo art = admArticulos.buscarArticulo(item.getArticulo()
-					.getReferencia());
+			Articulo art = admArticulos.buscarArticulo(item.getArticulo().getReferencia());
 
-			if (art == null) {
-
-			} else {
-
+			if (art != null) {
+							
 				item.setArticulo(art);
 
 				if (save) {
@@ -65,6 +60,7 @@ public class AdministradorPedidosBean implements AdministradorPedidos {
 					em.persist(item);
 				}
 			}
+			
 		}
 		envt.setArticulos(articulos);
 
@@ -78,6 +74,7 @@ public class AdministradorPedidosBean implements AdministradorPedidos {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	public Date checkPedidoExistente(String hash) {
 		Query q = em
 				.createQuery("SELECT e FROM EnvT e where e.xmlHash = ? ORDER BY e.fecha DESC");

@@ -36,6 +36,7 @@ public class ArtRopaVO extends ArticuloVO {
 		this.origen = origen;
 	}
 	
+	@Override
 	public String toString(){
 		StringBuffer result = new StringBuffer();
 		

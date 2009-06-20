@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.Transient;
 
 import server.VO.articulos.ArtHogarVO;
-import server.VO.articulos.ArtRopaVO;
 import server.VO.articulos.ArticuloVO;
 
 @Entity
@@ -61,6 +60,7 @@ public class ArtHogar extends Articulo {
 		this.categoria = categoria;
 	}
 	
+	@Override
 	@Transient
 	public ArticuloVO getVO(){
 		ArtHogarVO vo = new ArtHogarVO();
@@ -81,6 +81,7 @@ public class ArtHogar extends Articulo {
 		return vo;		
 	}
 
+	@Override
 	public void setVO(ArticuloVO artVO){
 		super.setVO(artVO);		
 		this.setNombre(((ArtHogarVO)artVO).getNombre());

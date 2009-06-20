@@ -8,8 +8,6 @@ import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import server.VO.articulos.ArticuloVO;
-import server.VO.ventas.ItemVentaVO;
 import server.VO.ventas.VentaVO;
 import server.beans.articulos.AdministradorArticulos;
 import server.entidades.articulos.Articulo;

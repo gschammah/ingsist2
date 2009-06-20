@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import server.VO.articulos.ArticuloVO;
 import server.entidades.PALC.PALC;
-import server.entidades.articulos.Articulo;
 
 public class ItemPALCVO implements Serializable {
 

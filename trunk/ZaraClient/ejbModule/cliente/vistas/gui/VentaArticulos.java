@@ -433,21 +433,11 @@ public class VentaArticulos extends JFrame {
 		
 		
 		Object[] datosT = {this.sub, this.imp, this.tot };
-		
-		//borrar
-		Object[] datosF = {this.jTextField2.getText(), this.lblFecha.getText(), this.jComboBox1.getSelectedItem().toString()};
-	    
-		
+					
 	    DefaultTableModel model = (DefaultTableModel) tablaArticulos.getModel();
 	    ((VentaArticulosController)vistaPadre.getControlador()).nuevaVenta(model.getDataVector(), datosT);
 	    
-	    
-	    //tiene que pasar un VO
-	    //TODO falta pasar el vo
-	    
-	    //((VentaArticulosController)vistaPadre.getControlador()).nuevaFactura(ultimaVenta);
-	    
-	    
+	      
 	}
 
 	public JEditorPane getTxtDetalles() {

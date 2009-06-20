@@ -2,7 +2,14 @@ package cliente.vistas;
 
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.text.DateFormat;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Vector;
 
+import javax.swing.table.DefaultTableModel;
+
+import server.VO.ventas.ItemVentaVO;
 import server.VO.ventas.VentaVO;
 import cliente.modelo.ZaraModel;
 import cliente.vistas.gui.Factura;
@@ -45,13 +52,36 @@ public class VistaFactura extends Vista {
 	
 	public void agregarInfo(VentaVO venta) {
 		
-		/*
-		((DefaultTableModel) vistaGrafica.getTabla().getModel())
-				.addRow(datosArticulo);
+	    Collection<ItemVentaVO> rows = venta.getItems();
+	    
+	    
+		Iterator<ItemVentaVO> i = rows.iterator();
+		
+		while (i.hasNext()){
+			
+			ItemVentaVO aux = i.next();
+         
+			Object[] dat = {
+					aux.getArticulo().getReferencia(),
+					aux.getCantidad(),
+					aux.getArticulo().getDescripcion(),
+					aux.getPrecio(),
+					aux.getCantidad()*aux.getPrecio()
+					};
+            
+            ((DefaultTableModel) vistaGrafica.getTabla().getModel())
+			.addRow(dat);
+	
+            
+		}
+		
+		//TODO falta persistir el nombre del Cliente
+		Object[] datosT = {venta.getSubTotal(), venta.getIva(), venta.getTotal()};
+		Object[] datosF = {"", DateFormat.getInstance().format(venta.getFecha()), venta.getTipoFactura(), venta.getId()};
 		
 		vistaGrafica.setDatosT(datosT);
 		vistaGrafica.setDatosF(datosF);
-		*/
+		
 	}
 		
 	public void cerrar() {

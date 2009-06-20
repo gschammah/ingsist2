@@ -15,23 +15,9 @@ public class FacturaController extends Controlador {
 	public void setData(VentaVO venta){
 		
 
-		//((VistaFactura) this.getVista()).agregarInfo(VentaVo venta);
+		((VistaFactura) this.getVista()).agregarInfo(venta);
 		
-		/*
-		for (Vector<Object> fila : datos) {
-			
-			Object[] dat = {
-					Long.parseLong(fila.get(0).toString()),
-					Integer.parseInt(fila.get(5).toString()),
-					fila.get(2).toString(),
-					Float.parseFloat(fila.get(3).toString()),
-					(Float.parseFloat(fila.get(3).toString())*Integer.parseInt(fila.get(5).toString()))
-			};
-			
-			((VistaFactura) this.getVista()).agregarInfo(dat, datosT, datosF);
-			
-		}
-		*/
+		
 		
 		
 	}

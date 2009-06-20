@@ -31,9 +31,7 @@ public class PALC extends javax.swing.JFrame {
     	
     	this.setTitle("Generar 'Pedido de Artículos a La Coruña' (PALC)");
     	
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();                
         btn_generar = new javax.swing.JButton();
         btn_salir = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
@@ -50,11 +48,7 @@ public class PALC extends javax.swing.JFrame {
         setTitle("Pedidos de Articulos a La Coruña");
         
         jLabel1.setText("Pedido de Artículos a La Coruña (PALC)");
-
-        jLabel2.setText("Último PALC:");
-
-        jTextField1.setEditable(false);
-        jTextField1.setText("Nunca");
+        
 
         btn_generar.setText("Generar PALC");
         btn_generar.addActionListener(new java.awt.event.ActionListener() {
@@ -175,13 +169,7 @@ public class PALC extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(259, 259, 259)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(369, 369, 369))
+                        .addComponent(jLabel1))                    
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 806, Short.MAX_VALUE)
@@ -192,17 +180,13 @@ public class PALC extends javax.swing.JFrame {
                         .addComponent(btn_generar)
                         .addGap(18, 18, 18)
                         .addComponent(btn_salir)))
-                .addGap(20, 20, 20))
-        );
+                .addGap(20, 20, 20)))));
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)                
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -234,15 +218,13 @@ public class PALC extends javax.swing.JFrame {
     private javax.swing.JButton btn_generar;
     private javax.swing.JButton btn_salir;
     private javax.swing.JButton btn_agregar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel1;    
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable articulos;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable articulos;    
     private javax.swing.JTextField txtArticulo;
     // End of variables declaration//GEN-END:variables
     

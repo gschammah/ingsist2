@@ -18,14 +18,18 @@ import framework.vista.Vista;
 public class EnvTController extends Controlador {
 	
 	private EnvTVO envt = null;
+	private VistaRecEnvT vista;
+	private ZaraModel modelo;
 
 	public EnvTController(ProxyModelo mod, Vista vis) {
 		super(mod, vis);
+		this.vista = (VistaRecEnvT) vis;
+		this.modelo = (ZaraModel) mod;
 		cargarEnvT(false);
 	}
 	
 	public Date checkEnvT(String hash){		
-		return ((ZaraModel)this.getModelo()).getFachada().checkPedidoExistente(hash);			
+		return modelo.getFachada().checkPedidoExistente(hash);			
 	}
 	
 	public void cargarEnvT(boolean save){
@@ -33,19 +37,19 @@ public class EnvTController extends Controlador {
 		if (save) {
 			Date fechaEnvT = checkEnvT(envt.getXmlHash());
 			
-			if (fechaEnvT == null || (fechaEnvT != null && ((VistaRecEnvT)this.getVista()).showPopup(fechaEnvT) == 0)) {
+			if (fechaEnvT == null || (fechaEnvT != null && (vista.showPopup(fechaEnvT) == 0))) {
 				// Persisto el cambio de stock
-				envt = ((ZaraModel)this.getModelo()).getFachada().nuevoEnvT(envt, save);
+				envt = modelo.getFachada().nuevoEnvT(envt, save);
 				
 				// Cargo los datos
-				((VistaRecEnvT)this.getVista()).cargarDatos(envt);
-				((VistaRecEnvT) this.getVista()).disableButton();
+				vista.cargarDatos(envt);
+				vista.disableButton();
 			}												
 		}
 		else 
 		{
 			JFileChooser fc = new JFileChooser();			
-			fc.showOpenDialog(((VistaRecEnvT) this.getVista()).getVistaGrafica());			
+			fc.showOpenDialog(vista.getVistaGrafica());			
 			File selFile = fc.getSelectedFile();
 			
 			envt = null;
@@ -57,14 +61,14 @@ public class EnvTController extends Controlador {
 					envt = ParseXML.parseEnvT(filename);
 					
 					// Pido un envtVO con la descripcion de los articulos y eventualmente los persisto
-					envt = ((ZaraModel)this.getModelo()).getFachada().nuevoEnvT(envt, save);
+					envt = modelo.getFachada().nuevoEnvT(envt, save);
 					
 					// Cargo los datos
-					((VistaRecEnvT)this.getVista()).cargarDatos(envt);
+					vista.cargarDatos(envt);
 					
 				} catch (Exception e) {					
 					//TODO log error
-					VistaUtils.showErrorPopup(((VistaRecEnvT) this.getVista()).getVistaGrafica(), "El XML no es un EnvT válido.");
+					VistaUtils.showErrorPopup(vista.getVistaGrafica(), "El XML no es un EnvT válido.");
 				}
 												
 			}
@@ -75,7 +79,7 @@ public class EnvTController extends Controlador {
 	}
 	
 	public void cerrar(){
-		((VistaRecEnvT)this.getVista()).cerrar();
+		vista.cerrar();
 	}
 
 }

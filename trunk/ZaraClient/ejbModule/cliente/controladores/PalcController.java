@@ -22,87 +22,81 @@ import framework.modeloCliente.ProxyModelo;
 import framework.vista.Vista;
 
 public class PalcController extends Controlador {
+	
+	private ZaraModel modelo;
+	private VistaPALC vista;
 
 	public PalcController(ProxyModelo mod, Vista vis) {
 		super(mod, vis);
+		this.modelo = (ZaraModel) mod;
+		this.vista = (VistaPALC) vis;
 		cargaPALC();
 	}
 
 	public Date checkPALC(String hash) {
-		return ((ZaraModel) this.getModelo()).getFachada()
-				.checkPedidoExistente(hash);
+		return modelo.getFachada().checkPedidoExistente(hash);
 	}
 
 	public void cargaPALC() {
-		Collection<PalcPropuestoVO> palc = ((ZaraModel) this.getModelo())
-				.getFachada().getPALC();
-		((VistaPALC) this.getVista()).cargarDatos(palc);
+		Collection<PalcPropuestoVO> palc = modelo.getFachada().getPALC();
+		vista.cargarDatos(palc);
 	}
 
 	public void registraPALC() {
 
 		JFileChooser fc = new JFileChooser();
-		fc.showSaveDialog(((VistaPALC) this.getVista()).getVistaGrafica());
+		fc.showSaveDialog(vista.getVistaGrafica());
 		File selFile = fc.getSelectedFile();
 
 		if (selFile != null) {
 
-			Collection<ItemPALCVO> articulos = ((VistaPALC) this.getVista())
-					.getArticulosElegidos();
+			Collection<ItemPALCVO> articulos = vista.getArticulosElegidos();
 			
 			PALCVO palc = new PALCVO();
 			palc.setArticulos(articulos);
 			palc.setEstado("Emitido");
 			palc.setFecha(Calendar.getInstance().getTime());
 
-			int idPedido = ((ZaraModel) this.getModelo()).getFachada()
-					.registraPALC(palc);
+			int idPedido = modelo.getFachada().registraPALC(palc);
 
 			if (idPedido != 0) {
 
-				VistaListadoPALC vista = VistaListadoPALC
-						.getInstance((ZaraModel) this.getModelo());
-				new ListadoPalcController(this.getModelo(), vista, palc);
+				VistaListadoPALC vis = VistaListadoPALC.getInstance(modelo);
+				new ListadoPalcController(this.getModelo(), vis, palc);
 				palc.setId(idPedido);
 
 				try {
 					ParseXML.generaPALC(selFile.getAbsolutePath(), palc);
 				} catch (Exception e) {
-					VistaUtils.showErrorPopup(((VistaPALC) this.getVista())
-							.getVistaGrafica(),
-							"Se ha producido un error al guardar el XML");
+					VistaUtils.showErrorPopup(vista.getVistaGrafica(), "Se ha producido un error al guardar el XML");
 				}
 			} else {
-				VistaUtils.showErrorPopup(((VistaPALC) this.getVista())
-						.getVistaGrafica(),
-						"Se ha producido un error al persistir los datos");
+				VistaUtils.showErrorPopup(vista.getVistaGrafica(), "Se ha producido un error al persistir los datos");
 			}
 		}
 
 	}
 
 	public void cerrar() {
-		((VistaPALC) this.getVista()).cerrar();
+		vista.cerrar();
 	}
 
 	public void agregaArticulo(Long ref) {		
-			PalcPropuestoVO palc = ((ZaraModel) this.getModelo()).getFachada().getPALC(ref);
+			PalcPropuestoVO palc = modelo.getFachada().getPALC(ref);
 			
 			if (palc == null) {
-				VistaUtils.showErrorPopup(((VistaPALC) this.getVista()).getVistaGrafica(), "El artículo ingresado no existe");
+				VistaUtils.showErrorPopup(vista.getVistaGrafica(), "El artículo ingresado no existe");
 			} else {			
-				((VistaPALC) this.getVista()).cargarDatos(palc);
+				vista.cargarDatos(palc);
 			}
 	}
 
 	public void showNumericoPopup() {
-		VistaUtils.showErrorPopup(((VistaPALC) this.getVista()).getVistaGrafica(), "El nro de referencia debe ser numérico");
+		VistaUtils.showErrorPopup(vista.getVistaGrafica(), "El nro de referencia debe ser numérico");
 	}
 
 	public void showExistentePopup() {
-		VistaUtils.showErrorPopup(((VistaPALC) this.getVista())
-				.getVistaGrafica(),
-				"El artículo ingresado ya figura en el PALC sugerido");
+		VistaUtils.showErrorPopup(vista.getVistaGrafica(), "El artículo ingresado ya figura en el PALC sugerido");
 	}
 
 }

@@ -17,14 +17,18 @@ import framework.vista.Vista;
 public class OfADController extends Controlador {
 
 	private OfADVO ofadVO = null;
+	private VistaOfAD vista;
+	private ZaraModel modelo;
 
 	public OfADController(ProxyModelo mod, Vista vis) {
 		super(mod, vis);
+		this.vista = (VistaOfAD) vis;
+		this.modelo = (ZaraModel) mod;
 		cargarOfAD(false);
 	}
 
 	public Date checkOfAD(String hash) {
-		return ((ZaraModel) this.getModelo()).getFachada().checkExistingOfad(hash);
+		return modelo.getFachada().checkExistingOfad(hash);
 	}
 
 	public void cargarOfAD(boolean save) {
@@ -33,19 +37,19 @@ public class OfADController extends Controlador {
 
 			Date fechaOfad = checkOfAD(ofadVO.getXmlHash());
 
-			if (fechaOfad == null || (fechaOfad != null && ((VistaOfAD) this.getVista()).showPopup(fechaOfad) == 0)) {
-				ofadVO = ((ZaraModel) this.getModelo()).getFachada().nuevoOfad(ofadVO, save);
+			if (fechaOfad == null || (fechaOfad != null && vista.showPopup(fechaOfad) == 0)) {
+				ofadVO = modelo.getFachada().nuevoOfad(ofadVO, save);
 				
 				// Cargo los datos
-				((VistaOfAD) this.getVista()).cargarDatos(ofadVO);
-				((VistaOfAD) this.getVista()).disableButton();
+				vista.cargarDatos(ofadVO);
+				vista.disableButton();
 				
 			} 
 		} 
 		else {
 
 			JFileChooser fc = new JFileChooser();			
-			fc.showOpenDialog(((VistaOfAD) this.getVista()).getVistaGrafica());			
+			fc.showOpenDialog(vista.getVistaGrafica());			
 			File selFile = fc.getSelectedFile();
 			
 			ofadVO = null;
@@ -55,14 +59,14 @@ public class OfADController extends Controlador {
 				String filename = selFile.getAbsolutePath();
 				try {
 					ofadVO = ParseXML.parseOfAD(filename);
-					ofadVO = ((ZaraModel) this.getModelo()).getFachada().nuevoOfad(ofadVO, save);
+					ofadVO = modelo.getFachada().nuevoOfad(ofadVO, save);
 					
 					// Cargo los datos
-					((VistaOfAD) this.getVista()).cargarDatos(ofadVO);
+					vista.cargarDatos(ofadVO);
 					
 				} catch (Exception e) {					
 					//TODO log error
-					VistaUtils.showErrorPopup(((VistaOfAD) this.getVista()).getVistaGrafica(), "El XML no es un OFAD válido.");
+					VistaUtils.showErrorPopup(vista.getVistaGrafica(), "El XML no es un OFAD válido.");
 				}
 												
 			}
@@ -71,7 +75,7 @@ public class OfADController extends Controlador {
 	}
 
 	public void cerrar() {
-		((VistaOfAD) this.getVista()).cerrar();
+		vista.cerrar();
 	}
 
 }

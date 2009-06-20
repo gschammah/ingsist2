@@ -55,13 +55,7 @@ public class VistaOfAD extends Vista {
 		this.centrarVista(vistaGrafica);
 	}
 
-	@Override
-	public void addControlador(Controlador cp) {
-		super.addControlador(cp);
-		((OfADController) this.getControlador()).cargarOfAD(false);
-	}
 
-	
 	public void showOfAD() {
 		vistaGrafica.pack();
 		vistaGrafica.setVisible(true);
@@ -124,6 +118,16 @@ public class VistaOfAD extends Vista {
 
 	public void cerrar() {
 		vistaGrafica.dispose();
+	}
+
+
+	public OfAD getVistaGrafica() {
+		return vistaGrafica;
+	}
+
+
+	public void disableButton() {	
+		vistaGrafica.getBtn_registrarOfAD().setEnabled(false);
 	}
 
 }

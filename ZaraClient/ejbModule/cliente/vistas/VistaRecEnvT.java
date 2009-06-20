@@ -1,11 +1,13 @@
 package cliente.vistas;
 
+import java.awt.Component;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.text.DateFormat;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -40,15 +42,7 @@ public class VistaRecEnvT extends Vista {
 			public void windowIconified(WindowEvent e) {}
 			public void windowOpened(WindowEvent e) {}										
 		});
-		
-		vistaGrafica.pack();
-		vistaGrafica.setVisible(true);
-	}
-	
-	@Override
-	public void addControlador(Controlador cp) {
-		super.addControlador(cp);
-		((EnvTController) this.getControlador()).cargarEnvT(false);
+				
 	}
 	
 
@@ -88,6 +82,9 @@ public class VistaRecEnvT extends Vista {
 						item.getCantidadRecibida(), item.getCantidadPendiente(), art.getStock() });
 			}
 		}		
+		
+		vistaGrafica.pack();
+		vistaGrafica.setVisible(true);
 	
 	}
 	
@@ -113,6 +110,15 @@ public class VistaRecEnvT extends Vista {
 
 	public void cerrar() {
 		vistaGrafica.dispose();
+	}
+
+	public RecEnvT getVistaGrafica() {
+		return vistaGrafica;
+	}
+
+
+	public void disableButton() {		
+		vistaGrafica.getBtn_registrarEnvT().setEnabled(false);
 	}
 
 

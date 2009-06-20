@@ -24,6 +24,10 @@ public class OfAD extends JFrame {
 	private VistaOfAD vistaPadre;
 
 	
+	public JButton getBtn_registrarOfAD() {
+		return btn_registrarOfAD;
+	}
+
 	public OfAD(VistaOfAD vista) {
 		initComponents();
 		vistaPadre = vista;

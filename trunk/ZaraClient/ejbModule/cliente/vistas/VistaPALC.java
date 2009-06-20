@@ -5,8 +5,6 @@ import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Map;
-
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 

@@ -1,13 +1,11 @@
 package cliente.vistas;
 
-import java.awt.Component;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.text.DateFormat;
 import java.util.Collection;
 import java.util.Date;
 
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -15,11 +13,9 @@ import javax.swing.table.DefaultTableModel;
 import server.VO.EnvT.EnvTVO;
 import server.VO.EnvT.ItemEnvTVO;
 import server.VO.articulos.ArticuloVO;
-import cliente.controladores.EnvTController;
 import cliente.modelo.ZaraModel;
 import cliente.vistas.gui.RecEnvT;
 import cliente.vistas.gui.tables.TablaUtils;
-import framework.controlador.Controlador;
 import framework.vista.Vista;
 
 public class VistaRecEnvT extends Vista {

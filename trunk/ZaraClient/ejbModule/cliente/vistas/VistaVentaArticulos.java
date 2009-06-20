@@ -4,12 +4,10 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.Collection;
 
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import server.VO.articulos.ArticuloVO;
 import server.VO.ventas.ItemVentaVO;
-import cliente.controladores.VentaArticulosController;
 import cliente.modelo.ZaraModel;
 import cliente.vistas.gui.VentaArticulos;
 import cliente.vistas.gui.tables.VentasCantidadTableRenderer;

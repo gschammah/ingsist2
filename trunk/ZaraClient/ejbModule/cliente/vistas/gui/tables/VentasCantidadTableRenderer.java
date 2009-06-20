@@ -8,7 +8,6 @@ import java.util.Collection;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
-import server.VO.articulos.ArticuloVO;
 import server.VO.ventas.ItemVentaVO;
 
 public class VentasCantidadTableRenderer extends DefaultTableCellRenderer {
@@ -34,6 +33,7 @@ public class VentasCantidadTableRenderer extends DefaultTableCellRenderer {
 		return false;
 	}
 
+	@Override
 	public Component getTableCellRendererComponent(JTable table,
 	      Object value,
 	      boolean isSelected,

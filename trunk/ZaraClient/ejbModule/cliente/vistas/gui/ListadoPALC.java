@@ -10,7 +10,10 @@ import cliente.controladores.ListadoPalcController;
 import cliente.vistas.VistaListadoPALC;
 
 public class ListadoPALC extends javax.swing.JFrame {
-    private VistaListadoPALC vistaPadre;
+
+	private static final long serialVersionUID = 1L;
+	
+	private VistaListadoPALC vistaPadre;
     
 	public javax.swing.JTable getTablaArt() {
 		return tablaArt;
@@ -55,8 +58,10 @@ public class ListadoPALC extends javax.swing.JFrame {
             new String [] {
                 "Artículo", "Descripción", "Cant. Pedida"
             }
-        ) {
-            Class[] types = new Class [] {
+        ) {    
+			private static final long serialVersionUID = 1L;
+			
+			Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {

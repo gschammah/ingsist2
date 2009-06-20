@@ -1,7 +1,6 @@
 package cliente.controladores;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
@@ -11,11 +10,10 @@ import javax.swing.JFileChooser;
 import server.VO.PALC.ItemPALCVO;
 import server.VO.PALC.PALCVO;
 import server.VO.PALC.PalcPropuestoVO;
-import cliente.XML.ParseXML;
 import cliente.modelo.ZaraModel;
+import cliente.tools.ParseXML;
 import cliente.vistas.VistaListadoPALC;
 import cliente.vistas.VistaPALC;
-import cliente.vistas.VistaRecEnvT;
 import cliente.vistas.VistaUtils;
 import framework.controlador.Controlador;
 import framework.modeloCliente.ProxyModelo;

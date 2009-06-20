@@ -2,13 +2,14 @@ package cliente.controladores;
 
 import java.io.File;
 import java.util.Date;
+import java.util.logging.Logger;
 
 import javax.swing.JFileChooser;
 
 import server.VO.EnvT.EnvTVO;
-import cliente.XML.ParseXML;
+import server.VO.EnvT.ItemEnvTVO;
 import cliente.modelo.ZaraModel;
-import cliente.vistas.VistaOfAD;
+import cliente.tools.ParseXML;
 import cliente.vistas.VistaRecEnvT;
 import cliente.vistas.VistaUtils;
 import framework.controlador.Controlador;
@@ -43,7 +44,17 @@ public class EnvTController extends Controlador {
 				
 				// Cargo los datos
 				vista.cargarDatos(envt);
-				vista.disableButton();
+				vista.disableButton();								
+											
+				int cant = 0;
+				
+				for (ItemEnvTVO item : envt.getArticulos()) {
+					if (!item.getArticulo().getDescripcion().startsWith("ERROR")) {						
+						cant++;
+					}
+				}
+				
+				Logger.getLogger("envt").info("Se cargó exitosamente el Envt. Se actualizó el stock de " + cant + " artículos");
 			}												
 		}
 		else 
@@ -63,11 +74,17 @@ public class EnvTController extends Controlador {
 					// Pido un envtVO con la descripcion de los articulos y eventualmente los persisto
 					envt = modelo.getFachada().nuevoEnvT(envt, save);
 					
+					for (ItemEnvTVO item : envt.getArticulos()) {
+						if (item.getArticulo().getDescripcion() == null) {
+							Logger.getLogger("envt").warning("El artículo " + item.getArticulo().getReferencia() + " no existe en la base de datos. Se descarta.");
+						}
+					}
+					
 					// Cargo los datos
 					vista.cargarDatos(envt);
 					
 				} catch (Exception e) {					
-					//TODO log error
+					Logger.getLogger("envt").warning("El XML no es un EnvT válido.");
 					VistaUtils.showErrorPopup(vista.getVistaGrafica(), "El XML no es un EnvT válido.");
 				}
 												

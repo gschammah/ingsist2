@@ -3,8 +3,6 @@ package cliente.vistas;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import cliente.vistas.gui.VentaArticulos;
-
 public class VistaUtils {
 
 	public static void showErrorPopup(JFrame vistaGrafica, String mensaje) {

@@ -1,7 +1,7 @@
 package server.beans.articulos;
 
 
-import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -10,13 +10,12 @@ import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.persistence.NoResultException;
 
 import server.VO.OfAD.OfADVO;
 import server.VO.articulos.ArticuloVO;
 import server.entidades.OfAD.ItemOfAD;
 import server.entidades.OfAD.OfAD;
-import server.entidades.articulos.*;
+import server.entidades.articulos.Articulo;
 
 
 /**
@@ -52,6 +51,10 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 				{
 					itemOfAD.getArticulo().setNuevo(true);
 				}
+				else
+				{
+					itemOfAD.getArticulo().setNuevo(false);
+				}
 			}
 		}
 		//actualizo la lista de articulos con los precios cambiados
@@ -59,9 +62,12 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 		
 		if (save)
 		{
+			ofad.setFecha(Calendar.getInstance().getTime());
 			em.persist(ofad);
 		}
-		
+		else {
+			ofad.setFecha(checkExistingOfad(null));
+		}
 		
 		return ofad.getVO();
 	}

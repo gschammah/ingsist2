@@ -146,12 +146,45 @@ public class AdministradorPedidosBean implements AdministradorPedidos {
 
 		return q.getResultList();
 	}
+	
+	@SuppressWarnings("unchecked")
+	private Collection<Articulo> getArtPendientes() {
+
+		Query q = em.createQuery("SELECT i.articulo FROM ItemEnvT i " +								 								
+								 "WHERE i.id IN (" +
+								 	"SELECT MAX(j.id) FROM ItemEnvT j " +
+								 	"INNER JOIN j.articulo art " +
+								 	"GROUP BY art.referencia)" +
+								 "AND i.cantidadPendiente <> 0");
+
+		
+		return q.getResultList();
+	}
+		
+	private int getArtPendientes(long ref) {
+
+		Query q = em.createQuery("SELECT i.cantidadPendiente FROM ItemEnvT i " +
+								 "WHERE i.id = (" +
+								 	"SELECT MAX(j.id) FROM ItemEnvT j " +
+								 	"WHERE j.articulo.referencia = :ref)");
+		q.setParameter("ref", ref);
+		
+		try {
+			return new Integer(q.getSingleResult().toString());
+		}
+		catch (NullPointerException e) {
+			return 0;
+		}
+	}
 
 	// Todo completar palc
 	
 	public PalcPropuestoVO getPALC(long ref) {
 		
 		ArticuloVO art = admArticulos.buscarArticuloVO(ref);
+		
+		if (art == null) return null;
+		
 		PalcPropuestoVO palc = new PalcPropuestoVO();
 		
 		// Calculo fechas
@@ -161,7 +194,7 @@ public class AdministradorPedidosBean implements AdministradorPedidos {
 		palc.setArticulo(art);
 		palc.setVentas(getCantVendida(art.getReferencia(), semanaPasada
 				.getTime(), Calendar.getInstance().getTime()));
-		palc.setPendientes(0);
+		palc.setPendientes(getArtPendientes(art.getReferencia()));
 		
 		return palc;
 	}
@@ -180,14 +213,14 @@ public class AdministradorPedidosBean implements AdministradorPedidos {
 		
 		articulos.addAll(getUltimoOfad()); 
 		articulos.addAll(getPdP());		
-		articulos.addAll(getArtVendidos(semanaPasada.getTime(), 
-						 				Calendar.getInstance().getTime()));
+		articulos.addAll(getArtVendidos(semanaPasada.getTime(),	Calendar.getInstance().getTime()));		
+		articulos.addAll(getArtPendientes());
 
 		for (Articulo articulo : articulos) {
 			PalcPropuestoVO p = new PalcPropuestoVO();
 			p.setArticulo(articulo.getVO());
-			// TODO set pendientes
-			p.setPendientes(0);
+
+			p.setPendientes(getArtPendientes(p.getArticulo().getReferencia()));
 			p.setVentas(getCantVendida(articulo.getReferencia(), semanaPasada
 						.getTime(), Calendar.getInstance().getTime()));
 			palc.add(p);
@@ -195,18 +228,18 @@ public class AdministradorPedidosBean implements AdministradorPedidos {
 		return palc;
 	}
 
-	public boolean registraPALC(PALCVO palc) {
+	public int registraPALC(PALCVO palc) {
 		
 		PALC p = new PALC();
 		p.setVO(palc);
 		
 		try {
 			em.persist(p);
-			return true;
+			return p.getId();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			return false;
+			return 0;
 		}
 	}
 

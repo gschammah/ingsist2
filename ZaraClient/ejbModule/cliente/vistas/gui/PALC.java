@@ -84,8 +84,10 @@ public class PALC extends javax.swing.JFrame {
             new String [] {
                 "Artículo", "Descripción", "Ventas", "Pend d/Envío", "Stock", "PdP", "Pedir", "Cant."
             }
-        ) {
-            Class[] types = new Class [] {
+        ) {            
+			private static final long serialVersionUID = 1L;
+			
+			Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Boolean.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {

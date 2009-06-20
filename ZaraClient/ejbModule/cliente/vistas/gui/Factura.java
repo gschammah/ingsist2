@@ -13,7 +13,6 @@ import java.text.DecimalFormat;
 import javax.swing.WindowConstants;
 
 import cliente.controladores.FacturaController;
-import cliente.controladores.VentaArticulosController;
 import cliente.vistas.VistaFactura;
 
 /**

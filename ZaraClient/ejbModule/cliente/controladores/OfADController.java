@@ -2,12 +2,13 @@ package cliente.controladores;
 
 import java.io.File;
 import java.util.Date;
+import java.util.logging.Logger;
 
 import javax.swing.JFileChooser;
 
 import server.VO.OfAD.OfADVO;
-import cliente.XML.ParseXML;
 import cliente.modelo.ZaraModel;
+import cliente.tools.ParseXML;
 import cliente.vistas.VistaOfAD;
 import cliente.vistas.VistaUtils;
 import framework.controlador.Controlador;
@@ -39,10 +40,12 @@ public class OfADController extends Controlador {
 
 			if (fechaOfad == null || (fechaOfad != null && vista.showPopup(fechaOfad) == 0)) {
 				ofadVO = modelo.getFachada().nuevoOfad(ofadVO, save);
-				
+											
 				// Cargo los datos
 				vista.cargarDatos(ofadVO);
 				vista.disableButton();
+				
+				Logger.getLogger("ofad").info("Ofad cargado satisfactoriamente. Se cargaron " + ofadVO.getArticulos().size() + " artículos.");
 				
 			} 
 		} 
@@ -64,8 +67,9 @@ public class OfADController extends Controlador {
 					// Cargo los datos
 					vista.cargarDatos(ofadVO);
 					
-				} catch (Exception e) {					
-					//TODO log error
+				} 				
+				catch (Exception e) {					
+					Logger.getLogger("ofad").warning("El XML no es un OFAD válido.");
 					VistaUtils.showErrorPopup(vista.getVistaGrafica(), "El XML no es un OFAD válido.");
 				}
 												

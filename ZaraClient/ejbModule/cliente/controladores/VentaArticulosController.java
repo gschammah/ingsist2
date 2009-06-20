@@ -1,8 +1,6 @@
 package cliente.controladores;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Vector;
 
 import server.VO.articulos.ArticuloVO;
@@ -11,7 +9,6 @@ import server.VO.ventas.VentaVO;
 import cliente.constantes.ZaraConstants;
 import cliente.modelo.ZaraModel;
 import cliente.vistas.VistaFactura;
-import cliente.vistas.VistaOfAD;
 import cliente.vistas.VistaUtils;
 import cliente.vistas.VistaVentaArticulos;
 import framework.controlador.Controlador;

@@ -9,9 +9,11 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JTable;
 
-public class VentasTableButtonEditor extends DefaultCellEditor {
-	  protected JButton button;
-	  private String    label;
+public class VentasTableButtonEditor extends DefaultCellEditor {	  
+	
+	private static final long serialVersionUID = 1L;
+	protected JButton button;
+	  
 	  private boolean   isPushed;
 	 
 	  public VentasTableButtonEditor(JCheckBox checkBox) {
@@ -25,7 +27,8 @@ public class VentasTableButtonEditor extends DefaultCellEditor {
 	    });
 	  }
 	 
-	  public Component getTableCellEditorComponent(JTable table, Object value,
+	  @Override
+	public Component getTableCellEditorComponent(JTable table, Object value,
 	                   boolean isSelected, int row, int column) {
 	    if (isSelected) {
 	      button.setForeground(table.getSelectionForeground());
@@ -39,19 +42,22 @@ public class VentasTableButtonEditor extends DefaultCellEditor {
 	    return button;
 	  }
 	 
-	  public Object getCellEditorValue() {
+	  @Override
+	public Object getCellEditorValue() {
 	    if (isPushed)  {
 	    }
 	    isPushed = false;
 	    return "X" ;
 	  }
 	   
-	  public boolean stopCellEditing() {
+	  @Override
+	public boolean stopCellEditing() {
 	    isPushed = false;
 	    return super.stopCellEditing();
 	  }
 	 
-	  protected void fireEditingStopped() {
+	  @Override
+	protected void fireEditingStopped() {
 	    super.fireEditingStopped();
 	  }
 	}

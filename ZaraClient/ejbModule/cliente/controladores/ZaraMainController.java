@@ -7,7 +7,6 @@ import cliente.vistas.VistaPALC;
 import cliente.vistas.VistaRecEnvT;
 import cliente.vistas.VistaVentaArticulos;
 import framework.controlador.Controlador;
-import framework.modeloCliente.ProxyModelo;
 import framework.vista.Vista;
 
 public class ZaraMainController extends Controlador{

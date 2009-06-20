@@ -1,4 +1,4 @@
-package cliente.XML;
+package cliente.tools;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -6,9 +6,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.jdom.Document;
 import org.jdom.Element;
+import org.jdom.JDOMException;
+import org.jdom.input.JDOMParseException;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.XMLOutputter;
 
@@ -21,11 +24,11 @@ import server.VO.PALC.PALCVO;
 import server.VO.articulos.ArtHogarVO;
 import server.VO.articulos.ArtRopaVO;
 import server.VO.articulos.ArticuloVO;
-import cliente.tools.MD5;
 
 public class ParseXML {
 
-	public static OfADVO parseOfAD(String file) throws Exception {
+	@SuppressWarnings("unchecked")
+	public static OfADVO parseOfAD(String file) throws JDOMParseException, JDOMException  {
 
 		SAXBuilder builder = new SAXBuilder();
 		Document doc = null;
@@ -33,7 +36,10 @@ public class ParseXML {
 		MD5 md5 = new MD5(file);
 								
 					
-		doc = builder.build(new FileInputStream(file));
+		try {
+			doc = builder.build(new FileInputStream(file));
+		} catch (FileNotFoundException e) {} 
+		  catch (IOException e) {}
 		
 		Element root = doc.getRootElement();
 		List articulos = root.getChild("articulos").getChildren();
@@ -46,10 +52,11 @@ public class ParseXML {
 			Element art = ((Element) articulo);
 
 			ItemOfADVO itemOfadVO = new ItemOfADVO();
-			itemOfadVO.setPrecioLista(Float.parseFloat(art
-					.getChildText("precioLista")));
-			itemOfadVO.setPrecioOferta(Float.parseFloat(art
-					.getChildText("precioOferta")));		
+			
+			try {
+				itemOfadVO.setPrecioLista(Float.parseFloat(art.getChildText("precioLista")));
+				itemOfadVO.setPrecioOferta(Float.parseFloat(art.getChildText("precioOferta")));
+			} catch (NumberFormatException e) {}
 			
 			ArticuloVO nuevoArt = null;						
 
@@ -75,9 +82,29 @@ public class ParseXML {
 			nuevoArt.setColor(art.getChildText("color"));
 			nuevoArt.setDescripcion(art.getChildText("descripcion"));
 			nuevoArt.setLinea(art.getChildText("linea"));
-			nuevoArt.setPrecioLista(Float.parseFloat(art.getChildText("precioLista")));
-			nuevoArt.setPrecioOferta(Float.parseFloat(art.getChildText("precioOferta")));
-			nuevoArt.setReferencia(Long.parseLong(art.getChildText("Referencia")));
+															
+			
+			// Chequeo error en referencia
+			
+			try {
+				nuevoArt.setReferencia(Long.parseLong(art.getChildText("Referencia")));
+			} catch (NumberFormatException e) {
+				Logger.getLogger("ofad").warning("Se encontró un artículo con referencia no numérica o sin referencia. Se descarta.");
+				continue;
+			} 
+			
+			
+			// Chequeo error en precios
+			try {
+				
+				nuevoArt.setPrecioLista(Float.parseFloat(art.getChildText("precioLista")));
+				nuevoArt.setPrecioOferta(Float.parseFloat(art.getChildText("precioOferta")));
+				
+			} catch (NumberFormatException e) {
+				Logger.getLogger("ofad").warning("Se encontraron precios no numéricos o nulos para el artículo " + nuevoArt.getReferencia() + ". Se descarta.");
+				continue;
+			}
+			
 			nuevoArt.setSeccion(art.getChildText("seccion"));
 			nuevoArt.setPuntoReposicion(Integer.parseInt(art.getChildText("stockReposicion")));			
 			
@@ -92,14 +119,19 @@ public class ParseXML {
 	}
 	
 	
-	public static EnvTVO parseEnvT(String file) throws Exception {
+	@SuppressWarnings("unchecked")
+	public static EnvTVO parseEnvT(String file) throws JDOMParseException, JDOMException  {
 
 		SAXBuilder builder = new SAXBuilder();
 		Document doc = null;
 		
 		MD5 md5 = new MD5(file);
 												
-		doc = builder.build(new FileInputStream(file));
+		try {
+			doc = builder.build(new FileInputStream(file));
+		} 
+		catch (FileNotFoundException e) {} 
+		catch (IOException e) {}
 		
 		Element root = doc.getRootElement();
 		List articulos = root.getChild("itemsenvt").getChildren();
@@ -115,10 +147,20 @@ public class ParseXML {
 			ItemEnvTVO itemEnvT = new ItemEnvTVO();							
 			ArticuloVO artVO = new ArticuloVO();
 			
-			artVO.setReferencia(Long.parseLong(art.getChildText("referencia")));
+			try {
+				artVO.setReferencia(Long.parseLong(art.getChildText("referencia")));
+			} catch (NumberFormatException e) {
+				Logger.getLogger("envt").warning("Se encontró un artículo con referencia no numérica. Se descarta.");
+				continue;
+			}
 			
-			itemEnvT.setCantidadRecibida(Integer.parseInt(art.getChildText("cantidadenviada")));			
-			itemEnvT.setCantidadPendiente(Integer.parseInt(art.getChildText("cantidadpendiente")));
+			try {
+				itemEnvT.setCantidadRecibida(Integer.parseInt(art.getChildText("cantidadenviada")));			
+				itemEnvT.setCantidadPendiente(Integer.parseInt(art.getChildText("cantidadpendiente")));
+			} catch (NumberFormatException e) {
+				Logger.getLogger("envt").warning("Existe un error en las cantidades para el artículo " + artVO.getReferencia() + ". Se descarta.");
+				continue;
+			}
 			itemEnvT.setArticulo(artVO);
 			
 			envt.addItem(itemEnvT);
@@ -138,7 +180,7 @@ public class ParseXML {
 		root.addContent (idPedido);
 		
 		Element idTienda = new Element ("IdTienda");		
-		idTienda.setText(new Integer(13).toString());
+		idTienda.setText("13");
 		root.addContent (idTienda);
 		
 		Element itemsPedido = new Element ("ItemsPedido");

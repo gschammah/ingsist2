@@ -85,12 +85,11 @@ public class VentaArticulosController extends Controlador {
 	}
 	public void nuevaFactura(VentaVO ventaVO){
 		
-		//if result==null
-		
+				
 		VistaFactura vista = VistaFactura.getInstance(modelo);
 		new FacturaController(this.getModelo(), vista);
 		
-		//((FacturaController) vista.getControlador()).setData(ventaVO);
+		((FacturaController) vista.getControlador()).setData(ventaVO);
 		
 	}
 

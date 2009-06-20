@@ -48,11 +48,11 @@ public class Factura extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        fechaFac = new javax.swing.JLabel();
+        clienteFac = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        numeroFac = new javax.swing.JLabel();
+        tipoFac = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         total = new javax.swing.JLabel();
         iva = new javax.swing.JLabel();
@@ -126,15 +126,15 @@ public class Factura extends javax.swing.JFrame {
 
         jLabel4.setText("Cliente:");
 
-        jLabel5.setText("Fecha: ");
+        fechaFac.setText("Fecha: ");
 
-        jLabel8.setText("");
+        clienteFac.setText("");
 
         jLabel9.setText("Factura Nro.");
 
-        jLabel10.setText("xxxxx");
+        numeroFac.setText("");
 
-        jLabel1.setText("Factura ");
+        tipoFac.setText("Factura ");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -146,31 +146,31 @@ public class Factura extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel8))
+                        .addComponent(clienteFac))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel10))
+                        .addComponent(numeroFac))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(tipoFac)
                         .addGap(637, 637, 637)
-                        .addComponent(jLabel5)))
+                        .addComponent(fechaFac)))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel5))
+                    .addComponent(tipoFac)
+                    .addComponent(fechaFac))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel8))
+                    .addComponent(clienteFac))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jLabel10)))
+                    .addComponent(numeroFac)))
         );
 
         jButton1.setText("Salir");
@@ -230,14 +230,14 @@ public class Factura extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel tipoFac;
+    private javax.swing.JLabel numeroFac;
     private javax.swing.JLabel subtotal;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel fechaFac;
     private javax.swing.JLabel iva;
     private javax.swing.JLabel total;
-    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel clienteFac;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -261,9 +261,10 @@ public class Factura extends javax.swing.JFrame {
     
     public void setDatosF(Object[] datosF){
     	
-    	this.jLabel8.setText(datosF[0].toString());
-    	this.jLabel5.setText(datosF[1].toString());
-    	this.jLabel1.setText("Factura "+ datosF[2].toString());
+    	this.clienteFac.setText(datosF[0].toString());
+    	this.fechaFac.setText("Fecha: " + datosF[1].toString());
+    	this.tipoFac.setText("Factura "+ datosF[2].toString());
+    	this.numeroFac.setText(datosF[3].toString());
     	  	
     }
     

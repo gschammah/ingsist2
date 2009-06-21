@@ -84,11 +84,15 @@ public class VentaArticulosController extends Controlador {
 				
 		if (result.isHayStock()){
 			nuevaFactura(result);
+			vista.toggleError(null);
 		}
 		else
 		{
-			vista.toggleError(result.getItems());	
+			vista.toggleError(result.getItems());
 		}
+		
+			
+		
 		
 		
 		

@@ -88,7 +88,7 @@ public class VentaArticulos extends JFrame {
         jLabel2 = new JLabel();
         jComboBox1 = new JComboBox();
         jLabel4 = new JLabel();
-        jTextField2 = new JTextField();
+        nomCliente = new JTextField();
         lblFecha = new JLabel();
         subtotal = new JLabel();
         iva = new JLabel();
@@ -261,7 +261,7 @@ public class VentaArticulos extends JFrame {
                 .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(21, Short.MAX_VALUE)));
 
-        jPanel1Layout.linkSize(SwingConstants.VERTICAL, new java.awt.Component[] {btn_agregar, jLabel1, txt_referencia, jTextField2});
+        jPanel1Layout.linkSize(SwingConstants.VERTICAL, new java.awt.Component[] {btn_agregar, jLabel1, txt_referencia, nomCliente});
 
         jPanel2.setBorder(BorderFactory.createTitledBorder("Datos de Factura"));
 
@@ -272,7 +272,7 @@ public class VentaArticulos extends JFrame {
         jComboBox1.addActionListener(new ActionListener(){
 
 			public void actionPerformed(ActionEvent arg0) {
-				setIVA();				
+				setVals();				
 			}
         	
         	
@@ -281,7 +281,7 @@ public class VentaArticulos extends JFrame {
         
         jLabel4.setText("Cliente:");
 
-        jTextField2.setText("");
+        nomCliente.setText("");
 
         lblFecha.setText("Fecha: " + DateFormat.getInstance().format((Calendar.getInstance().getTime())));
 
@@ -293,7 +293,7 @@ public class VentaArticulos extends JFrame {
                 .addGap(6, 6, 6)
                 .addComponent(jLabel4)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, GroupLayout.PREFERRED_SIZE, 196, GroupLayout.PREFERRED_SIZE)
+                .addComponent(nomCliente, GroupLayout.PREFERRED_SIZE, 196, GroupLayout.PREFERRED_SIZE)
                 .addGap(138, 138, 138)
                 .addComponent(jLabel2)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
@@ -309,7 +309,7 @@ public class VentaArticulos extends JFrame {
                 .addComponent(jComboBox1, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
                 .addComponent(lblFecha)
                 .addComponent(jLabel4)
-                .addComponent(jTextField2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addComponent(nomCliente, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         );
 
         sub =0;
@@ -405,7 +405,7 @@ public class VentaArticulos extends JFrame {
     private JScrollPane jScrollPane1;
     private JTable tablaArticulos;
     private JTextField txt_referencia;
-    private JTextField jTextField2;
+    private JTextField nomCliente;
     private JEditorPane txtDetalles;
     private double sub;
     private double imp;
@@ -432,7 +432,7 @@ public class VentaArticulos extends JFrame {
 	private void doGenerarFactura(ActionEvent evt) {
 		
 		
-		Object[] datosT = {this.sub, this.imp, this.tot };
+		Object[] datosT = {this.sub, this.imp, this.tot, this.nomCliente.getText() };
 					
 	    DefaultTableModel model = (DefaultTableModel) tablaArticulos.getModel();
 	    ((VentaArticulosController)vistaPadre.getControlador()).nuevaVenta(model.getDataVector(), datosT);
@@ -453,20 +453,21 @@ public class VentaArticulos extends JFrame {
 		DecimalFormat dec = new DecimalFormat("$#0.00");
 		
 		if (this.jComboBox1.getSelectedItem().toString().equalsIgnoreCase("A")){
-			imp=0;
-	        iva.setText("IVA: " + dec.format(imp));
+			sub=(sub/1.21);
+			imp=(sub*0.21);
+			subtotal.setText("Subtotal: " + dec.format(sub));
+			iva.setText("IVA: " + dec.format(imp));
 	    };
 		
 		if (this.jComboBox1.getSelectedItem().toString().equalsIgnoreCase("B")){
-			imp=(sub*(0.21));
+			imp=0;
 	        iva.setText("IVA: " + dec.format(imp));
 		};
 
 		if (this.jComboBox1.getSelectedItem().toString().equalsIgnoreCase("C")){
-			imp=(sub*(0.21));
+			imp=0;
 	        iva.setText("IVA: " + dec.format(imp));
 		};
-		setTotal();
 	}
 	
 	public void setSubtotal(){
@@ -476,7 +477,8 @@ public class VentaArticulos extends JFrame {
 		for (int i=0;i<tablaArticulos.getRowCount();i++){
 			sub=sub+(Double.parseDouble(tablaArticulos.getModel().getValueAt(i, 3).toString())* Double.parseDouble(tablaArticulos.getModel().getValueAt(i, 5).toString()));
 		}
-        subtotal.setText("Subtotal: " + dec.format(sub));
+		
+		subtotal.setText("Subtotal: " + dec.format(sub));
 
 	}
 	

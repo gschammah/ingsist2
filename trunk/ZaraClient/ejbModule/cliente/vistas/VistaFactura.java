@@ -69,12 +69,13 @@ public class VistaFactura extends Vista {
 			
 			ItemVentaVO aux = i.next();
          
+			float f = aux.getCantidad()*aux.getPrecio();
 			Object[] dat = {
 					aux.getArticulo().getReferencia(),
 					aux.getCantidad(),
 					aux.getArticulo().getDescripcion(),
 					aux.getPrecio(),
-					aux.getCantidad()*aux.getPrecio()
+					f
 					};
             
             ((DefaultTableModel) vistaGrafica.getTabla().getModel())
@@ -83,9 +84,9 @@ public class VistaFactura extends Vista {
             
 		}
 		
-		//TODO falta persistir el nombre del Cliente
+		
 		Object[] datosT = {venta.getSubTotal(), venta.getIva(), venta.getTotal()};
-		Object[] datosF = {"", DateFormat.getInstance().format(venta.getFecha()), venta.getTipoFactura(), venta.getId()};
+		Object[] datosF = {venta.getCliente(), DateFormat.getInstance().format(venta.getFecha()), venta.getTipoFactura(), venta.getId()};
 		
 		vistaGrafica.setDatosT(datosT);
 		vistaGrafica.setDatosF(datosF);

@@ -11,7 +11,6 @@ package server.VO.PALC;
 import java.io.Serializable;
 
 import server.VO.articulos.ArticuloVO;
-import server.entidades.PALC.PALC;
 
 public class ItemPALCVO implements Serializable {
 
@@ -20,7 +19,7 @@ public class ItemPALCVO implements Serializable {
 	private int id;
 	private ArticuloVO articulo;
 	private int cantidadSolicitada;	
-	private PALC palc;
+	private PALCVO palc;
 		
 	public int getId() {
 		return id;
@@ -46,11 +45,11 @@ public class ItemPALCVO implements Serializable {
 		this.cantidadSolicitada = cantidadSolicitada;
 	}
 		
-	public PALC getPalc() {
+	public PALCVO getPalc() {
 		return palc;
 	}
 	
-	public void setPalc(PALC palc) {
+	public void setPalc(PALCVO palc) {
 		this.palc = palc;
 	}	
 }

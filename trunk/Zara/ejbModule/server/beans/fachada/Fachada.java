@@ -19,7 +19,6 @@ import server.VO.PALC.PALCVO;
 import server.VO.PALC.PalcPropuestoVO;
 import server.VO.articulos.ArticuloVO;
 import server.VO.ventas.VentaVO;
-import server.entidades.articulos.Articulo;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -37,12 +36,7 @@ public interface Fachada {
 	 * @see server.beans.articulos.AdministradorArticulos#checkExistingOfad(java.lang.String)
 	 */
 	public Date checkExistingOfad(String hash);
-	
-	/* (non-Javadoc)
-	 * @see server.beans.articulos.AdministradorArticulos#buscarArticulo(long)
-	 */
-	public Articulo buscarArticulo(long ref);
-		
+				
 	/* (non-Javadoc)
 	 * @see server.beans.pedidos.AdministradorPedidos#nuevoEnvT(server.VO.EnvT.EnvTVO, boolean)
 	 */

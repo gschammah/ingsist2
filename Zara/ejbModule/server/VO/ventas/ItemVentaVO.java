@@ -1,3 +1,11 @@
+/*
+ * Ingeniería en sistemas 2
+ * TP Tienda Zara - Grupo 13
+ * 
+ * Integrantes:
+ * Gabriel Schammah
+ * Maximiliano Landivar
+ */
 package server.VO.ventas;
 
 import java.io.Serializable;

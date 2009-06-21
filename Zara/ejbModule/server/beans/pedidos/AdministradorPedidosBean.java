@@ -164,7 +164,7 @@ public class AdministradorPedidosBean implements AdministradorPedidos {
 		try {
 			return new Integer(q.getSingleResult().toString());
 		}
-		catch (NullPointerException e) {
+		catch (Exception e) {
 			return 0;
 		}
 
@@ -229,7 +229,7 @@ public class AdministradorPedidosBean implements AdministradorPedidos {
 		try {
 			return new Integer(q.getSingleResult().toString());
 		}
-		catch (NullPointerException e) {
+		catch (Exception e) {
 			return 0;
 		}
 	}
@@ -303,7 +303,6 @@ public class AdministradorPedidosBean implements AdministradorPedidos {
 			return p.getId();
 		}
 		catch (Exception e) {
-			e.printStackTrace();
 			return 0;
 		}
 	}

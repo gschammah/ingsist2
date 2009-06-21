@@ -81,6 +81,7 @@ public class ItemVenta implements Serializable {
 		ItemVentaVO vo = new ItemVentaVO();
 		vo.setArticulo(this.articulo.getVO());
 		vo.setCantidad(this.cantidad);
+		vo.setPrecio(this.precio);
 		vo.setId(this.id);		
 		return vo;
 	}

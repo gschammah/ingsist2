@@ -1,3 +1,11 @@
+/*
+ * Ingeniería en sistemas 2
+ * TP Tienda Zara - Grupo 13
+ * 
+ * Integrantes:
+ * Gabriel Schammah
+ * Maximiliano Landivar
+ */
 package server.beans.pedidos;
 
 import java.util.ArrayList;
@@ -23,15 +31,24 @@ import server.entidades.EnvT.ItemEnvT;
 import server.entidades.PALC.PALC;
 import server.entidades.articulos.Articulo;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AdministradorPedidosBean.
+ */
 @Stateful
 public class AdministradorPedidosBean implements AdministradorPedidos {
 
+	/** Entity Manager */
 	@PersistenceContext
 	private EntityManager em;
 
+	/** Administrador Articulos Bean. */
 	@EJB(name = "ZaraEAR/AdministradorArticulosBean/local")
 	AdministradorArticulos admArticulos;
 
+	/* (non-Javadoc)
+	 * @see server.beans.pedidos.AdministradorPedidos#nuevoEnvT(server.VO.EnvT.EnvTVO, boolean)
+	 */
 	public EnvTVO nuevoEnvT(EnvTVO envtVO, boolean save) {
 
 		EnvT envt = new EnvT();
@@ -74,6 +91,9 @@ public class AdministradorPedidosBean implements AdministradorPedidos {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see server.beans.pedidos.AdministradorPedidos#checkPedidoExistente(java.lang.String)
+	 */
 	@SuppressWarnings("unchecked")
 	public Date checkPedidoExistente(String hash) {
 		Query q = em
@@ -89,6 +109,11 @@ public class AdministradorPedidosBean implements AdministradorPedidos {
 		}
 	}
 
+	/**
+	 * Devuelve una lista de artículos que se encuentran bajo punto de pedido.
+	 * 
+	 * @return Lista de artículos bajo PdP
+	 */
 	@SuppressWarnings("unchecked")
 	private Collection<Articulo> getPdP() {
 
@@ -98,6 +123,11 @@ public class AdministradorPedidosBean implements AdministradorPedidos {
 		return q.getResultList();
 	}
 
+	/**
+	 * Devuelve una lista de artículos disponible en la última OfAD ingresada.
+	 * 
+	 * @return Lista de Artículos
+	 */
 	@SuppressWarnings("unchecked")
 	private Collection<Articulo> getUltimoOfad() {
 
@@ -109,6 +139,16 @@ public class AdministradorPedidosBean implements AdministradorPedidos {
 		return q.getResultList();
 	}
 
+	/**
+	 * Devuelve la cantidad Vendida entre las fechas recibidas de un artículo
+	 * en particular.
+	 * 
+	 * @param referencia Referencia del Artículo
+	 * @param fechaDesde Fecha de inicio
+	 * @param fechaHasta Fecha final
+	 * 
+	 * @return Entero con la cantidad vendida del artículo
+	 */
 	private int getCantVendida(long referencia, Date fechaDesde, Date fechaHasta) {
 
 		Query q = em.createQuery("SELECT SUM(item.cantidad) FROM Venta v " +
@@ -130,6 +170,14 @@ public class AdministradorPedidosBean implements AdministradorPedidos {
 
 	}
 
+	/**
+	 * Devuelve una lista de artículos con vendidos entre las fechas ingresadas 
+	 * 
+	 * @param fechaDesde Fecha inicial
+	 * @param fechaHasta Fecha final
+	 * 
+	 * @return Lista de artículos vendidos.
+	 */
 	@SuppressWarnings("unchecked")
 	private Collection<Articulo> getArtVendidos(Date fechaDesde, Date fechaHasta) {
 
@@ -144,6 +192,11 @@ public class AdministradorPedidosBean implements AdministradorPedidos {
 		return q.getResultList();
 	}
 	
+	/**
+	 * Calcula los artículos pendientes de envío.
+	 * 
+	 * @return Devuelve una lista de artículos pendientes.
+	 */
 	@SuppressWarnings("unchecked")
 	private Collection<Articulo> getArtPendientes() {
 
@@ -158,6 +211,13 @@ public class AdministradorPedidosBean implements AdministradorPedidos {
 		return q.getResultList();
 	}
 		
+	/**
+	 * Calcula la cantidad pendiente de envío de un artículo particular.
+	 * 
+	 * @param ref Referencia del artículo
+	 * 
+	 * @return Cantidad pendiente
+	 */
 	private int getArtPendientes(long ref) {
 
 		Query q = em.createQuery("SELECT i.cantidadPendiente FROM ItemEnvT i " +
@@ -174,8 +234,10 @@ public class AdministradorPedidosBean implements AdministradorPedidos {
 		}
 	}
 
-	// Todo completar palc
-	
+
+	/* (non-Javadoc)
+	 * @see server.beans.pedidos.AdministradorPedidos#getPALC(long)
+	 */
 	public PalcPropuestoVO getPALC(long ref) {
 		
 		ArticuloVO art = admArticulos.buscarArticuloVO(ref);
@@ -196,6 +258,9 @@ public class AdministradorPedidosBean implements AdministradorPedidos {
 		return palc;
 	}
 
+	/* (non-Javadoc)
+	 * @see server.beans.pedidos.AdministradorPedidos#getPALC()
+	 */
 	public Collection<PalcPropuestoVO> getPALC() {
 
 		Collection<PalcPropuestoVO> palc = new ArrayList<PalcPropuestoVO>();
@@ -225,6 +290,9 @@ public class AdministradorPedidosBean implements AdministradorPedidos {
 		return palc;
 	}
 
+	/* (non-Javadoc)
+	 * @see server.beans.pedidos.AdministradorPedidos#registraPALC(server.VO.PALC.PALCVO)
+	 */
 	public int registraPALC(PALCVO palc) {
 		
 		PALC p = new PALC();

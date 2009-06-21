@@ -1,3 +1,11 @@
+/*
+ * Ingeniería en sistemas 2
+ * TP Tienda Zara - Grupo 13
+ * 
+ * Integrantes:
+ * Gabriel Schammah
+ * Maximiliano Landivar
+ */
 package server.beans.ventas;
 
 import java.util.ArrayList;
@@ -14,15 +22,30 @@ import server.entidades.articulos.Articulo;
 import server.entidades.ventas.ItemVenta;
 import server.entidades.ventas.Venta;
 
+// TODO: Auto-generated Javadoc
+/**
+ * Bean que Administrada las Ventas.
+ */
 @Stateful
 public class AdministradorVentasBean implements AdministradorVentas {
 
+	/** EntityManager */
 	@PersistenceContext
 	private EntityManager em;
 
+	/** Bean Administrador Articulos. */
 	@EJB(name = "ZaraEAR/AdministradorArticulosBean/local")
 	AdministradorArticulos admArticulos;
 	
+	/**
+	 * Recibe la lista de artículos facturados y calcula la cantidad
+	 * total pedida del mismo artículo
+	 * 
+	 * @param itemVenta Línea de la factura
+	 * @param items Todas las líneas de la factura.
+	 * 
+	 * @return Cantidad total 
+	 */
 	private int mergeArticulos(ItemVenta itemVenta, Collection<ItemVenta> items) {
 		
 		int result = 0;
@@ -36,6 +59,9 @@ public class AdministradorVentasBean implements AdministradorVentas {
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see server.beans.ventas.AdministradorVentas#nuevaVenta(server.VO.ventas.VentaVO)
+	 */
 	public VentaVO nuevaVenta(VentaVO vo) {
 		
 		Collection<ItemVenta> result = new ArrayList<ItemVenta>();		

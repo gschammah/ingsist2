@@ -1,3 +1,11 @@
+/*
+ * Ingeniería en sistemas 2
+ * TP Tienda Zara - Grupo 13
+ * 
+ * Integrantes:
+ * Gabriel Schammah
+ * Maximiliano Landivar
+ */
 package server.beans.articulos;
 
 
@@ -19,16 +27,19 @@ import server.entidades.articulos.Articulo;
 
 
 /**
- * Bean Stateful que administra articulos
- *
+ * Bean Stateful que administra articulos.
  */
 @Stateful
 public class AdministradorArticulosBean implements AdministradorArticulos {
 	
+	/** EntityManager */
 	@PersistenceContext
 	private EntityManager em;
 		
 	
+	/* (non-Javadoc)
+	 * @see server.beans.articulos.AdministradorArticulos#nuevoOfad(server.VO.OfAD.OfADVO, boolean)
+	 */
 	public OfADVO nuevoOfad(OfADVO ofadVO, boolean save) {
 		OfAD ofad = new OfAD();
 		ofad.setVO(ofadVO);
@@ -72,6 +83,9 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 		return ofad.getVO();
 	}
 	
+	/* (non-Javadoc)
+	 * @see server.beans.articulos.AdministradorArticulos#checkExistingOfad(java.lang.String)
+	 */
 	@SuppressWarnings("unchecked")
 	public Date checkExistingOfad(String hash){
 		String query;
@@ -102,11 +116,17 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 		}										
 	}
 	
+	/* (non-Javadoc)
+	 * @see server.beans.articulos.AdministradorArticulos#buscarArticulo(long)
+	 */
 	public Articulo buscarArticulo(long ref){		
 		Articulo result = em.find(Articulo.class, ref);
 		return result;
 	}
 	
+	/* (non-Javadoc)
+	 * @see server.beans.articulos.AdministradorArticulos#buscarArticuloVO(long)
+	 */
 	public ArticuloVO buscarArticuloVO(long ref) {
 		Articulo result = em.find(Articulo.class, ref);
 		if (result == null)

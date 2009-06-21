@@ -25,6 +25,7 @@ public class VentaVO implements Serializable {
 	private float iva;
 	private float total;
 	private boolean hayStock = true;
+	private String cliente;
 
 	public boolean isHayStock() {
 		return hayStock;
@@ -92,6 +93,14 @@ public class VentaVO implements Serializable {
 
 	public void addItem(ItemVentaVO vo) {
 		items.add(vo);
+	}
+
+	public String getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(String cliente) {
+		this.cliente = cliente;
 	}
 
 }

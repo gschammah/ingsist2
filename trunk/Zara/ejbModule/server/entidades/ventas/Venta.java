@@ -39,6 +39,7 @@ public class Venta implements Serializable {
 	private float iva;
 	private float total;
 	private boolean hayStock = true;
+	private String cliente;
 
 	@Transient
 	public boolean isHayStock() {
@@ -116,6 +117,7 @@ public class Venta implements Serializable {
 		this.subTotal = vo.getSubTotal();
 		this.iva = vo.getIva();
 		this.hayStock = vo.isHayStock();
+		this.cliente = vo.getCliente();
 		this.tipoFactura = vo.getTipoFactura();
 		this.items = voToVenta(vo.getItems());
 	}
@@ -129,6 +131,7 @@ public class Venta implements Serializable {
 		vo.setTotal(this.total);
 		vo.setId(this.id);
 		vo.setTipoFactura(this.tipoFactura);
+		vo.setCliente(this.cliente);
 		vo.setItems(this.ventaToVO());
 		vo.setHayStock(this.hayStock);
 		return vo;
@@ -155,6 +158,14 @@ public class Venta implements Serializable {
 		}
 
 		return result;
+	}
+
+	public String getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(String cliente) {
+		this.cliente = cliente;
 	}
 
 }

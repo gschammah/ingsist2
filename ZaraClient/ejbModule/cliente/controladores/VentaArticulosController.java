@@ -63,7 +63,13 @@ public class VentaArticulosController extends Controlador {
 			ArticuloVO art = getArticulo(Long.parseLong(fila.get(0).toString()));
 
 			itemVenta.setArticulo(art);
-			itemVenta.setPrecio(Float.parseFloat(fila.get(3).toString()));
+			
+			double d = Double.parseDouble(fila.get(3).toString());
+			if (vista.getTipoFactura() == 'A'){
+				d = d/1.21;
+			};
+			
+			itemVenta.setPrecio(Float.parseFloat(Double.toString(d)));
 			itemVenta.setCantidad(Integer.parseInt(fila.get(5).toString()));
 
 			venta.addItem(itemVenta);
@@ -72,6 +78,7 @@ public class VentaArticulosController extends Controlador {
 		venta.setSubTotal(Float.parseFloat(datosT[0].toString()));
 		venta.setIva(Float.parseFloat(datosT[1].toString()));
 		venta.setTotal(Float.parseFloat(datosT[2].toString()));
+		venta.setCliente(datosT[3].toString());
 
 		VentaVO result = (modelo.getFachada().nuevaVenta(venta));
 				

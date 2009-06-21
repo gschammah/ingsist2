@@ -86,7 +86,7 @@ public class VentaArticulos extends JFrame {
         tablaArticulos = new JTable();
         jPanel2 = new JPanel();
         jLabel2 = new JLabel();
-        jComboBox1 = new JComboBox();
+        comboFactura = new JComboBox();
         jLabel4 = new JLabel();
         nomCliente = new JTextField();
         lblFecha = new JLabel();
@@ -267,9 +267,9 @@ public class VentaArticulos extends JFrame {
 
         jLabel2.setText("Tipo de Factura:");
 
-        jComboBox1.setModel(new DefaultComboBoxModel(new String[] { "A", "B", "C" }));
+        comboFactura.setModel(new DefaultComboBoxModel(new String[] { "A", "B", "C" }));
 
-        jComboBox1.addActionListener(new ActionListener(){
+        comboFactura.addActionListener(new ActionListener(){
 
 			public void actionPerformed(ActionEvent arg0) {
 				setVals();				
@@ -297,7 +297,7 @@ public class VentaArticulos extends JFrame {
                 .addGap(138, 138, 138)
                 .addComponent(jLabel2)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(comboFactura, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
                 .addComponent(lblFecha)
                 .addGap(21, 21, 21))
@@ -306,7 +306,7 @@ public class VentaArticulos extends JFrame {
             jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel2)
-                .addComponent(jComboBox1, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+                .addComponent(comboFactura, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
                 .addComponent(lblFecha)
                 .addComponent(jLabel4)
                 .addComponent(nomCliente, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
@@ -391,7 +391,7 @@ public class VentaArticulos extends JFrame {
     private JButton btn_agregar;
     private JButton btn_generarFactura;
     private JButton btn_salir;
-    private JComboBox jComboBox1;
+    private JComboBox comboFactura;
     private JLabel jLabel1;
     private JLabel jLabel2;
     private JLabel subtotal;
@@ -445,26 +445,26 @@ public class VentaArticulos extends JFrame {
 	}
 	
 	public String getTipoFactura(){
-		return this.jComboBox1.getSelectedItem().toString();
+		return this.comboFactura.getSelectedItem().toString();
 	}
 	
 	public void setIVA(){
 		
 		DecimalFormat dec = new DecimalFormat("$#0.00");
 		
-		if (this.jComboBox1.getSelectedItem().toString().equalsIgnoreCase("A")){
+		if (this.comboFactura.getSelectedItem().toString().equalsIgnoreCase("A")){
 			sub=(sub/1.21);
 			imp=(sub*0.21);
 			subtotal.setText("Subtotal: " + dec.format(sub));
 			iva.setText("IVA: " + dec.format(imp));
 	    };
 		
-		if (this.jComboBox1.getSelectedItem().toString().equalsIgnoreCase("B")){
+		if (this.comboFactura.getSelectedItem().toString().equalsIgnoreCase("B")){
 			imp=0;
 	        iva.setText("IVA: " + dec.format(imp));
 		};
 
-		if (this.jComboBox1.getSelectedItem().toString().equalsIgnoreCase("C")){
+		if (this.comboFactura.getSelectedItem().toString().equalsIgnoreCase("C")){
 			imp=0;
 	        iva.setText("IVA: " + dec.format(imp));
 		};

@@ -16,9 +16,11 @@ import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import server.VO.clientes.ClienteVO;
 import server.VO.ventas.VentaVO;
 import server.beans.articulos.AdministradorArticulos;
 import server.entidades.articulos.Articulo;
+import server.entidades.clientes.Cliente;
 import server.entidades.ventas.ItemVenta;
 import server.entidades.ventas.Venta;
 
@@ -58,6 +60,14 @@ public class AdministradorVentasBean implements AdministradorVentas {
 		}
 		return result;
 	}
+	
+	public ClienteVO buscarCliente(String cuit){		
+		Cliente result = em.find(Cliente.class, cuit);
+		if (result == null) {
+			return null;
+		}
+		return result.getVO();
+	}
 
 	/* (non-Javadoc)
 	 * @see server.beans.ventas.AdministradorVentas#nuevaVenta(server.VO.ventas.VentaVO)
@@ -68,6 +78,8 @@ public class AdministradorVentasBean implements AdministradorVentas {
 		
 		Venta venta = new Venta();
 		venta.setVO(vo);
+		
+			
 		
 		Collection<ItemVenta> items = venta.getItems();
 
@@ -95,8 +107,15 @@ public class AdministradorVentasBean implements AdministradorVentas {
 			// hay stock
 			for (ItemVenta item : items) {
 				em.merge(item.getArticulo());
+			}						
+			
+			if (buscarCliente(venta.getCliente().getCuit()) != null) {
+				em.merge(venta.getCliente());
 			}
-			em.persist(venta);
+			else {
+				em.persist(venta.getCliente());
+			}
+			em.persist(venta);			
 			venta.setHayStock(true);			
 		}
 		return venta.getVO();

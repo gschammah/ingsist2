@@ -8,10 +8,15 @@
  */
 package cliente.tools;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.CharArrayWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Logger;
@@ -23,6 +28,9 @@ import org.jdom.input.JDOMParseException;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.XMLOutputter;
 
+import com.sun.org.apache.xerces.internal.impl.io.UTF8Reader;
+import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
+
 import server.VO.EnvT.EnvTVO;
 import server.VO.EnvT.ItemEnvTVO;
 import server.VO.OfAD.ItemOfADVO;
@@ -32,20 +40,50 @@ import server.VO.PALC.PALCVO;
 import server.VO.articulos.ArtHogarVO;
 import server.VO.articulos.ArtRopaVO;
 import server.VO.articulos.ArticuloVO;
+import sun.nio.cs.ISO_8859_2;
+import sun.nio.cs.UTF_32;
 
 public class ParseXML {
+	
+	private static Document getDocument(String file) throws IOException, JDOMException {		
+		SAXBuilder builder = new SAXBuilder();		
+		
+		FileInputStream f = new FileInputStream(file);									
+		InputStreamReader reader = new InputStreamReader(f);
+		BufferedReader r = new BufferedReader(reader);
+		CharArrayWriter charWriter = new CharArrayWriter();											
+														
+		String firstLine = r.readLine();
+		byte[] firstLineBytes = firstLine.getBytes(new ISO_8859_2());
+		
+		//me fijo si es utf8 o si ya tiene header
+		if (!firstLine.startsWith("<?xml") && firstLineBytes[0] != 63) {
+			charWriter.append("<?xml version='1.0' encoding='ISO-8859-1'?>\n");
+			charWriter.append(firstLine + "\n");				
+			while (r.ready()){					
+				charWriter.append(r.readLine() + "\n");
+			}				
+			charWriter.close();
+			
+			String output = new String(charWriter.toCharArray());
+			
+			return builder.build(new ByteArrayInputStream(output.getBytes()));			
+		} else {
+			return builder.build(new FileInputStream(file));
+		}																									
+		
+
+	}
 
 	@SuppressWarnings("unchecked")
 	public static OfADVO parseOfAD(String file) throws JDOMParseException, JDOMException  {
-
-		SAXBuilder builder = new SAXBuilder();
-		Document doc = null;
+		
 		
 		MD5 md5 = new MD5(file);
-								
+		Document doc = null;
 					
 		try {
-			doc = builder.build(new FileInputStream(file));
+			doc = ParseXML.getDocument(file);									
 		} catch (FileNotFoundException e) {} 
 		  catch (IOException e) {}
 		
@@ -129,14 +167,13 @@ public class ParseXML {
 	
 	@SuppressWarnings("unchecked")
 	public static EnvTVO parseEnvT(String file) throws JDOMParseException, JDOMException  {
-
-		SAXBuilder builder = new SAXBuilder();
+		
 		Document doc = null;
 		
 		MD5 md5 = new MD5(file);
 												
 		try {
-			doc = builder.build(new FileInputStream(file));
+			doc = ParseXML.getDocument(file);			
 		} 
 		catch (FileNotFoundException e) {} 
 		catch (IOException e) {}

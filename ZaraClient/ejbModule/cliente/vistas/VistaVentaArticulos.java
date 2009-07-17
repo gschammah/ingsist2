@@ -75,10 +75,9 @@ public class VistaVentaArticulos extends Vista {
 
 		Object[] datosArticulo = new Object[] { articulo.getReferencia(),
 				articulo.getLinea(), articulo.getDescripcion(),
-				articulo.getPrecioLista(), null, 1 };
+				articulo.getPrecioLista(), null, 1 };			
 
-		((DefaultTableModel) vistaGrafica.getTablaArticulos().getModel())
-				.addRow(datosArticulo);
+		((DefaultTableModel) vistaGrafica.getTablaArticulos().getModel()).addRow(datosArticulo);
 	}
 	
 

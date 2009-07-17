@@ -12,6 +12,7 @@ import java.util.Calendar;
 import java.util.Vector;
 
 import server.VO.articulos.ArticuloVO;
+import server.VO.clientes.ClienteVO;
 import server.VO.ventas.ItemVentaVO;
 import server.VO.ventas.VentaVO;
 import cliente.constantes.ZaraConstants;
@@ -78,7 +79,13 @@ public class VentaArticulosController extends Controlador {
 		venta.setSubTotal(Float.parseFloat(datosT[0].toString()));
 		venta.setIva(Float.parseFloat(datosT[1].toString()));
 		venta.setTotal(Float.parseFloat(datosT[2].toString()));
-		venta.setCliente(datosT[3].toString());
+		ClienteVO cliente = new ClienteVO();
+		cliente.setCuit("1245");
+		cliente.setDireccion("Santa fe 2344");
+		cliente.setNombre("julio");
+		cliente.setRazonSocial("coca");
+		
+		venta.setCliente(cliente);
 
 		VentaVO result = (modelo.getFachada().nuevaVenta(venta));
 				

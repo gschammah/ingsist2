@@ -76,7 +76,8 @@ public class OfADController extends Controlador {
 					vista.cargarDatos(ofadVO);
 					
 				} 				
-				catch (Exception e) {					
+				catch (Exception e) {
+					e.printStackTrace();
 					Logger.getLogger("ofad").warning("El XML no es un OFAD válido.");
 					VistaUtils.showErrorPopup(vista.getVistaGrafica(), "El XML no es un OFAD válido.");
 				}

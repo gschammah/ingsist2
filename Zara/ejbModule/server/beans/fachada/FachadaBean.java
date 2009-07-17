@@ -19,6 +19,7 @@ import server.VO.OfAD.OfADVO;
 import server.VO.PALC.PALCVO;
 import server.VO.PALC.PalcPropuestoVO;
 import server.VO.articulos.ArticuloVO;
+import server.VO.clientes.ClienteVO;
 import server.VO.ventas.VentaVO;
 import server.beans.articulos.AdministradorArticulos;
 import server.beans.pedidos.AdministradorPedidos;
@@ -120,6 +121,10 @@ public class FachadaBean implements Fachada {
 	 */
 	public VentaVO nuevaVenta(VentaVO vo) {
 		return admVentas.nuevaVenta(vo);
+	}
+	
+	public ClienteVO buscarCliente(String cuit){
+		return admVentas.buscarCliente(cuit);
 	}
 	
 }

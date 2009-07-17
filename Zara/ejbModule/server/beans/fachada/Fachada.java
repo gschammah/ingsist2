@@ -18,6 +18,7 @@ import server.VO.OfAD.OfADVO;
 import server.VO.PALC.PALCVO;
 import server.VO.PALC.PalcPropuestoVO;
 import server.VO.articulos.ArticuloVO;
+import server.VO.clientes.ClienteVO;
 import server.VO.ventas.VentaVO;
 
 // TODO: Auto-generated Javadoc
@@ -71,4 +72,6 @@ public interface Fachada {
 	 * @see server.beans.pedidos.AdministradorPedidos#registraPALC(server.VO.PALC.PALCVO)
 	 */
 	public int registraPALC(PALCVO palc);
+	
+	public ClienteVO buscarCliente(String cuit);
 }

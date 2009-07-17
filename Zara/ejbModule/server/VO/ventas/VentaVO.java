@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
+import server.VO.clientes.ClienteVO;
+import server.entidades.clientes.Cliente;
+
 public class VentaVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -25,7 +28,7 @@ public class VentaVO implements Serializable {
 	private float iva;
 	private float total;
 	private boolean hayStock = true;
-	private String cliente;
+	private ClienteVO cliente;
 
 	public boolean isHayStock() {
 		return hayStock;
@@ -95,11 +98,11 @@ public class VentaVO implements Serializable {
 		items.add(vo);
 	}
 
-	public String getCliente() {
+	public ClienteVO getCliente() {
 		return cliente;
 	}
 
-	public void setCliente(String cliente) {
+	public void setCliente(ClienteVO cliente) {
 		this.cliente = cliente;
 	}
 

@@ -21,10 +21,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
 import server.VO.ventas.ItemVentaVO;
 import server.VO.ventas.VentaVO;
+import server.entidades.clientes.Cliente;
 
 @Entity
 public class Venta implements Serializable {
@@ -39,7 +41,7 @@ public class Venta implements Serializable {
 	private float iva;
 	private float total;
 	private boolean hayStock = true;
-	private String cliente;
+	private Cliente cliente;
 
 	@Transient
 	public boolean isHayStock() {
@@ -111,13 +113,16 @@ public class Venta implements Serializable {
 	}
 
 	public void setVO(VentaVO vo) {
+		Cliente cliente = new Cliente();
+		cliente.setVO(vo.getCliente());
+		
 		this.fecha = vo.getFecha();
 		this.id = vo.getId();
 		this.total = vo.getTotal();
 		this.subTotal = vo.getSubTotal();
 		this.iva = vo.getIva();
-		this.hayStock = vo.isHayStock();
-		this.cliente = vo.getCliente();
+		this.hayStock = vo.isHayStock();		
+		this.cliente = cliente;
 		this.tipoFactura = vo.getTipoFactura();
 		this.items = voToVenta(vo.getItems());
 	}
@@ -131,7 +136,7 @@ public class Venta implements Serializable {
 		vo.setTotal(this.total);
 		vo.setId(this.id);
 		vo.setTipoFactura(this.tipoFactura);
-		vo.setCliente(this.cliente);
+		vo.setCliente(this.cliente.getVO());
 		vo.setItems(this.ventaToVO());
 		vo.setHayStock(this.hayStock);
 		return vo;
@@ -160,11 +165,12 @@ public class Venta implements Serializable {
 		return result;
 	}
 
-	public String getCliente() {
+	@OneToOne
+	public Cliente getCliente() {
 		return cliente;
 	}
 
-	public void setCliente(String cliente) {
+	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
 

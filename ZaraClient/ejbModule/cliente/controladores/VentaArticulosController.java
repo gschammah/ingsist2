@@ -79,13 +79,8 @@ public class VentaArticulosController extends Controlador {
 		venta.setSubTotal(Float.parseFloat(datosT[0].toString()));
 		venta.setIva(Float.parseFloat(datosT[1].toString()));
 		venta.setTotal(Float.parseFloat(datosT[2].toString()));
-		ClienteVO cliente = new ClienteVO();
-		cliente.setCuit("1245");
-		cliente.setDireccion("Santa fe 2344");
-		cliente.setNombre("julio");
-		cliente.setRazonSocial("coca");
 		
-		venta.setCliente(cliente);
+		venta.setCliente((ClienteVO) datosT[3]);
 
 		VentaVO result = (modelo.getFachada().nuevaVenta(venta));
 				
@@ -141,6 +136,9 @@ public class VentaArticulosController extends Controlador {
 		VistaUtils.showNumericoPopup(vista.getVistaGrafica());		
 	}
 	
+	public ClienteVO getCliente(String cuit){
+		return modelo.getFachada().buscarCliente(cuit);
+	}
 	
 
 }

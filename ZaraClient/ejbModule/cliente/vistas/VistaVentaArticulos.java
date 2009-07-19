@@ -17,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 import server.VO.articulos.ArticuloVO;
 import server.VO.ventas.ItemVentaVO;
 import cliente.modelo.ZaraModel;
+import cliente.principal.ZaraMain;
 import cliente.vistas.gui.VentaArticulos;
 import cliente.vistas.gui.tables.VentasCantidadTableRenderer;
 import framework.vista.Vista;
@@ -118,7 +119,6 @@ public class VistaVentaArticulos extends Vista {
 	public void setVistaGrafica(VentaArticulos vistaGrafica) {
 		this.vistaGrafica = vistaGrafica;
 	}
-	
-	
 
+		
 }

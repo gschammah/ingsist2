@@ -86,7 +86,14 @@ public class VistaFactura extends Vista {
 		
 		
 		Object[] datosT = {venta.getSubTotal(), venta.getIva(), venta.getTotal()};
-		Object[] datosF = {venta.getCliente(), DateFormat.getInstance().format(venta.getFecha()), venta.getTipoFactura(), venta.getId()};
+		Object[] datosF = {
+				venta.getCliente().getNombre(), 
+				DateFormat.getInstance().format(venta.getFecha()), 
+				venta.getTipoFactura(), 
+				venta.getId(), 
+				venta.getCliente().getCuit(), 
+				venta.getCliente().getRazonSocial(),
+				venta.getCliente().getDireccion()};
 		
 		vistaGrafica.setDatosT(datosT);
 		vistaGrafica.setDatosF(datosF);

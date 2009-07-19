@@ -49,6 +49,9 @@ public class Factura extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         fechaFac = new javax.swing.JLabel();
         clienteFac = new javax.swing.JLabel();
+        cuitcuil = new javax.swing.JLabel();
+        razonsocial = new javax.swing.JLabel();
+        direccion = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         numeroFac = new javax.swing.JLabel();
         tipoFac = new javax.swing.JLabel();
@@ -143,34 +146,62 @@ public class Factura extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(clienteFac))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(numeroFac))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(clienteFac))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(tipoFac)
                         .addGap(637, 637, 637)
                         .addComponent(fechaFac)))
                 .addContainerGap(14, Short.MAX_VALUE))
+                
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(cuitcuil))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(razonsocial))                        
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(direccion)
+                        .addGap(637, 637, 637)
+                        ))
+                .addContainerGap(14, Short.MAX_VALUE))
+                
         );
+        
         jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tipoFac)
-                    .addComponent(fechaFac))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(clienteFac))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(numeroFac)))
-        );
+                jPanel2Layout.createSequentialGroup()
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(tipoFac)
+                        .addComponent(fechaFac))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel9)
+                        .addComponent(numeroFac))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel4)
+                        .addComponent(clienteFac))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cuitcuil))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(razonsocial))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(direccion)
+                        )        
+            );
+        
+        ////////
+        
+        
 
         jButton1.setText("Salir");
         jButton1.addActionListener(new ActionListener(){
@@ -236,6 +267,9 @@ public class Factura extends javax.swing.JFrame {
     private javax.swing.JLabel fechaFac;
     private javax.swing.JLabel iva;
     private javax.swing.JLabel total;
+    private javax.swing.JLabel cuitcuil;
+    private javax.swing.JLabel razonsocial;
+    private javax.swing.JLabel direccion;
     private javax.swing.JLabel clienteFac;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -264,6 +298,9 @@ public class Factura extends javax.swing.JFrame {
     	this.fechaFac.setText("Fecha: " + datosF[1].toString());
     	this.tipoFac.setText("Factura "+ datosF[2].toString());
     	this.numeroFac.setText(datosF[3].toString());
+    	this.cuitcuil.setText("CUIT/CUIL: "+ datosF[4].toString());
+    	this.razonsocial.setText("Razon Social: "+ datosF[5].toString());
+    	this.direccion.setText("Dirección: "+ datosF[6].toString());
     	  	
     }
     

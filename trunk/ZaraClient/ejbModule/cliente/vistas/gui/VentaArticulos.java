@@ -36,8 +36,11 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
+import server.VO.clientes.ClienteVO;
+
 import cliente.constantes.ZaraConstants;
 import cliente.controladores.VentaArticulosController;
+import cliente.principal.ZaraMain;
 import cliente.vistas.VistaVentaArticulos;
 import cliente.vistas.gui.tables.VentasCantidadTableRenderer;
 import cliente.vistas.gui.tables.VentasTableButtonEditor;
@@ -60,6 +63,10 @@ public class VentaArticulos extends JFrame {
         vistaPadre = vista;
     }
 
+    
+    
+    
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -88,7 +95,13 @@ public class VentaArticulos extends JFrame {
         jLabel2 = new JLabel();
         comboFactura = new JComboBox();
         jLabel4 = new JLabel();
+        cuitcuilL = new JLabel("cuit/cuil:");
+        razonsocialL = new JLabel("Razon Social:");
+        direccionL = new JLabel("Dirección:");
         nomCliente = new JTextField();
+        cuitcuil = new JTextField();
+        razonsocial = new JTextField();
+        direccion = new JTextField();
         lblFecha = new JLabel();
         subtotal = new JLabel();
         iva = new JLabel();
@@ -114,6 +127,18 @@ public class VentaArticulos extends JFrame {
 				if (e.getKeyCode() == KeyEvent.VK_ENTER )
 				{
 					doAgregarArticulo();
+				}
+			}
+			public void keyReleased(KeyEvent arg0) {}
+			public void keyTyped(KeyEvent arg0) {}
+		});
+        
+        cuitcuil.addKeyListener(new KeyListener(){
+
+			public void keyPressed(KeyEvent e) {			
+				if ((e.getKeyCode() == KeyEvent.VK_ENTER ))
+				{
+					doBuscarCliente();
 				}
 			}
 			public void keyReleased(KeyEvent arg0) {}
@@ -282,36 +307,72 @@ public class VentaArticulos extends JFrame {
         jLabel4.setText("Cliente:");
 
         nomCliente.setText("");
+        cuitcuil.setText("");
+        razonsocial.setText("");
+        direccion.setText("");
 
         lblFecha.setText("Fecha: " + DateFormat.getInstance().format((Calendar.getInstance().getTime())));
 
         GroupLayout jPanel2Layout = new GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(jLabel4)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nomCliente, GroupLayout.PREFERRED_SIZE, 196, GroupLayout.PREFERRED_SIZE)
-                .addGap(138, 138, 138)
-                .addComponent(jLabel2)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(comboFactura, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
-                .addComponent(lblFecha)
-                .addGap(21, 21, 21))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                .addComponent(jLabel2)
-                .addComponent(comboFactura, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
-                .addComponent(lblFecha)
-                .addComponent(jLabel4)
-                .addComponent(nomCliente, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        );
 
+        
+        jPanel2Layout.setHorizontalGroup(
+                jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(6, 6, 6)
+                    .addComponent(cuitcuilL)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(cuitcuil, GroupLayout.PREFERRED_SIZE, 196, GroupLayout.PREFERRED_SIZE)
+                    .addGap(138, 138, 138)
+                    .addComponent(jLabel2)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(comboFactura, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
+                    .addComponent(lblFecha)
+                    .addGap(21, 21, 21))
+                 .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(6, 6, 6)
+                    .addComponent(jLabel4)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(nomCliente, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
+                    .addGap(138, 138, 138)
+                    .addComponent(razonsocialL)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(razonsocial, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE))                    
+                 .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(6, 6, 6)
+                    .addComponent(direccionL)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(direccion, GroupLayout.PREFERRED_SIZE, 187, GroupLayout.PREFERRED_SIZE)
+                    .addGap(138, 138, 138))              
+            );
+        
+            jPanel2Layout.setVerticalGroup(
+                jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(comboFactura, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblFecha)
+                    .addComponent(cuitcuilL)
+                    .addComponent(cuitcuil))
+                .addGap(6,6,6)    
+                .addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                	.addComponent(jLabel4)
+                    .addComponent(nomCliente, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                	.addComponent(razonsocial)
+                	.addComponent(razonsocialL))                
+                .addGap(6,6,6)
+                .addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    	.addComponent(direccion)
+                    	.addComponent(direccionL)
+                   )                    
+                 );
+        
+        
+        
+        
+        
         sub =0;
         subtotal.setText("Subtotal: " + sub);
 
@@ -382,7 +443,7 @@ public class VentaArticulos extends JFrame {
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        
+            
                
         pack();
     }
@@ -400,12 +461,18 @@ public class VentaArticulos extends JFrame {
     private JLabel iva;
     private JLabel total;
     private JLabel lblDetalles;
+    private JLabel cuitcuilL;
+    private JLabel razonsocialL;
+    private JLabel direccionL;
     private JPanel jPanel1;
     private JPanel jPanel2;
     private JScrollPane jScrollPane1;
     private JTable tablaArticulos;
     private JTextField txt_referencia;
     private JTextField nomCliente;
+    private JTextField cuitcuil;
+    private JTextField razonsocial;
+    private JTextField direccion;
     private JEditorPane txtDetalles;
     private double sub;
     private double imp;
@@ -431,13 +498,37 @@ public class VentaArticulos extends JFrame {
 	
 	private void doGenerarFactura(ActionEvent evt) {
 		
+		ClienteVO cliente = new ClienteVO();
+		cliente.setCuit(this.cuitcuil.getText());
+		cliente.setNombre(this.nomCliente.getText());
+		cliente.setRazonSocial(this.razonsocial.getText());
+		cliente.setDireccion(this.direccion.getText());
 		
-		Object[] datosT = {this.sub, this.imp, this.tot, this.nomCliente.getText() };
+		
+		Object[] datosT = {this.sub, this.imp, this.tot, cliente };
 					
 	    DefaultTableModel model = (DefaultTableModel) tablaArticulos.getModel();
 	    ((VentaArticulosController)vistaPadre.getControlador()).nuevaVenta(model.getDataVector(), datosT);
 	    
 	      
+	}
+	
+	private void doBuscarCliente(){
+		
+		if (this.cuitcuil.getText().isEmpty()){
+			this.cuitcuil.setText("0");
+		}
+		
+		ClienteVO cliente = new ClienteVO();
+		cliente = ((VentaArticulosController) vistaPadre.getControlador()).getCliente(cuitcuil.getText());
+		
+		if (cliente != null){
+			this.nomCliente.setText(cliente.getNombre());
+			this.razonsocial.setText(cliente.getRazonSocial());
+			this.direccion.setText(cliente.getDireccion());
+		}
+		
+		
 	}
 
 	public JEditorPane getTxtDetalles() {
@@ -457,16 +548,19 @@ public class VentaArticulos extends JFrame {
 			imp=(sub*0.21);
 			subtotal.setText("Subtotal: " + dec.format(sub));
 			iva.setText("IVA: " + dec.format(imp));
+			enableFields();
 	    };
 		
 		if (this.comboFactura.getSelectedItem().toString().equalsIgnoreCase("B")){
 			imp=0;
 	        iva.setText("IVA: " + dec.format(imp));
+	        disableFields();
 		};
 
 		if (this.comboFactura.getSelectedItem().toString().equalsIgnoreCase("C")){
 			imp=0;
 	        iva.setText("IVA: " + dec.format(imp));
+	        disableFields();
 		};
 	}
 	
@@ -495,6 +589,22 @@ public class VentaArticulos extends JFrame {
 		setTotal();
 	}
 
+	public void disableFields(){
+		cuitcuil.setText("0");
+		cuitcuil.setEditable(false);
+		nomCliente.setEditable(false);
+		razonsocial.setEditable(false);
+		direccion.setEditable(false);
+		doBuscarCliente();
+	}
+	public void enableFields(){
+		cuitcuil.setEditable(true);
+		nomCliente.setEditable(true);
+		razonsocial.setEditable(true);
+		direccion.setEditable(true);
+	}
+	
+	
     // End of variables declaration//GEN-END:variables
 
 }

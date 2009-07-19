@@ -1,5 +1,0 @@
-[21/06/2009 16:37:23] INFO - Se cargó exitosamente el Envt. Se actualizó el stock de 6 artículos
-[14/07/2009 18:05:20] WARNING - El artículo 5718823 no existe en la base de datos. Se descarta.
-[14/07/2009 18:05:25] INFO - Se cargó exitosamente el Envt. Se actualizó el stock de 1 artículos
-[17/07/2009 18:48:56] WARNING - El XML no es un EnvT válido.
-[17/07/2009 18:56:15] INFO - Se cargó exitosamente el Envt. Se actualizó el stock de 2 artículos

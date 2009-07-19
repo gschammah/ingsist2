@@ -19,6 +19,8 @@ import javax.swing.table.DefaultTableModel;
 
 import server.VO.ventas.ItemVentaVO;
 import server.VO.ventas.VentaVO;
+import cliente.modelo.DatosF;
+import cliente.modelo.DatosT;
 import cliente.modelo.ZaraModel;
 import cliente.vistas.gui.Factura;
 import framework.vista.Vista;
@@ -84,16 +86,16 @@ public class VistaFactura extends Vista {
             
 		}
 		
+		DatosT datosT = new DatosT(venta.getSubTotal(), venta.getIva(), venta.getTotal());				
 		
-		Object[] datosT = {venta.getSubTotal(), venta.getIva(), venta.getTotal()};
-		Object[] datosF = {
+		DatosF datosF = new DatosF(
 				venta.getCliente().getNombre(), 
 				DateFormat.getInstance().format(venta.getFecha()), 
 				venta.getTipoFactura(), 
 				venta.getId(), 
 				venta.getCliente().getCuit(), 
 				venta.getCliente().getRazonSocial(),
-				venta.getCliente().getDireccion()};
+				venta.getCliente().getDireccion());
 		
 		vistaGrafica.setDatosT(datosT);
 		vistaGrafica.setDatosF(datosF);

@@ -16,6 +16,7 @@ import server.VO.clientes.ClienteVO;
 import server.VO.ventas.ItemVentaVO;
 import server.VO.ventas.VentaVO;
 import cliente.constantes.ZaraConstants;
+import cliente.modelo.DatosT;
 import cliente.modelo.ZaraModel;
 import cliente.vistas.VistaFactura;
 import cliente.vistas.VistaUtils;
@@ -52,7 +53,7 @@ public class VentaArticulosController extends Controlador {
 		}
 	}
 	
-	public void nuevaVenta(Vector<Vector<Object>> datos, Object[] datosT) {
+	public void nuevaVenta(Vector<Vector<Object>> datos, DatosT datosT, ClienteVO cliente) {
 
 		VentaVO venta = new VentaVO();
 
@@ -76,11 +77,11 @@ public class VentaArticulosController extends Controlador {
 			venta.addItem(itemVenta);
 		}
 		
-		venta.setSubTotal(Float.parseFloat(datosT[0].toString()));
-		venta.setIva(Float.parseFloat(datosT[1].toString()));
-		venta.setTotal(Float.parseFloat(datosT[2].toString()));
+		venta.setSubTotal(datosT.getSubTotal());
+		venta.setIva(datosT.getIva());
+		venta.setTotal(datosT.getTotal());
 		
-		venta.setCliente((ClienteVO) datosT[3]);
+		venta.setCliente(cliente);
 
 		VentaVO result = (modelo.getFachada().nuevaVenta(venta));
 				

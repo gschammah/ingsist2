@@ -26,6 +26,7 @@ import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.input.JDOMParseException;
 import org.jdom.input.SAXBuilder;
+import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
 import com.sun.org.apache.xerces.internal.impl.io.UTF8Reader;
@@ -251,7 +252,7 @@ public class ParseXML {
 		
 		root.addContent (itemsPedido);
 		
-		XMLOutputter out = new XMLOutputter ();
+		XMLOutputter out = new XMLOutputter (Format.getPrettyFormat());
 		
 		out.output (new Document(root), new FileOutputStream (file));			
 		 

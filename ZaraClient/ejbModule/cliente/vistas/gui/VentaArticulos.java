@@ -8,6 +8,8 @@ package cliente.vistas.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.text.DateFormat;
@@ -40,6 +42,7 @@ import server.VO.clientes.ClienteVO;
 
 import cliente.constantes.ZaraConstants;
 import cliente.controladores.VentaArticulosController;
+import cliente.modelo.DatosT;
 import cliente.principal.ZaraMain;
 import cliente.vistas.VistaVentaArticulos;
 import cliente.vistas.gui.tables.VentasCantidadTableRenderer;
@@ -132,6 +135,15 @@ public class VentaArticulos extends JFrame {
 			public void keyReleased(KeyEvent arg0) {}
 			public void keyTyped(KeyEvent arg0) {}
 		});
+        
+        cuitcuil.addFocusListener(new FocusListener(){
+
+			public void focusGained(FocusEvent e) {							
+			}
+
+			public void focusLost(FocusEvent e) {
+				doBuscarCliente();
+			}});
         
         cuitcuil.addKeyListener(new KeyListener(){
 
@@ -474,9 +486,9 @@ public class VentaArticulos extends JFrame {
     private JTextField razonsocial;
     private JTextField direccion;
     private JEditorPane txtDetalles;
-    private double sub;
-    private double imp;
-    private double tot;
+    private float sub;
+    private float imp;
+    private float tot;
 
 	public JTable getTablaArticulos() {
 		return tablaArticulos;
@@ -504,11 +516,10 @@ public class VentaArticulos extends JFrame {
 		cliente.setRazonSocial(this.razonsocial.getText());
 		cliente.setDireccion(this.direccion.getText());
 		
-		
-		Object[] datosT = {this.sub, this.imp, this.tot, cliente };
+		DatosT datosT = new DatosT(this.sub, this.imp, this.tot);
 					
 	    DefaultTableModel model = (DefaultTableModel) tablaArticulos.getModel();
-	    ((VentaArticulosController)vistaPadre.getControlador()).nuevaVenta(model.getDataVector(), datosT);
+	    ((VentaArticulosController)vistaPadre.getControlador()).nuevaVenta(model.getDataVector(), datosT, cliente);
 	    
 	      
 	}
@@ -544,8 +555,8 @@ public class VentaArticulos extends JFrame {
 		DecimalFormat dec = new DecimalFormat("$#0.00");
 		
 		if (this.comboFactura.getSelectedItem().toString().equalsIgnoreCase("A")){
-			sub=(sub/1.21);
-			imp=(sub*0.21);
+			sub = (float) (sub/1.21);
+			imp = (float) (sub*0.21);
 			subtotal.setText("Subtotal: " + dec.format(sub));
 			iva.setText("IVA: " + dec.format(imp));
 			enableFields();
@@ -566,10 +577,10 @@ public class VentaArticulos extends JFrame {
 	
 	public void setSubtotal(){
 		DecimalFormat dec = new DecimalFormat("$#0.00");
-		sub=0;
+		sub = 0;
 		
 		for (int i=0;i<tablaArticulos.getRowCount();i++){
-			sub=sub+(Double.parseDouble(tablaArticulos.getModel().getValueAt(i, 3).toString())* Double.parseDouble(tablaArticulos.getModel().getValueAt(i, 5).toString()));
+			sub = sub + (new Float(tablaArticulos.getModel().getValueAt(i, 3).toString())* new Float(tablaArticulos.getModel().getValueAt(i, 5).toString()));
 		}
 		
 		subtotal.setText("Subtotal: " + dec.format(sub));

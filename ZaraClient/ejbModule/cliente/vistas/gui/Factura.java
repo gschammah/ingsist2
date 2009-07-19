@@ -13,6 +13,8 @@ import java.text.DecimalFormat;
 import javax.swing.WindowConstants;
 
 import cliente.controladores.FacturaController;
+import cliente.modelo.DatosF;
+import cliente.modelo.DatosT;
 import cliente.vistas.VistaFactura;
 
 /**
@@ -283,24 +285,24 @@ public class Factura extends javax.swing.JFrame {
     	return this.jTable1;
     }
     
-    public void setDatosT(Object[] datosT){
+    public void setDatosT(DatosT datosT){
     	DecimalFormat dec = new DecimalFormat("$#0.00");
     	
-    	subtotal.setText("Subtotal: "+ dec.format(datosT[0]));
-    	iva.setText("IVA: "+ dec.format(datosT[1]));
-    	total.setText("TOTAL: "+ dec.format(datosT[2]));
+    	subtotal.setText("Subtotal: "+ dec.format(datosT.getSubTotal()));
+    	iva.setText("IVA: "+ dec.format(datosT.getIva()));
+    	total.setText("TOTAL: "+ dec.format(datosT.getTotal()));
     	 	
     }
     
-    public void setDatosF(Object[] datosF){
+    public void setDatosF(DatosF datosF){
     	
-    	this.clienteFac.setText(datosF[0].toString());
-    	this.fechaFac.setText("Fecha: " + datosF[1].toString());
-    	this.tipoFac.setText("Factura "+ datosF[2].toString());
-    	this.numeroFac.setText(datosF[3].toString());
-    	this.cuitcuil.setText("CUIT/CUIL: "+ datosF[4].toString());
-    	this.razonsocial.setText("Razon Social: "+ datosF[5].toString());
-    	this.direccion.setText("Dirección: "+ datosF[6].toString());
+    	this.clienteFac.setText(datosF.getClienteFac());
+    	this.fechaFac.setText("Fecha: " + datosF.getFechaFac());
+    	this.tipoFac.setText("Factura "+ datosF.getTipoFac());
+    	this.numeroFac.setText(datosF.getNumeroFac());
+    	this.cuitcuil.setText("CUIT/CUIL: "+ datosF.getCuitcuil());
+    	this.razonsocial.setText("Razon Social: "+ datosF.getRazonsocial());
+    	this.direccion.setText("Dirección: "+ datosF.getDireccion());
     	  	
     }
     

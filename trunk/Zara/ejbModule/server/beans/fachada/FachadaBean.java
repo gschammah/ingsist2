@@ -12,6 +12,7 @@ import java.util.Collection;
 import java.util.Date;
 
 import javax.ejb.EJB;
+import javax.ejb.Init;
 import javax.ejb.Stateful;
 
 import server.VO.EnvT.EnvTVO;
@@ -25,6 +26,7 @@ import server.beans.articulos.AdministradorArticulos;
 import server.beans.pedidos.AdministradorPedidos;
 import server.beans.ventas.AdministradorVentas;
 import server.entidades.articulos.Articulo;
+import server.entidades.clientes.Cliente;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -126,5 +128,6 @@ public class FachadaBean implements Fachada {
 	public ClienteVO buscarCliente(String cuit){
 		return admVentas.buscarCliente(cuit);
 	}
-	
+		
+
 }

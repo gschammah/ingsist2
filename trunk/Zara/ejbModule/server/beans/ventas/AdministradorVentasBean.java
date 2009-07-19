@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.ejb.EJB;
+import javax.ejb.Init;
+import javax.ejb.PostActivate;
+import javax.ejb.PrePassivate;
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -119,6 +122,18 @@ public class AdministradorVentasBean implements AdministradorVentas {
 			venta.setHayStock(true);			
 		}
 		return venta.getVO();
+	}	
+	
+	@Init
+	public void init(){		
+		if (this.buscarCliente("0") == null) {
+			Cliente cliente = new Cliente();
+			cliente.setCuit("0");
+			cliente.setDireccion("ND");
+			cliente.setNombre("Cliente Anónimo");
+			cliente.setRazonSocial("ND");
+			em.persist(cliente);
+		}
 	}
 
 }

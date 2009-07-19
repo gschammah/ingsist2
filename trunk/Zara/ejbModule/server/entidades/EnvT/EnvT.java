@@ -39,7 +39,7 @@ public class EnvT implements Serializable {
 	//TODO hash
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.TABLE)
+	@GeneratedValue
 	public int getId() {
 		return id;
 	}
@@ -47,8 +47,7 @@ public class EnvT implements Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	@Column(columnDefinition="datetime")
+		
 	public Date getFecha() {
 		return fecha;
 	}

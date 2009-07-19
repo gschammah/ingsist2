@@ -33,7 +33,7 @@ public class ItemEnvT implements Serializable{
 	private EnvT envt;
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.TABLE)
+	@GeneratedValue
 	public int getId() {
 		return id;
 	}

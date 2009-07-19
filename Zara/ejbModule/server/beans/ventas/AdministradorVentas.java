@@ -12,6 +12,7 @@ import javax.ejb.Remote;
 
 import server.VO.clientes.ClienteVO;
 import server.VO.ventas.VentaVO;
+import server.entidades.clientes.Cliente;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -29,6 +30,6 @@ public interface AdministradorVentas {
 	 */
 	public VentaVO nuevaVenta(VentaVO vo);
 
-	public ClienteVO buscarCliente(String cuit);
+	public ClienteVO buscarCliente(String cuit);	
 	
 }

@@ -41,7 +41,7 @@ public class OfAD implements Serializable{
 	}	
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.TABLE)
+	@GeneratedValue
 	public int getId() {
 		return id;
 	}
@@ -61,8 +61,7 @@ public class OfAD implements Serializable{
 		this.xmlHash = xmlHash;
 	}
 
-
-	@Column(columnDefinition="datetime")
+	
 	public Date getFecha() {
 		return fecha;
 	}

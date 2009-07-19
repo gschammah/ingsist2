@@ -67,7 +67,7 @@ public class ItemOfAD implements Serializable{
 	}
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.TABLE)
+	@GeneratedValue
 	public int getId() {
 		return id;
 	}

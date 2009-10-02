@@ -5,8 +5,8 @@
   <PROCESS-ITEM ID="rules:#index.jsp:0" NAME="item" PATH="/index.jsp" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT ID="ventas::#ventas.jsp" NAME="output"
     PATH="/ventas.jsp" TARGET="rules:#ventas.jsp" TITLE="ventas" model-entity="JSFProcessItemOutput"/>
-   <PROCESS-ITEM-OUTPUT ID="ofad::#ofad.jsp" NAME="output1"
-    PATH="/ofad.jsp" TARGET="rules:#ofad.jsp" TITLE="ofad" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="ofad::#ofad" NAME="output1" PATH="/ofad"
+    TARGET="rules:#ofad" TITLE="ofad" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT ID="envt::#envt.jsp" NAME="output2"
     PATH="/envt.jsp" TARGET="rules:#envt.jsp" TITLE="envt" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT ID="palc::#palc.jsp" NAME="output3"
@@ -19,6 +19,5 @@
   SHAPE="288,353,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#palc.jsp" PATH="/palc.jsp"
   SHAPE="288,33,0,0" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#ofad.jsp" PATH="/ofad.jsp"
-  SHAPE="288,145,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#ofad" PATH="/ofad" SHAPE="288,145,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>

@@ -11,7 +11,7 @@
   </navigation-case>
   <navigation-case>
    <from-outcome>ofad</from-outcome>
-   <to-view-id>/ofad.jsp</to-view-id>
+   <to-view-id>/ofad</to-view-id>
   </navigation-case>
   <navigation-case>
    <from-outcome>envt</from-outcome>

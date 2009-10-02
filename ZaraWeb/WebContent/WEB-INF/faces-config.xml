@@ -2,25 +2,24 @@
 <!DOCTYPE faces-config PUBLIC "-//Sun Microsystems, Inc.//DTD JavaServer Faces Config 1.1//EN"
                               "http://java.sun.com/dtd/web-facesconfig_1_1.dtd">
 <faces-config>
-
  
  <navigation-rule>
   <from-view-id>/index.jsp</from-view-id>
   <navigation-case>
    <from-outcome>ventas</from-outcome>
-   <to-view-id>ventas.jsf</to-view-id>
+   <to-view-id>/ventas.jsp</to-view-id>
   </navigation-case>
   <navigation-case>
    <from-outcome>ofad</from-outcome>
-   <to-view-id>ofad.jsp</to-view-id>
+   <to-view-id>/ofad.jsp</to-view-id>
   </navigation-case>
   <navigation-case>
    <from-outcome>envt</from-outcome>
-   <to-view-id>envt.jsp</to-view-id>
+   <to-view-id>/envt.jsp</to-view-id>
   </navigation-case>
   <navigation-case>
    <from-outcome>palc</from-outcome>
-   <to-view-id>palc.jsp</to-view-id>
+   <to-view-id>/palc.jsp</to-view-id>
   </navigation-case>
  </navigation-rule>
 

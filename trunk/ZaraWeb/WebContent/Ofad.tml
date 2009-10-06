@@ -13,7 +13,7 @@
 		<p/>		
 		<t:form>
 			<label for="fileOfad">Archivo: </label>
-			<t:errors/>
+			
 	        <input t:type="upload" t:id="file" value="fileOfad" validate="required"/>
 	        <p>
 	        <input t:type="Submit" value="Subir"/>							

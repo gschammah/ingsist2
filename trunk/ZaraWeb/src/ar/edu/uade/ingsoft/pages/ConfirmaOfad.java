@@ -10,7 +10,7 @@ import server.VO.OfAD.ItemOfADVO;
 import server.VO.OfAD.OfADVO;
 import ar.edu.uade.ingsoft.model.ZaraModel;
 
-public class ConfirmaOfad {
+public class ConfirmaOfad extends MainPage {
 
 	@Property
 	@SessionState
@@ -18,34 +18,21 @@ public class ConfirmaOfad {
 	
 	@Property
 	private ItemOfADVO item;
+			
+	private Class action;
 	
-	private ZaraModel modelo;
-	
-	private String action;
-	
-	public Object onSuccess() {
-		
-		if (action.equals("guardar")) {		
-			try {
-				modelo = new ZaraModel();
-				ofad = modelo.getFachada().nuevoOfad(ofad, true);
-			} catch (NamingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
-			return null;
-		} else {
-			return Ofad.class;
-		}
-		
+	public Object onSuccess() {				
+		return action;				
 	}
 	
 	private void onSelectedFromGuardar() {
-		action = "guardar";
+		super.init();
+		ofad = getFachada().nuevoOfad(ofad, true);
+		action = null;
 	}
 	
 	private void onSelectedFromSalir() {
-		action = "salir";
+		action = Ofad.class;
 	} 
 	
 }

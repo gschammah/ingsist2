@@ -1,6 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html title="Confirma Ofad"
-      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+      xmlns:p="tapestry:parameter">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Recibir EnvT</title>
@@ -24,10 +25,10 @@
 			</tr>
 		</thead>
 		<t:loop source="envt.articulos" value="item">
-		<t:if test="notPendiente">
+		<t:if test="!item.cantidadPendiente">
 		<tr>
 			<td>${item.articulo.referencia}</td>
-			<td>${item.articulo.descripcion}</td>
+			<td><t:if test="item.articulo.descripcion">${item.articulo.descripcion}<p:else>ERROR: Art&iacute;culo no existe en base de datos</p:else></t:if></td>
 			<td>${item.cantidadRecibida}</td>
 			<td>${item.articulo.stock}</td>
 		</tr>
@@ -47,10 +48,10 @@
 			</tr>
 		</thead>
 		<t:loop source="envt.articulos" value="item">
-		<t:if test="pendiente">
+		<t:if test="item.cantidadPendiente">
 		<tr>
 			<td>${item.articulo.referencia}</td>
-			<td>${item.articulo.descripcion}</td>
+			<td><t:if test="item.articulo.descripcion">${item.articulo.descripcion}<p:else>ERROR: Art&iacute;culo no existe en base de datos</p:else></t:if></td>
 			<td>${item.cantidadRecibida}</td>
 			<td>${item.cantidadPendiente}</td>
 			<td>${item.articulo.stock}</td>

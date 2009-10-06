@@ -3,8 +3,6 @@ package ar.edu.uade.ingsoft.pages;
 import java.io.File;
 import java.util.Date;
 
-import javax.naming.NamingException;
-
 import org.apache.tapestry5.annotations.PageAttached;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.SessionState;
@@ -12,12 +10,9 @@ import org.apache.tapestry5.upload.services.UploadedFile;
 
 import server.VO.OfAD.OfADVO;
 import tools.ParseXML;
-import ar.edu.uade.ingsoft.model.ZaraModel;
 
-public class Ofad {
-
-    private ZaraModel modelo;
-	
+public class Ofad extends MainPage {
+    
 	@Property
     private Date ultimaAct;
 	
@@ -31,14 +26,8 @@ public class Ofad {
 
     @PageAttached
     public void init() {
-        if (ultimaAct == null) {
-        	try {        		
-				modelo = new ZaraModel();
-			} catch (NamingException e) { 
-				e.printStackTrace();
-			}
-        	ultimaAct = modelo.getFachada().checkExistingOfad(null);     
-        }
+    	  super.init();
+          ultimaAct = getFachada().checkExistingOfad(null);             
     }
 
 
@@ -50,7 +39,7 @@ public class Ofad {
 		
 			try {
 				ofad = ParseXML.parseOfAD(copied.getPath());
-				ofad = modelo.getFachada().nuevoOfad(ofad, false);
+				ofad = getFachada().nuevoOfad(ofad, false);
 				return ConfirmaOfad.class;
 			} 				
 			catch (Exception e) {				

@@ -12,7 +12,7 @@ import server.VO.OfAD.ItemOfADVO;
 import server.VO.OfAD.OfADVO;
 import ar.edu.uade.ingsoft.model.ZaraModel;
 
-public class ConfirmaEnvt {
+public class ConfirmaEnvt extends MainPage {
 
 	@Property
 	@SessionState
@@ -23,41 +23,21 @@ public class ConfirmaEnvt {
 		
 	private ZaraModel modelo;
 	
-	private String action;
+	private Object action;
 	
-	public Object onSuccess() {
-		
-		if (action.equals("guardar")) {		
-			try {
-				modelo = new ZaraModel();
-				envt = modelo.getFachada().nuevoEnvT(envt, true);
-			} catch (NamingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
-			return null;
-		} else {
-			return Envt.class;
-		}
-		
+	public Object onSuccess() {				
+		return action;
 	}
 	
 	private void onSelectedFromGuardar() {
-		action = "guardar";
+		super.init();
+		envt = getFachada().nuevoEnvT(envt, true);
+		action = null;
 	}
 	
 	private void onSelectedFromSalir() {
-		action = "salir";
+		action = Envt.class;
 	} 
-	
-	
-	public boolean isNotPendiente(){
-		return item.getCantidadRecibida()!=0;
-	}
-	
-	public boolean isPendiente(){
-		return item.getCantidadPendiente()!=0;
 		
-	}
 	
 }

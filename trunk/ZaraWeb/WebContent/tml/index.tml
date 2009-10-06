@@ -3,15 +3,15 @@
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<link href="css/styles.css" media="screen" rel="stylesheet"/>
+<link href="../css/styles.css" media="screen" rel="stylesheet"/>
 </head>
 <body>
 	<div id="container">
-		<div><img src="img/logo.gif" /></div>
-		<div><a href="ventas">Venta de Art&iacute;culos</a></div>
-		<div><t:pagelink page="ofad">Recibir OfAD</t:pagelink></div>
+		<div><img src="../img/logo.gif" /></div>
+		<div><a href="../ventas">Venta de Art&iacute;culos</a></div>
+		<div><t:pagelink page="tml/ofad">Recibir OfAD</t:pagelink></div>
 		<div><a href="palc">Generar PALC</a></div>
-		<div><t:pagelink page="envt">Recibir ENVT</t:pagelink></div>			
+		<div><t:pagelink page="tml/envt">Recibir ENVT</t:pagelink></div>			
 	</div>
 </body>
 </html>

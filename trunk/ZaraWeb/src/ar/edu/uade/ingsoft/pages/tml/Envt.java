@@ -1,4 +1,4 @@
-package ar.edu.uade.ingsoft.pages;
+package ar.edu.uade.ingsoft.pages.tml;
 
 import java.io.File;
 import java.util.Date;

@@ -4,15 +4,18 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 	
+	<display-name>ZaraWeb</display-name>
+			
 	<display-name>ZaraWeb</display-name>			
 	
-	<!--  
+	
 	<welcome-file-list>
         <welcome-file>index</welcome-file>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
-	-->
+	
 
+	<!--  
 	<context-param>
         <param-name>tapestry.app-package</param-name>
         <param-value>ar.edu.uade.ingsoft</param-value>
@@ -25,8 +28,10 @@
 
     <filter-mapping>
         <filter-name>app</filter-name>
-        <url-pattern>/tml/*</url-pattern>
-    </filter-mapping>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>-->
+
+	<!--  
     
     <servlet>
 		<servlet-name>VentasSrv</servlet-name>
@@ -37,5 +42,16 @@
 		<url-pattern>/ventas</url-pattern>
 	</servlet-mapping>
     
+
+	-->
+	
+	<servlet>
+		<servlet-name>PalcSrv</servlet-name>
+		<servlet-class>ar.edu.uade.ingsoft.servlets.PalcServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PalcSrv</servlet-name>
+		<url-pattern>/palc</url-pattern>
+	</servlet-mapping>
 
 </web-app>

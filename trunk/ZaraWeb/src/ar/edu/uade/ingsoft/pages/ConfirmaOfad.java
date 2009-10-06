@@ -32,7 +32,7 @@ public class ConfirmaOfad extends MainPage {
 	}
 	
 	private void onSelectedFromSalir() {
-		action = Ofad.class;
+		action = Index.class;
 	} 
 	
 }

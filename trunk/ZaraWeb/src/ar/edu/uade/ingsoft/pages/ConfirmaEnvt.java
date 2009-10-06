@@ -36,7 +36,7 @@ public class ConfirmaEnvt extends MainPage {
 	}
 	
 	private void onSelectedFromSalir() {
-		action = Envt.class;
+		action = Index.class;		
 	} 
 		
 	

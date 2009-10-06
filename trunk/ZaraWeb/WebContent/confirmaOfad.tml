@@ -1,6 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html title="Confirma Ofad"
-      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+      xmlns:p="tapestry:parameter">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Recibir OFAD</title>
@@ -59,14 +60,16 @@
 	
 	<p/>
 	
-	<t:form>		
-		<t:submit t:id="guardar"  value="Registrar Ofad" />  
-					
+	<t:form>				  				
+		<t:if test="success">
 		<div class="botonSalir">
 			<t:submit t:id="salir"  value="Salir" />
-			<p/>
-		
+			<p/>		
 		</div>	
+		<p:else>
+			<t:submit t:id="guardar"  value="Registrar Ofad" />
+		</p:else>
+		</t:if>
 	</t:form>
 </div>
 </body>

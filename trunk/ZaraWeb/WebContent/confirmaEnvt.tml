@@ -62,14 +62,19 @@
 	
 	<p/>
 	
-	<t:form>		
-		<t:submit t:id="guardar"  value="Registrar Envt" />  
-					
-		<div class="botonSalir">
+	<t:form>
+		<t:if test="success">
+			<div class="botonSalir">
 			<t:submit t:id="salir"  value="Salir" />
-			<p/>
-		
-		</div>	
+			<p/>		
+		</div>
+		<p:else>
+			<t:submit t:id="guardar"  value="Registrar Envt" />
+		</p:else>
+		</t:if>		
+		  
+					
+			
 	</t:form>
 </div>
 </body>

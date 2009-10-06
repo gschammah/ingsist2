@@ -3,6 +3,7 @@ package ar.edu.uade.ingsoft.pages;
 import javax.naming.NamingException;
 
 import org.apache.tapestry5.annotations.OnEvent;
+import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.SessionState;
 
@@ -23,15 +24,20 @@ public class ConfirmaEnvt extends MainPage {
 		
 	private ZaraModel modelo;
 	
-	private Object action;
+	private Class action;
+	
+	@Property
+	@Persist
+	private boolean success;
 	
 	public Object onSuccess() {				
 		return action;
 	}
 	
 	private void onSelectedFromGuardar() {
-		super.init();
+		super.init();		
 		envt = getFachada().nuevoEnvT(envt, true);
+		success = true;
 		action = null;
 	}
 	

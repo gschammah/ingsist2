@@ -8,7 +8,7 @@
 <body>
 	<div id="container">
 		<div><img src="img/logo.gif" /></div>
-		<div><t:pagelink page="ventas">Venta de Art&iacute;culos</t:pagelink></div>
+		<div><a href="ventas">Venta de Art&iacute;culos</a></div>
 		<div><t:pagelink page="ofad">Recibir OfAD</t:pagelink></div>
 		<div><a href="palc">Generar PALC</a></div>
 		<div><t:pagelink page="envt">Recibir ENVT</t:pagelink></div>			

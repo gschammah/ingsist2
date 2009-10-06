@@ -47,20 +47,10 @@ import ar.edu.uade.ingsoft.model.ZaraModel;
 	
 		HttpSession ses = req.getSession(true);
 		Collection<PalcPropuestoVO> palc = (Collection<PalcPropuestoVO>) ses.getAttribute("palc");
-		palc = modelo.getFachada().getPALC();
-		if (palc == null) {
-			palc = new ArrayList<PalcPropuestoVO>();
-			PalcPropuestoVO p = new PalcPropuestoVO();
-			p.setVentas(23);
-			palc.add(p);
-		}
-		
-		
+		palc = modelo.getFachada().getPALC();					
 		
 		ses.setAttribute("palc", palc);
-		req.setAttribute("palc", palc);
-		
-		
+		req.setAttribute("palc", palc);				
 		
 		
 	  String pagina = "/palc.jsp";

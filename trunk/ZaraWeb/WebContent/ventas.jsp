@@ -54,7 +54,8 @@
 		
 		<div class="factLeft">			
 			<label for="referencia">ID: </label>
-			<input type="text" name="referencia" id="referencia"/>
+			<input style="width:90px" type="text" name="referencia" id="referencia"/>
+			Cant.<input style="width: 25px"type="text" name="cantidad" id="cantidad"/>
 			<input type="submit" name="agregar" value="Agregar" /><br>
 			<c:out value="${error}"/>
 					
@@ -62,7 +63,7 @@
 		
 		<div class="factCenter" style="width: 66%">			
 			<label for="detalles">Detalles: </label>
-			<span style="float: left; padding-left: 5px"><c:out escapeXml="false" value="${currentArt.articulo}"/></span>			
+			<span style="float: left; padding-left: 5px"><c:out escapeXml="false" value="${currentArt}"/></span>			
 		</div>
 		<p/>
 		<div class="facturaHeader2">
@@ -87,7 +88,7 @@
 				<td>${item.precio}</td>
 				<td><input type="checkbox" /></td>
 				<td>${item.cantidad}</td>
-				<td><input type="button" value="OK" onClick="location.href='ventas&cmd=del&id=${item.articulo.referencia}'"/></td>
+				<td><input type="button" value="OK" onClick="location.href='ventas?cmd=del&id=${item.articulo.referencia}'"/></td>
 			</tr>
 			</c:forEach>					
 		</table>

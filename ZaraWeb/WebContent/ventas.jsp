@@ -1,6 +1,10 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<%@page import="java.util.Collection"%>
+<%@page import="server.VO.articulos.ArticuloVO"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -15,7 +19,7 @@
 		<div class="facturaHeader">
 			<div class="factLeft">
 				<label for="cuit">CUIT/CUIL: </label>
-				<input type="text" id="cuit" name="cuit" value="cuit"/>
+				<input type="text" id="cuit" name="cuit"/>
 			</div>             
 			
 			<div class="factCenter">
@@ -50,13 +54,15 @@
 		
 		<div class="factLeft">			
 			<label for="referencia">ID: </label>
-			<input type="text" name="referencia" id="referencia" value="referencia"/>
-			<input type="submit" name="agregar" value="Agregar" />
+			<input type="text" name="referencia" id="referencia"/>
+			<input type="submit" name="agregar" value="Agregar" /><br>
+			<c:out value="${error}"/>
+					
 		</div>  
 		
 		<div class="factCenter" style="width: 66%">			
 			<label for="detalles">Detalles: </label>
-			<textarea rows="5" id="detalles" class="txtDetalles"></textarea>			
+			<span style="float: left; padding-left: 5px"><c:out escapeXml="false" value="${currentArt.articulo}"/></span>			
 		</div>
 		<p/>
 		<div class="facturaHeader2">
@@ -71,16 +77,19 @@
 					<th>Cantidad</th>
 					<th>Borrar</th>
 				</tr>
-			</thead>			
+			</thead>
+		
+			<c:forEach items="${articulos}" var="item">	
 			<tr>
-				<td>${item.referencia}</td>
-				<td>${item.linea}</td>
-				<td>${item.descripcion}</td>
-				<td>${item.precioLista}</td>
+				<td>${item.articulo.referencia}</td>
+				<td>${item.articulo.linea}</td>
+				<td>${item.articulo.descripcion}</td>
+				<td>${item.precio}</td>
 				<td><input type="checkbox" /></td>
-				<td></td>
-				<td><input type="button" value="OK" /></td>
-			</tr>					
+				<td>${item.cantidad}</td>
+				<td><input type="button" value="OK" onClick="location.href='ventas&cmd=del&id=${item.articulo.referencia}'"/></td>
+			</tr>
+			</c:forEach>					
 		</table>
 	</div>
 	
@@ -92,7 +101,7 @@
 	
 			
 		<div class="botones">
-			<input type="submit" value="Generar Factura" />
+			<input name="generar" type="submit" value="Generar Factura" />
 			<input type="button" value="Cancelar" />
 		</div>	
 	

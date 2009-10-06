@@ -1,20 +1,22 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html title="Ventas"
-      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <link href="css/styles.css" media="screen" rel="stylesheet" />
+<title>Ventas</title>
 </head>
 <body>
-    <t:form>
+<form method="POST">    
 	<fieldset>
 		<legend>Datos de Factura</legend>
 		
 		<div class="facturaHeader">
 			<div class="factLeft">
-				<t:label for="cuit">CUIT/CUIL: </t:label>
-				<input t:type="TextField" t:id="cuit" value="cuit"/>
-			</div> 
+				<label for="cuit">CUIT/CUIL: </label>
+				<input type="text" id="cuit" name="cuit" value="cuit"/>
+			</div>             
 			
 			<div class="factCenter">
 				<label for="tipoFact">Tipo de Factura: </label>
@@ -48,8 +50,8 @@
 		
 		<div class="factLeft">			
 			<label for="referencia">ID: </label>
-			<t:textfield t:id="referencia" value="referencia"/>
-			<t:submit t:id="agregar" value="Agregar" />
+			<input type="text" name="referencia" id="referencia" value="referencia"/>
+			<input type="submit" name="agregar" value="Agregar" />
 		</div>  
 		
 		<div class="factCenter" style="width: 66%">			
@@ -69,8 +71,7 @@
 					<th>Cantidad</th>
 					<th>Borrar</th>
 				</tr>
-			</thead>
-			<t:loop source="articulos" value="item">
+			</thead>			
 			<tr>
 				<td>${item.referencia}</td>
 				<td>${item.linea}</td>
@@ -79,8 +80,7 @@
 				<td><input type="checkbox" /></td>
 				<td></td>
 				<td><input type="button" value="OK" /></td>
-			</tr>
-			</t:loop>			
+			</tr>					
 		</table>
 	</div>
 	
@@ -97,7 +97,7 @@
 		</div>	
 	
 	</fieldset>
-	</t:form>
+	</form>
 
 </body>
 </html>

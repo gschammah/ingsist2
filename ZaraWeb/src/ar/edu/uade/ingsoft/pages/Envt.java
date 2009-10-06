@@ -16,10 +16,8 @@ import server.VO.OfAD.OfADVO;
 import tools.ParseXML;
 import ar.edu.uade.ingsoft.model.ZaraModel;
 
-public class Envt {
-
-    private ZaraModel modelo;
-	
+public class Envt extends MainPage {
+   
 	@Property
     private Date ultimaAct;
 	
@@ -33,14 +31,8 @@ public class Envt {
 
     @PageAttached
     public void init() {
-        if (ultimaAct == null) {
-        	try {        		
-				modelo = new ZaraModel();
-			} catch (NamingException e) { 
-				e.printStackTrace();
-			}
-        	ultimaAct = modelo.getFachada().checkPedidoExistente(null);     
-        }
+    	super.init();
+        ultimaAct = getFachada().checkPedidoExistente(null);             
     }
 
 
@@ -52,17 +44,14 @@ public class Envt {
 		
 			try {
 				envt = ParseXML.parseEnvT(copied.getPath());
-				envt = modelo.getFachada().nuevoEnvT(envt, false);
+				envt = getFachada().nuevoEnvT(envt, false);
 				return ConfirmaEnvt.class;
 			} 				
 			catch (Exception e) {				
 				e.printStackTrace();
 				return null;
-			}			
-			
-		}
-        
-        
+			}					
+		}                
                 
 }
         

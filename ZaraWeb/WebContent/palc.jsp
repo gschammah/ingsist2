@@ -1,4 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<%@page import="server.VO.PALC.PalcPropuestoVO"%>
+<%@page import="java.util.Collection"%>
+<%@page import="server.VO.articulos.ArticuloVO"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -11,7 +16,7 @@
 
 
 <fieldset>
-		<legend>Artículos</legend>
+		<legend>Art&iacute;culos</legend>
 		
 		<div class="factLeft">			
 			<label for="referencia">ID: </label>
@@ -28,7 +33,7 @@
 			<thead>
 				<tr>
 					<th>Referencia</th>			
-					<th>Descripción</th>
+					<th>Descripci&oacute;n</th>
 					<th>Ventas</th>
 					<th>Pend d/env</th>
 					<th>Stock</th>
@@ -37,27 +42,24 @@
 					<th>Cant.</th>
 				</tr>
 			</thead>
-			<tr>
-				<td>xxx</td>	
-				<td>xxxxx</td>
-				<td>xxxx</td>
-				<td>xxxx</td>
-				<td>xxxx</td>
-				<td>xxxx</td>
-				<td><input type="checkbox"></td>
-				<td>xxxx</td>
+			
+				
+			<c:forEach  items="${palc}" var="item">
+     		<tr>
+				<td>${item.articulo.referencia}</td>	
+				<td>${item.articulo.descripcion}</td>
+				<td>${item.ventas}</td>
+				<td>${item.pendientes}</td>
+				<td>${item.articulo.stock}</td>
+				<td>${item.articulo.puntoReposicion}</td>
+				<td><input name="pedir_"" type="checkbox"></td>
+				<td><input name="cantidad_" /></td>
 			</tr>
-			<tr>
-				<td>xxx</td>	
-				<td>xxxxx</td>
-				<td>xxxx</td>
-				<td>xxxx</td>
-				<td>xxxx</td>
-				<td>xxxx</td>
-				<td><input type="checkbox"></td>
-				<td>xxxx</td>
-			</tr>
-		</table>
+			
+			</c:forEach>
+			
+			
+					</table>
 	</div>
 
         <p />

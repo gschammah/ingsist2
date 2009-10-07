@@ -38,7 +38,7 @@
 			
 			<div class="factRight">
 				Fecha: <input type="text" name="fecha" readonly="readonly"
-				value = '<fmt:formatDate type="date" value="${now}" />' />
+				value = '<fmt:formatDate pattern="dd/mm/yyyy" type="date" value="${now}" />' />
 			</div> 					
 		</div>
 		

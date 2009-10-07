@@ -15,15 +15,16 @@
 <body>
 
 
-
+<form method="POST">
 
 <fieldset>
 		<legend>Art&iacute;culos</legend>
 		
 		<div class="factLeft">			
 			<label for="referencia">ID: </label>
-			<input id="referencia" name="referencia"/>
-			<input type="submit" value="OK" />
+			<input id="referencia" name="referencia" id="referencia"/>
+			<input type="submit" name="agregar" value="Agregar" />
+			<br/><c:out value="${error}"/>
 		</div>
 
 
@@ -54,8 +55,8 @@
 				<td>${item.pendientes}</td>
 				<td>${item.articulo.stock}</td>
 				<td>${item.articulo.puntoReposicion}</td>
-				<td><input name="pedir_"" type="checkbox"></td>
-				<td><input name="cantidad_" /></td>
+				<td><input id=${item.articulo.referencia} name=${item.articulo.referencia} type="checkbox"></td>
+				<td><input name=${item.articulo.referencia}_cant id=${item.articulo.referencia}_cant type="text" /></td>
 			</tr>
 			
 			</c:forEach>
@@ -65,19 +66,19 @@
 	</div>
 
         <p />
-	<form action="confirmaPaLC.html">
+	
 		<div class="botones">
 			<input type="submit" value="Generar PALC">
 			<input type="button" value="Volver" onClick="javascript:history.go(-1)">
 			<p/>
 
 		</div>
-	</form>
+	
 
 
 
 	</fieldset>
-	
+</form>
 
 </body>
 </html>

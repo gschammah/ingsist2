@@ -60,15 +60,13 @@
 	
 	<p/>
 	
-	<t:form>				  				
-		<t:if test="success">
+	<t:form>		
 		<div class="botonSalir">
 			<t:submit t:id="salir"  value="Salir" />
 			<p/>		
-		</div>	
-		<p:else>
+		</div>			  				
+		<t:if test="!success">
 			<t:submit t:id="guardar"  value="Registrar Ofad" />
-		</p:else>
 		</t:if>
 	</t:form>
 </div>

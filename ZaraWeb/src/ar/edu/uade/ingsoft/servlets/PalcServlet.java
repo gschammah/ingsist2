@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import server.VO.PALC.ItemPALCVO;
+import server.VO.PALC.PALCVO;
 import server.VO.PALC.PalcPropuestoVO;
 import server.VO.articulos.ArticuloVO;
 import server.VO.ventas.ItemVentaVO;
@@ -61,11 +62,11 @@ import ar.edu.uade.ingsoft.model.ZaraModel;
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		HttpSession ses = req.getSession(true);
+		Collection<PalcPropuestoVO> palc = (Collection<PalcPropuestoVO>) ses.getAttribute("palc");
 		
 		if (req.getParameter("agregar") != null) {
 			
-			HttpSession ses = req.getSession(true);
-			Collection<PalcPropuestoVO> palc = (Collection<PalcPropuestoVO>) ses.getAttribute("palc");
 			
 			boolean existe = false;
 			
@@ -104,11 +105,31 @@ import ar.edu.uade.ingsoft.model.ZaraModel;
 				e.printStackTrace();
 			}
 			
-			
+
 			ses.setAttribute("palc", palc);
 			req.setAttribute("palc", palc);
 			
 			muestraPagina(req, resp);
+			
+		}
+		if (req.getParameter("confirmar") != null) {
+				
+				ItemPALCVO itemp = new ItemPALCVO();
+				PALCVO pvo = new PALCVO();
+
+				for ( PalcPropuestoVO item : palc){
+					
+					itemp.setCantidadSolicitada(Integer.parseInt(req.getParameter(item.getArticulo().getReferencia()+"_cant")));
+					itemp.setArticulo(item.getArticulo());				
+					
+					pvo.addItem(itemp);
+				}
+				modelo.getFachada().registraPALC(pvo);
+				
+				ses.setAttribute("lista", pvo.getArticulos());
+				req.setAttribute("lista", pvo.getArticulos());
+				
+				getServletConfig().getServletContext().getRequestDispatcher("/confirmaPalc.jsp").forward(req, resp);
 		}		
 		
 	}   	  	    

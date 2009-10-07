@@ -68,7 +68,7 @@
         <p />
 	
 		<div class="botones">
-			<input type="submit" value="Generar PALC">
+			<input type="submit" value="Generar PALC" name="confirmar">
 			<input type="button" value="Volver" onClick="javascript:history.go(-1)">
 			<p/>
 

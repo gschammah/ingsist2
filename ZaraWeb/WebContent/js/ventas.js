@@ -27,5 +27,12 @@ $(function(){
 		var check = this.checked ? 1 : 0;			
 		location.href = "ventas?cmd=precio&checked=" + check + "&ref=" + this.name + "&tipoFact=" + $("#tipoFact").val();
 	});
+	
+	$("form").submit(function(){
+		if (!$("#referencia").val() && (!$("#cuit").val() || !$("#cliente").val() || !$("#razonSocial").val() || !$("#direccion").val())) {
+			alert("Por favor complete todos los datos de la factura");
+			return false;
+		}
+	});
 
 });

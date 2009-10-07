@@ -25,7 +25,7 @@
 			</div>
 			
 			<div class="factRight">
-				Fecha: ${venta.fecha}
+				Fecha: <fmt:formatDate type="date" pattern="dd/mm/yyyy" value="${venta.fecha}" />
 			</div> 					
 		</div>
 		

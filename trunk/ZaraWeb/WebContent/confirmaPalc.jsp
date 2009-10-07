@@ -1,4 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <%@page import="server.VO.PALC.ItemPALCVO"%>
 <%@page import="server.VO.articulos.ArticuloVO"%>
 <%@page import="server.VO.PALC.PALCVO"%>
@@ -6,7 +10,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Generar PALC</title>
+<title>PALC</title>
 <link href="css/styles.css" media="screen" rel="stylesheet" />
 </head>
 <body>
@@ -23,23 +27,16 @@
 			</tr>
 		</thead>
 				
-		<%
-			for (ItemPALCVO item: ((Collection<ItemPALCVO>) request.getSession().getAttribute("arts"))) {
-    					    				
-        	%>
-			
-			
-			<tr>
-				<td><%= item.getArticulo().getReferencia() %></td>	
-				<td><%= item.getArticulo().getDescripcion() %></td>
-				<td><%= item.getCantidadSolicitada() %></td>
+		<c:forEach  items="${lista}" var="item">
+     		<tr>
+				<td>${item.articulo.referencia}</td>	
+				<td>${item.articulo.descripcion}</td>
+				<td>${item.cantidadSolicitada}</td>
 			</tr>
 			
-			<%
-						
-			}
-    		%>
-		
+			</c:forEach>
+				
+				
 	</table>
 	
 	
@@ -47,7 +44,7 @@
         <div class="botonSalir">
         	<form action="index.html">
 
-        			<input type="submit" value="Salir">
+        			<input type="button" value="Salir" name="salir">
         			<p/>
         	</form>
 	</div>

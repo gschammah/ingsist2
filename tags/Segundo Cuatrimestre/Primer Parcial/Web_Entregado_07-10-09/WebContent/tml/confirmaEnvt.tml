@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html title="Confirma Ofad"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+      xmlns:p="tapestry:parameter">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Recibir EnvT</title>
+<link href="../css/styles.css" media="screen" rel="stylesheet" />
+</head>
+<body>
+<div class="container">	
+	<div class="lastUpdate">
+		<label for="lastUpdate">Ultima Actualizaci&oacute;n: </label>
+		<span>${envt.fecha}</span>
+	</div>
+
+	<table cellpadding="0" cellspacing="0" class="grilla">
+		<caption>Art&iacute;culos Recibidos</caption>
+		<thead>
+			<tr>
+				<th>Art&iacute;culo</th>
+				<th>Descripci&oacute;n</th>
+				<th>Cant. Recibida</th>
+				<th>Stock Total</th>
+			</tr>
+		</thead>
+		<t:loop source="envt.articulos" value="item">
+		<t:if test="!item.cantidadPendiente">
+		<tr>
+			<td>${item.articulo.referencia}</td>
+			<td><t:if test="item.articulo.descripcion">${item.articulo.descripcion}<p:else>ERROR: Art&iacute;culo no existe en base de datos</p:else></t:if></td>
+			<td>${item.cantidadRecibida}</td>
+			<td>${item.articulo.stock}</td>
+		</tr>
+		</t:if>
+		</t:loop>		
+	</table>
+	
+	<table cellpadding="0" cellspacing="0" class="grillaBottom">
+		<caption>Art&iacute;culos Pendientes</caption>
+		<thead>
+			<tr>
+				<th>Art&iacute;culo</th>
+				<th>Descripci&oacute;n</th>
+				<th>Cant. Recibida</th>
+				<th>Cant. Pendiente</th>
+				<th>Stock Total</th>
+			</tr>
+		</thead>
+		<t:loop source="envt.articulos" value="item">
+		<t:if test="item.cantidadPendiente">
+		<tr>
+			<td>${item.articulo.referencia}</td>
+			<td><t:if test="item.articulo.descripcion">${item.articulo.descripcion}<p:else>ERROR: Art&iacute;culo no existe en base de datos</p:else></t:if></td>
+			<td>${item.cantidadRecibida}</td>
+			<td>${item.cantidadPendiente}</td>
+			<td>${item.articulo.stock}</td>
+		</tr>
+		</t:if>
+		</t:loop>		
+	</table>
+	
+	<p/>
+	
+	<t:form>
+		<div class="botonSalir">
+			<t:submit t:id="salir"  value="Salir" />
+			<p/>		
+		</div>
+	<t:if test="!success">
+			<t:submit t:id="guardar"  value="Registrar Envt" />
+	</t:if>		
+		  
+					
+			
+	</t:form>
+</div>
+</body>
+</html>

@@ -48,5 +48,14 @@
 		<servlet-name>PalcSrv</servlet-name>
 		<url-pattern>/palc</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>AjaxSrv</servlet-name>
+		<servlet-class>ar.edu.uade.ingsoft.servlets.AjaxServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AjaxSrv</servlet-name>
+		<url-pattern>/ajax</url-pattern>
+	</servlet-mapping>
 
 </web-app>

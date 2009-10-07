@@ -2,24 +2,29 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<html>
+  <head>
 <%@page import="java.util.Collection"%>
 <%@page import="server.VO.articulos.ArticuloVO"%>
+<c:set var="now" value="<%=new java.util.Date()%>" />
 <html>
 <head>
+<script src="js/jquery-1.3.2.min.js"></script>
+<script src="js/ventas.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <link href="css/styles.css" media="screen" rel="stylesheet" />
 <title>Ventas</title>
 </head>
 <body>
-<form method="POST">    
+<form method="POST" action="ventas">    
 	<fieldset>
 		<legend>Datos de Factura</legend>
 		
 		<div class="facturaHeader">
 			<div class="factLeft">
 				<label for="cuit">CUIT/CUIL: </label>
-				<input type="text" id="cuit" name="cuit"/>
+				<input type="text" id="cuit" name="cuit"/>				
 			</div>             
 			
 			<div class="factCenter">
@@ -32,7 +37,8 @@
 			</div>
 			
 			<div class="factRight">
-				Fecha: ${currentTime}
+				Fecha: <input type="text" name="fecha" readonly="readonly"
+				value = '<fmt:formatDate type="date" value="${now}" />' />
 			</div> 					
 		</div>
 		
@@ -45,6 +51,11 @@
 			<div class="factCenter">
 				<label for="razonSocial">Raz&oacute;n Social:</label>
 				<input id="razonSocial" name="razonSocial"/>
+			</div>
+			
+			<div class="factRight">
+				<label for="direccion">Direcci&oacute;n:</label>
+				<input id="direccion" name="direccion"/>
 			</div>
 		</div>
 	</fieldset>
@@ -86,7 +97,7 @@
 				<td>${item.articulo.linea}</td>
 				<td>${item.articulo.descripcion}</td>
 				<td>${item.precio}</td>
-				<td><input type="checkbox" /></td>
+				<td><input type="checkbox" <c:if test="${item.articulo.precioLista != item.precio}">checked</c:if> class="check" name="${item.articulo.referencia}"/></td>
 				<td>${item.cantidad}</td>
 				<td><input type="button" value="OK" onClick="location.href='ventas?cmd=del&id=${item.articulo.referencia}'"/></td>
 			</tr>
@@ -95,15 +106,15 @@
 	</div>
 	
 	<div class="totales">
-		SubTotal: 0.0 <br/>
-		IVA: 0.0 <br/>
-		TOTAL: 0.0 <br/>
+		SubTotal: $<span id="subtotal"><fmt:formatNumber type="number" maxFractionDigits="2" value="${total.subTotal}" /></span> <br/>
+		IVA: $<span id="iva"><fmt:formatNumber type="number" maxFractionDigits="2" value="${total.iva}" /></span> <br/>
+		TOTAL: $<span id="total"> <fmt:formatNumber type="number" maxFractionDigits="2" value="${total.total}" /> </span><br/>
 	</div>
 	
 			
 		<div class="botones">
 			<input name="generar" type="submit" value="Generar Factura" />
-			<input type="button" value="Cancelar" />
+			<input type="button" value="Cancelar" onClick="location.href='tml/index'" />
 		</div>	
 	
 	</fieldset>

@@ -13,6 +13,10 @@ public class DatosT {
 		this.iva = iva;
 		this.total = total;
 	}
+	
+	public DatosT(){
+		
+	}
 
 	public float getSubTotal() {
 		return subTotal;

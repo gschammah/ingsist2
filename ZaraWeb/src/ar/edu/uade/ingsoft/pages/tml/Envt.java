@@ -44,7 +44,7 @@ public class Envt extends MainPage {
 		
 			try {
 				envt = ParseXML.parseEnvT(copied.getPath());
-				envt = getFachada().nuevoEnvT(envt, false);
+				envt = getFachada().nuevoEnvT(envt, false);				
 				return ConfirmaEnvt.class;
 			} 				
 			catch (Exception e) {				

@@ -27,7 +27,8 @@ public class Ofad extends MainPage {
     @PageAttached
     public void init() {
     	  super.init();
-          ultimaAct = getFachada().checkExistingOfad(null);             
+          ultimaAct = getFachada().checkExistingOfad(null);
+
     }
 
 

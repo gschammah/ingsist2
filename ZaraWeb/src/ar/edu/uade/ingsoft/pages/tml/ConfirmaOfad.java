@@ -39,7 +39,8 @@ public class ConfirmaOfad extends MainPage {
 		action = null;
 	}
 	
-	private void onSelectedFromSalir() {		
+	private void onSelectedFromSalir() {	
+		success=false;
 		action = Index.class;
 	} 
 	

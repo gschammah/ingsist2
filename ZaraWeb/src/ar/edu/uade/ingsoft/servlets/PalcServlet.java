@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import server.VO.PALC.ItemPALCVO;
 import server.VO.PALC.PalcPropuestoVO;
+import server.VO.articulos.ArticuloVO;
 import server.VO.ventas.ItemVentaVO;
 
 import ar.edu.uade.ingsoft.model.ZaraModel;
@@ -53,9 +54,7 @@ import ar.edu.uade.ingsoft.model.ZaraModel;
 		req.setAttribute("palc", palc);				
 		
 		
-	  String pagina = "/palc.jsp";
-	       
-      getServletConfig().getServletContext().getRequestDispatcher(pagina).forward(req, resp);
+	  muestraPagina(req, resp);
 
 	}  	
 	
@@ -63,7 +62,59 @@ import ar.edu.uade.ingsoft.model.ZaraModel;
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		
+		if (req.getParameter("agregar") != null) {
+			
+			HttpSession ses = req.getSession(true);
+			Collection<PalcPropuestoVO> palc = (Collection<PalcPropuestoVO>) ses.getAttribute("palc");
+			
+			boolean existe = false;
+			
+			
+			long referencia;
+			try {
+				referencia = new Long(req.getParameter("referencia"));
+			
+			
+			PalcPropuestoVO nuevo = modelo.getFachada().getPALC(referencia);
+			
+			if (nuevo != null) {															
+				
+				for (PalcPropuestoVO item : palc) {
+					if (item.getArticulo().getReferencia() == nuevo.getArticulo().getReferencia()) {
+						existe = true;
+					}											
+				}
+				
+				if (!existe) {
+					palc.add(nuevo);
+				}else{
+					req.setAttribute("error", "El articulo ya figura en la lista");
+				}
+				
+				
+												
+			} 
+			  else if (nuevo == null)	
+			{
+				req.setAttribute("error", "El artículo ingresado no existe");
+			}
+			
+			} catch (NumberFormatException e) {
+				req.setAttribute("error", "Referencia no valida");
+				e.printStackTrace();
+			}
+			
+			
+			ses.setAttribute("palc", palc);
+			req.setAttribute("palc", palc);
+			
+			muestraPagina(req, resp);
+		}		
 		
-		doGet(req,resp);
 	}   	  	    
+	
+	private void muestraPagina(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+		String pagina = "/palc.jsp";
+		getServletConfig().getServletContext().getRequestDispatcher(pagina).forward(req, res);
+	}
 }

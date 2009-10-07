@@ -8,6 +8,8 @@
 <%@page import="server.VO.articulos.ArticuloVO"%>
 <html>
 <head>
+<script src="js/jquery-1.3.2.min.js"></script>
+<script src="js/palc.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>PALC</title>
 <link href="css/styles.css" media="screen" rel="stylesheet" />
@@ -55,8 +57,8 @@
 				<td>${item.pendientes}</td>
 				<td>${item.articulo.stock}</td>
 				<td>${item.articulo.puntoReposicion}</td>
-				<td><input id=${item.articulo.referencia} name=${item.articulo.referencia} type="checkbox"></td>
-				<td><input name=${item.articulo.referencia}_cant id=${item.articulo.referencia}_cant type="text" /></td>
+				<td><input class="check" id="${item.articulo.referencia}" type="checkbox"></td>
+				<td><input disabled="disabled" name="${item.articulo.referencia}" id="${item.articulo.referencia}_cant" type="text" /></td>
 			</tr>
 			
 			</c:forEach>

@@ -1,9 +1,8 @@
 package ar.edu.uade.ingsoft.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.naming.NamingException;
 import javax.servlet.Servlet;
@@ -17,9 +16,7 @@ import javax.servlet.http.HttpSession;
 import server.VO.PALC.ItemPALCVO;
 import server.VO.PALC.PALCVO;
 import server.VO.PALC.PalcPropuestoVO;
-import server.VO.articulos.ArticuloVO;
-import server.VO.ventas.ItemVentaVO;
-
+import tools.ParseXML;
 import ar.edu.uade.ingsoft.model.ZaraModel;
 
  public class PalcServlet extends HttpServlet implements Servlet {
@@ -27,6 +24,7 @@ import ar.edu.uade.ingsoft.model.ZaraModel;
 	private static final long serialVersionUID = 1L;
 
 	private ZaraModel modelo;
+	private String pagina;
 	
 	public PalcServlet() {
 		super();
@@ -49,11 +47,22 @@ import ar.edu.uade.ingsoft.model.ZaraModel;
 	
 		HttpSession ses = req.getSession(true);
 		Collection<PalcPropuestoVO> palc = (Collection<PalcPropuestoVO>) ses.getAttribute("palc");
-		palc = modelo.getFachada().getPALC();					
 		
-		ses.setAttribute("palc", palc);
-		req.setAttribute("palc", palc);				
-		
+		if (req.getParameter("xml") == null) {
+			palc = modelo.getFachada().getPALC();
+			ses.setAttribute("palc", palc);
+			pagina = "/palc.jsp";
+		} else {
+			resp.setHeader("Content-Disposition", "attachment; filename=palc.xml" );
+			pagina = "/palc_xml.jsp";
+			PALCVO pvo = (PALCVO) ses.getAttribute("pvo");
+			try {
+				req.setAttribute("xml", ParseXML.generaPALC(pvo));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} 																		
 		
 	  muestraPagina(req, resp);
 
@@ -107,35 +116,39 @@ import ar.edu.uade.ingsoft.model.ZaraModel;
 			
 
 			ses.setAttribute("palc", palc);
-			req.setAttribute("palc", palc);
-			
-			muestraPagina(req, resp);
+			req.setAttribute("palc", palc);	
+			pagina = "/palc.jsp";
 			
 		}
 		if (req.getParameter("confirmar") != null) {
-				
-				ItemPALCVO itemp = new ItemPALCVO();
+								
 				PALCVO pvo = new PALCVO();
-
+				pvo.setEstado("Emitido");
+				pvo.setFecha(new Date());
+								
 				for ( PalcPropuestoVO item : palc){
 					
-					itemp.setCantidadSolicitada(Integer.parseInt(req.getParameter(item.getArticulo().getReferencia()+"_cant")));
-					itemp.setArticulo(item.getArticulo());				
-					
+					if (req.getParameter(((Long)item.getArticulo().getReferencia()).toString()) != null) {
+					ItemPALCVO itemp = new ItemPALCVO();
+					itemp.setCantidadSolicitada(Integer.parseInt(req.getParameter(((Long)item.getArticulo().getReferencia()).toString())));
+					itemp.setArticulo(item.getArticulo());									
 					pvo.addItem(itemp);
+					}
 				}
 				modelo.getFachada().registraPALC(pvo);
-				
-				ses.setAttribute("lista", pvo.getArticulos());
+								
+				ses.setAttribute("pvo", pvo);
+				ses.setAttribute("palc", palc);
 				req.setAttribute("lista", pvo.getArticulos());
 				
-				getServletConfig().getServletContext().getRequestDispatcher("/confirmaPalc.jsp").forward(req, resp);
+				pagina = "/confirmaPalc.jsp";				
 		}		
+		
+		muestraPagina(req, resp);
 		
 	}   	  	    
 	
-	private void muestraPagina(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
-		String pagina = "/palc.jsp";
+	private void muestraPagina(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{		
 		getServletConfig().getServletContext().getRequestDispatcher(pagina).forward(req, res);
 	}
 }

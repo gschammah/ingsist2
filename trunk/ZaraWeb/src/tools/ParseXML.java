@@ -212,7 +212,7 @@ public class ParseXML {
 
 	}
 	
-	public static void generaPALC(String file, PALCVO palc) throws Exception {
+	public static String generaPALC(PALCVO palc) throws Exception {
 		
 		Element root = new Element ("PalcVo");	
 		
@@ -248,8 +248,7 @@ public class ParseXML {
 		root.addContent (itemsPedido);
 		
 		XMLOutputter out = new XMLOutputter (Format.getPrettyFormat());
-		
-		out.output (new Document(root), new FileOutputStream (file));			
+		return out.outputString(root);			
 		 
 
 

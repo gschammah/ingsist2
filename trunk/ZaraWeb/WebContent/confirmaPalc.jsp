@@ -49,5 +49,7 @@
         	</form>
 	</div>
 </div>
+
+<center><a href="palc?xml=1">Descarga XML</a></center>
 </body>
 </html>

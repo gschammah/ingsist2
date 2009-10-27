@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import server.VO.PALC.ItemPALCVO;
 import server.VO.PALC.PALCVO;
 import server.VO.PALC.PalcPropuestoVO;
+import tools.Jms;
 import tools.ParseXML;
 import ar.edu.uade.ingsoft.model.ZaraModel;
 
@@ -48,11 +49,27 @@ import ar.edu.uade.ingsoft.model.ZaraModel;
 		HttpSession ses = req.getSession(true);
 		Collection<PalcPropuestoVO> palc = (Collection<PalcPropuestoVO>) ses.getAttribute("palc");
 		
-		if (req.getParameter("xml") == null) {
+		if (req.getParameter("xml") == null && req.getParameter("enviar") == null) {
 			palc = modelo.getFachada().getPALC();
 			ses.setAttribute("palc", palc);
 			pagina = "/palc.jsp";
-		} else {
+		} 
+		//JMS
+		else if (req.getParameter("enviar") != null) {
+			PALCVO pvo = (PALCVO) ses.getAttribute("pvo");
+			String mensaje = null;
+			try {
+				Jms.enviarPalc(ParseXML.generaPALC(pvo));
+				mensaje = "Se ha enviado correctamente el PALC";
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				mensaje = "Se ha producido un error al enviar el PALC";
+			}
+			req.setAttribute("mensaje", mensaje);
+			pagina = "/palc_ok.jsp";
+		}
+		//XML
+		else {						
 			resp.setHeader("Content-Disposition", "attachment; filename=palc.xml" );
 			pagina = "/palc_xml.jsp";
 			PALCVO pvo = (PALCVO) ses.getAttribute("pvo");

@@ -39,17 +39,21 @@
 				
 	</table>
 	
-	
-
-        <div class="botonSalir">
-        	<form action="index.html">
-
-        			<input type="button" value="Salir" name="salir">
+		
+	<div class="botonSalir">
+			<form method="get">
+        			<input type="submit" value="Enviar" name="enviar">        			
+        	</form>
+        	<form action="/tienda">
+        			<input type="submit" value="Salir" name="salir">
         			<p/>
         	</form>
 	</div>
+                	        
+        	<center><a href="palc?xml=1">Descarga XML</a></center>
+		
 </div>
 
-<center><a href="palc?xml=1">Descarga XML</a></center>
+
 </body>
 </html>

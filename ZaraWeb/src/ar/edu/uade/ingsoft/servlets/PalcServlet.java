@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import server.VO.PALC.ItemPALCVO;
 import server.VO.PALC.PALCVO;
 import server.VO.PALC.PalcPropuestoVO;
-import tools.Jms;
+import tools.WSPalc;
 import tools.ParseXML;
 import ar.edu.uade.ingsoft.model.ZaraModel;
 
@@ -59,7 +59,7 @@ import ar.edu.uade.ingsoft.model.ZaraModel;
 			PALCVO pvo = (PALCVO) ses.getAttribute("pvo");
 			String mensaje = null;
 			try {
-				Jms.enviarPalc(ParseXML.generaPALC(pvo));
+				WSPalc.enviarPalc(ParseXML.generaPALC(pvo));
 				mensaje = "Se ha enviado correctamente el PALC";
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

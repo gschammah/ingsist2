@@ -22,7 +22,7 @@ public class WSLCBeanServiceLocator extends org.apache.axis.client.Service imple
     }
 
     // Use to get a proxy class for WSLCBeanPort
-    private java.lang.String WSLCBeanPort_address = null;
+    private java.lang.String WSLCBeanPort_address = "http://172.16.175.123:8080/LCServerEAR-LCServer/WSLCBean";
 
     public java.lang.String getWSLCBeanPortAddress() {
         return WSLCBeanPort_address;

@@ -44,7 +44,7 @@ public class WSLCBeanProxy implements weblc.WSLCBean {
     return wSLCBean;
   }
   
-  public boolean recibirPALCweb(java.lang.String arg0) throws java.rmi.RemoteException{
+  public boolean recibirPALCweb(weblc.Palcvo arg0) throws java.rmi.RemoteException{
     if (wSLCBean == null)
       _initWSLCBeanProxy();
     return wSLCBean.recibirPALCweb(arg0);

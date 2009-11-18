@@ -8,5 +8,5 @@
 package weblc;
 
 public interface WSLCBean extends java.rmi.Remote {
-    public boolean recibirPALCweb(java.lang.String arg0) throws java.rmi.RemoteException;
+    public boolean recibirPALCweb(weblc.Palcvo arg0) throws java.rmi.RemoteException;
 }

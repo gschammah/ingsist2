@@ -38,6 +38,8 @@ import server.VO.articulos.ArtHogarVO;
 import server.VO.articulos.ArtRopaVO;
 import server.VO.articulos.ArticuloVO;
 import sun.nio.cs.ISO_8859_2;
+import weblc.ItemPedidoVO;
+import weblc.Palcvo;
 
 public class ParseXML {
 	
@@ -50,7 +52,7 @@ public class ParseXML {
 		CharArrayWriter charWriter = new CharArrayWriter();											
 														
 		String firstLine = r.readLine();
-		byte[] firstLineBytes = firstLine.getBytes(new ISO_8859_2());
+		byte[] firstLineBytes = firstLine.getBytes();
 		
 		//me fijo si es utf8 o si ya tiene header
 		if (!firstLine.startsWith("<?xml") && firstLineBytes[0] != 63) {
@@ -252,6 +254,29 @@ public class ParseXML {
 		 
 
 
+	}
+
+	public static weblc.Palcvo generaPALCVO(server.VO.PALC.PALCVO pvo) {
+		
+		Palcvo palcWS = new Palcvo();
+		palcWS.setEstado(pvo.getEstado());
+		palcWS.setIdPedido(pvo.getId());
+		palcWS.setIdTienda(13);
+			
+		int i = 0;				
+		
+		weblc.ItemPedidoVO[] itemPedido = new weblc.ItemPedidoVO[pvo.getArticulos().size()] ; 
+		
+		for (ItemPALCVO item : pvo.getArticulos()) {
+			itemPedido[i] = new weblc.ItemPedidoVO();
+			itemPedido[i].setCantidadSolicitada(item.getCantidadSolicitada());									
+			itemPedido[i].setReferencia(new Integer(new Long(item.getArticulo().getReferencia()).toString()));			
+			i++;
+		}
+		
+		palcWS.setItemsPedido(itemPedido);
+		
+		return palcWS;
 	}
 	
 	

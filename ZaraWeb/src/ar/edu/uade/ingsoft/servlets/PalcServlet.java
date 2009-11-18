@@ -54,16 +54,18 @@ import ar.edu.uade.ingsoft.model.ZaraModel;
 			ses.setAttribute("palc", palc);
 			pagina = "/palc.jsp";
 		} 
-		//JMS
+		//WS
 		else if (req.getParameter("enviar") != null) {
 			PALCVO pvo = (PALCVO) ses.getAttribute("pvo");
 			String mensaje = null;
 			try {
-				WSPalc.enviarPalc(ParseXML.generaPALC(pvo));
+				WSPalc.enviarPalc(ParseXML.generaPALCVO(pvo));
 				mensaje = "Se ha enviado correctamente el PALC";
+				modelo.getFachada().registraPALC(pvo);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				mensaje = "Se ha producido un error al enviar el PALC";
+				e.printStackTrace();
 			}
 			req.setAttribute("mensaje", mensaje);
 			pagina = "/palc_ok.jsp";
@@ -73,6 +75,7 @@ import ar.edu.uade.ingsoft.model.ZaraModel;
 			resp.setHeader("Content-Disposition", "attachment; filename=palc.xml" );
 			pagina = "/palc_xml.jsp";
 			PALCVO pvo = (PALCVO) ses.getAttribute("pvo");
+			modelo.getFachada().registraPALC(pvo);
 			try {
 				req.setAttribute("xml", ParseXML.generaPALC(pvo));
 			} catch (Exception e) {
@@ -151,8 +154,7 @@ import ar.edu.uade.ingsoft.model.ZaraModel;
 					itemp.setArticulo(item.getArticulo());									
 					pvo.addItem(itemp);
 					}
-				}
-				modelo.getFachada().registraPALC(pvo);
+				}				
 								
 				ses.setAttribute("pvo", pvo);
 				ses.setAttribute("palc", palc);

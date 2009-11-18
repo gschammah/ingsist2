@@ -27,7 +27,7 @@ public class ZaraModel {
 				
 		contextProperties = new Hashtable<String, String>();
 		contextProperties.put(Context.INITIAL_CONTEXT_FACTORY, "org.jnp.interfaces.NamingContextFactory");
-		contextProperties.put(Context.PROVIDER_URL, "jnp://127.0.0.1:1099");
+		contextProperties.put(Context.PROVIDER_URL, "jnp://172.16.175.133:1099");
 		String naming = "ZaraEAR/FachadaBean/remote";
 		
 			initialContext = new InitialContext(contextProperties);

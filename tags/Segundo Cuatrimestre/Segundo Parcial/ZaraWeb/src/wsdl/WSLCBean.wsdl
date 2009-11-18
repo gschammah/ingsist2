@@ -1,0 +1,72 @@
+<definitions name='WSLCBeanService' targetNamespace='http://weblc/' xmlns='http://schemas.xmlsoap.org/wsdl/' xmlns:soap='http://schemas.xmlsoap.org/wsdl/soap/' xmlns:tns='http://weblc/' xmlns:xsd='http://www.w3.org/2001/XMLSchema'>
+ <types>
+  <xs:schema targetNamespace='http://weblc/' version='1.0' xmlns:tns='http://weblc/' xmlns:xs='http://www.w3.org/2001/XMLSchema'>
+   <xs:element name='recibirPALCweb' type='tns:recibirPALCweb'/>
+   <xs:element name='recibirPALCwebResponse' type='tns:recibirPALCwebResponse'/>
+   <xs:complexType name='recibirPALCweb'>
+    <xs:sequence>
+     <xs:element minOccurs='0' name='arg0' type='tns:palcvo'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='palcvo'>
+    <xs:complexContent>
+     <xs:extension base='tns:baseVO'>
+      <xs:sequence>
+       <xs:element minOccurs='0' name='estado' type='xs:string'/>
+       <xs:element minOccurs='0' name='idPedido' type='xs:int'/>
+       <xs:element minOccurs='0' name='idTienda' type='xs:int'/>
+       <xs:element maxOccurs='unbounded' minOccurs='0' name='itemsPedido' nillable='true' type='tns:itemPedidoVO'/>
+      </xs:sequence>
+     </xs:extension>
+    </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType abstract='true' name='baseVO'>
+    <xs:sequence/>
+   </xs:complexType>
+   <xs:complexType name='itemPedidoVO'>
+    <xs:complexContent>
+     <xs:extension base='tns:baseVO'>
+      <xs:sequence>
+       <xs:element minOccurs='0' name='cantidadSolicitada' type='xs:int'/>
+       <xs:element minOccurs='0' name='referencia' type='xs:int'/>
+      </xs:sequence>
+     </xs:extension>
+    </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name='recibirPALCwebResponse'>
+    <xs:sequence>
+     <xs:element name='return' type='xs:boolean'/>
+    </xs:sequence>
+   </xs:complexType>
+  </xs:schema>
+ </types>
+ <message name='WSLCBean_recibirPALCwebResponse'>
+  <part element='tns:recibirPALCwebResponse' name='recibirPALCwebResponse'></part>
+ </message>
+ <message name='WSLCBean_recibirPALCweb'>
+  <part element='tns:recibirPALCweb' name='recibirPALCweb'></part>
+ </message>
+ <portType name='WSLCBean'>
+  <operation name='recibirPALCweb' parameterOrder='recibirPALCweb'>
+   <input message='tns:WSLCBean_recibirPALCweb'></input>
+   <output message='tns:WSLCBean_recibirPALCwebResponse'></output>
+  </operation>
+ </portType>
+ <binding name='WSLCBeanBinding' type='tns:WSLCBean'>
+  <soap:binding style='document' transport='http://schemas.xmlsoap.org/soap/http'/>
+  <operation name='recibirPALCweb'>
+   <soap:operation soapAction=''/>
+   <input>
+    <soap:body use='literal'/>
+   </input>
+   <output>
+    <soap:body use='literal'/>
+   </output>
+  </operation>
+ </binding>
+ <service name='WSLCBeanService'>
+  <port binding='tns:WSLCBeanBinding' name='WSLCBeanPort'>
+   <soap:address location='http://172.16.175.123:8080/LCServerEAR-LCServer/WSLCBean'/>
+  </port>
+ </service>
+</definitions>

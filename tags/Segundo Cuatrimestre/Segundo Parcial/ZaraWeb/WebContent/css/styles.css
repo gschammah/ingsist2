@@ -1,0 +1,127 @@
+* {
+	font-family: "Trebuchet MS"
+}
+
+#container {
+	text-align: center;
+	font-size: 16pt;
+	font-weight: bold;
+}
+
+#container a {
+	text-decoration: none;
+	color: black;
+}
+
+#container a:hover {
+	text-decoration: underline;
+	color: black;
+}
+
+#container div{
+	margin-bottom: 45px;
+}
+
+#subContainer {
+	border: 1px solid lightgrey;
+	margin: auto;
+	width: 500px;
+	padding: 20px;
+}
+
+.grilla, .grillaBottom  {
+	width: 800px;		
+}
+
+.grilla {
+	margin-bottom: 50px;	
+}
+
+.grillaArticulos {
+	margin-left: 50px;
+	width: 90%;
+}
+
+.lastUpdate {
+	text-align: left;
+	margin-bottom: 20px;
+}
+
+table caption {
+	padding-bottom: 10px;
+	font-weight: bold;
+}
+
+table, tr, td, th{
+	border: 1px solid black;		
+}
+
+.container {
+	width: 800px;
+	text-align: center;
+	border: 1px solid lightgrey;
+	margin: auto;
+	padding: 20px;
+}
+
+fieldset input{
+	margin: 3px;
+}
+
+fieldset label {
+  float:left;  
+  margin-right:0.5em;
+  padding-top:0.2em;
+  text-align:right; 
+  width: 30%; 
+}
+
+
+.factLeft {
+	float: left;
+	width: 33%;
+}
+
+.factCenter {
+	float: left;
+	width: 33%;	
+}
+
+.factRight {
+	float: right;
+	width: 33%;	
+}
+
+.facturaHeader2 {
+	clear: left;
+}
+
+.txtDetalles {
+	width: 65%;
+}
+
+.totales {
+	float: right;
+	margin: 20px;
+	font-weight: bold;
+}
+
+.botones {
+	clear: both;
+	margin-right: 40px;
+	float: right;
+}
+
+.botonVolver {
+	clear: both;
+	margin-right: 40px;
+	float: right;
+	margin-top: -10px;
+}
+
+.botonSalir {
+	clear: both;
+	margin-right: 40px;
+	margin-top: -10px;
+	float: right;
+}

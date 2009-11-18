@@ -5,6 +5,6 @@ import javax.ejb.Remote;
 @Remote
 public interface ProcesarEnvt {
 	
-	public boolean recibirEnvt(String envtXML);
+	public boolean recibirEnvt(vo.EnvtVO vo);
 
 }

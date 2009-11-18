@@ -13,8 +13,9 @@ import server.beans.fachada.Fachada;
 import tools.ParseXML;
 
 @MessageDriven(activationConfig = {
-		@ActivationConfigProperty(propertyName="destinationType", propertyValue="javax.jms.Queue"),
-		@ActivationConfigProperty(propertyName="destination", propertyValue="queue/ColaOfad")
+		@ActivationConfigProperty(propertyName="destinationType", propertyValue="javax.jms.Topic"),
+		@ActivationConfigProperty(propertyName="destination", propertyValue="topic/ColaOfad"),
+		@ActivationConfigProperty(propertyName="providerAdapterJNDI", propertyValue="java:/RemoteJMSProvider")
 })
 
 public class ProcesarOfadBean implements MessageListener {
@@ -30,7 +31,7 @@ public class ProcesarOfadBean implements MessageListener {
 			if (mensaje instanceof TextMessage) {
 				msg = (TextMessage) mensaje;
 				String ofadXML = msg.getText();
-				
+												
 				OfADVO vo = ParseXML.parseOfAD(ofadXML);
 				fachada.nuevoOfad(vo, true);
 			} 

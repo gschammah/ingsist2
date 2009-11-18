@@ -1,0 +1,4 @@
+server.beans.articulos
+server.beans.fachada
+server.beans.pedidos
+server.beans.ventas
